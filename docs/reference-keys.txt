@@ -1,4 +1,8 @@
-intro
+our-workspace
+preliminaries
+branding-code
+packages
+some-of-our-datasets
 motivating-gams
 linear-regression
 data
@@ -6,7 +10,7 @@ model-fitting
 generalized-linear-models
 generalized-additive-models
 utilization-forecasting
-introduction
+introduction-1
 data-1
 predictors
 weekday
@@ -20,7 +24,7 @@ alternative-trend-forecast
 model-fitting-2
 making-predictions-1
 hurricane-impact-valuation
-introduction-1
+introduction-2
 data-2
 model-fitting-3
 initial-model
@@ -30,10 +34,11 @@ penultimate-model
 serial-autocorrelation-of-errors
 heteroskedasticity
 final-model
+using-the-model
 valuation-of-care-interventions
-introduction-2
+introduction-3
 data-3
 processed-dataset
 exposure
 model-fitting-4
-using-the-model
+using-the-model-1

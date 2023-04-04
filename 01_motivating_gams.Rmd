@@ -248,8 +248,8 @@ ggplot(pdat, aes(x = exp(carat), group = clarity, color = clarity)) +
 
 ## Generalized Additive Models
 
-Generalized Additive Models (GAMs) were introduced in the 90s by Simon Wood as an extension of GLMs that incorporate a form of _functional regression_.  
-They have all of the same characteristics of GLMs in addition to the ability to model functional, not just linear, relationships between predictor variables and the response, as well as an expanded field of error distributions, most notably for actuarial work the Tweedie and Negative Binomial.  
+Generalized Additive Models (GAMs) were introduced in the 90s by Simon Wood as an extension of GLMs that incorporate a form of _functional regression_.
+They have all of the same characteristics of GLMs in addition to the ability to model functional, not just linear, relationships between predictor variables and the response, as well as an expanded field of error distributions, most notably for actuarial work the Tweedie and Negative Binomial.
 Functional relationships are modeled by GAMs using various types of _splines_, which are piecewise functions that are used to interpolate a continuously-differentiable curve between a collection of points.  
 The linear predictor for a GAM, therefore, looks like this:  
 
@@ -258,12 +258,12 @@ $$\eta = \sum_{i=0}^n\sum_{j=0}^m\beta_{ij}f_j(X_i)$$
 With the added dimension $j$ denoting the _basis dimension_, or each "piece" of the piecewise spline $f_j(X_i)$.  
 This sounds a lot scarier than it is; it should become clear how splines work in GAMs once we fit one to our diamonds dataset.  
 
-GAMs are fit a lot like GLMs.  
-The function to use is called `gam()`, and it takes the same arguments `formula`, `data`, and `family` as `glm()`.  
-You specify a functional term by wrapping it in `s()` or one of the other [smooth constructors](https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html) offered in the `mgcv` package.  
-Here, I am using the `ti()` (short for <u>t</u>ensor <u>i</u>nteraction) constructor because this is the recommended way to create interaction terms in the context of GAMs.  
-I also parallelize model fitting, because otherwise fitting takes hours on my 32G work laptop (!).  
-The `bam()` function is just short for <u>b</u>ig g<u>am</u> and includes a new argument, `cluster`, which is a parallel computing cluster created using the `parallel` package.  
+GAMs are fit a lot like GLMs.
+The function to use is called `gam()`, and it takes the same arguments `formula`, `data`, and `family` as `glm()`.
+You specify a functional term by wrapping it in `s()` or one of the other [smooth constructors](https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html) offered in the `mgcv` package.
+Here, I am using the `ti()` (short for <u>t</u>ensor <u>i</u>nteraction) constructor because this is the recommended way to create interaction terms in the context of GAMs.
+I also parallelize model fitting, because otherwise fitting takes hours on my 32G work laptop (!).
+The `bam()` function is just short for <u>b</u>ig <u>g</u>am and includes a new argument, `cluster`, which is a parallel computing cluster created using the `parallel` package.
 It is recommended to fit GAMs in parallel if the number of rows in your training dataset is five figures or more.  
 
 ```{r}
@@ -304,4 +304,4 @@ ggplot(pdat, aes(x = exp(carat), group = clarity, color = clarity)) +
   mytheme
 ```
 
-Here, we can see that the polynomial relationship between carat and price we modeled in the GLM is picked up automatically by the GAM.  
+Here, we can see that the polynomial relationship between carat and price we modeled with a GLM is picked up automatically by the GAM.  

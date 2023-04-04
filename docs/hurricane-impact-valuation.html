@@ -4,26 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Hurricane Impact Valuation | Generalized Additive Models for Actuaries</title>
-  <meta name="description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <title>Chapter 3 Hurricane Impact Valuation | Generalized Additive Models for Actuaries</title>
+  <meta name="description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Hurricane Impact Valuation | Generalized Additive Models for Actuaries" />
+  <meta property="og:title" content="Chapter 3 Hurricane Impact Valuation | Generalized Additive Models for Actuaries" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Hurricane Impact Valuation | Generalized Additive Models for Actuaries" />
+  <meta name="twitter:title" content="Chapter 3 Hurricane Impact Valuation | Generalized Additive Models for Actuaries" />
   
-  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   
 
 <meta name="author" content="Nathan Cornwell" />
 
 
-<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,60 +135,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Bookdown Book</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>2</b> Motivating GAMs</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>2.1</b> Linear Regression</a></li>
-<li class="chapter" data-level="2.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
-<li class="chapter" data-level="2.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>2.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="2.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>2.4</b> Generalized Linear Models</a></li>
-<li class="chapter" data-level="2.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>2.5</b> Generalized Additive Models</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>3</b> Utilization Forecasting</a>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#our-workspace"><i class="fa fa-check"></i><b>0.1</b> Our Workspace</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#preliminaries"><i class="fa fa-check"></i><b>0.2</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
-<li class="chapter" data-level="3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>3.3</b> Predictors</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>3.3.1</b> Weekday</a></li>
-<li class="chapter" data-level="3.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>3.3.2</b> In-year</a></li>
-<li class="chapter" data-level="3.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>3.3.3</b> Holidays</a></li>
-<li class="chapter" data-level="3.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>3.3.4</b> COVID</a></li>
-<li class="chapter" data-level="3.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>3.3.5</b> Trend</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>3.4</b> Model Fitting</a></li>
-<li class="chapter" data-level="3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>3.5</b> Making Predictions</a></li>
-<li class="chapter" data-level="3.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>3.6</b> Alternative Trend Forecast</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>3.6.1</b> Model Fitting</a></li>
-<li class="chapter" data-level="3.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>3.6.2</b> Making Predictions</a></li>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.1</b> Branding Code</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.2</b> Packages</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.3</b> (Some of our) Datasets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>4</b> Hurricane Impact Valuation</a>
+<li class="chapter" data-level="1" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>1</b> Motivating GAMs</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
-<li class="chapter" data-level="4.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a>
+<li class="chapter" data-level="1.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>1.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="1.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>1.2</b> Data</a></li>
+<li class="chapter" data-level="1.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>1.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="1.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>1.4</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="1.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>1.5</b> Generalized Additive Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>2</b> Utilization Forecasting</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>4.3.1</b> Initial Model</a></li>
-<li class="chapter" data-level="4.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>4.3.2</b> Deriving the Holiday List</a></li>
-<li class="chapter" data-level="4.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>4.3.3</b> Hurricane Effect Window</a></li>
-<li class="chapter" data-level="4.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>4.3.4</b> Penultimate Model</a></li>
-<li class="chapter" data-level="4.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>4.3.5</b> Serial Autocorrelation of Errors</a></li>
-<li class="chapter" data-level="4.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>4.3.6</b> Heteroskedasticity</a></li>
-<li class="chapter" data-level="4.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>4.3.7</b> Final Model</a></li>
+<li class="chapter" data-level="2.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>2.3</b> Predictors</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>2.3.1</b> Weekday</a></li>
+<li class="chapter" data-level="2.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>2.3.2</b> In-year</a></li>
+<li class="chapter" data-level="2.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>2.3.3</b> Holidays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>2.3.4</b> COVID</a></li>
+<li class="chapter" data-level="2.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>2.3.5</b> Trend</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>2.4</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>2.5</b> Making Predictions</a></li>
+<li class="chapter" data-level="2.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>2.6</b> Alternative Trend Forecast</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>2.6.1</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>2.6.2</b> Making Predictions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>5</b> Valuation of Care Interventions</a>
+<li class="chapter" data-level="3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>3</b> Hurricane Impact Valuation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>5.2</b> Data</a>
+<li class="chapter" data-level="3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>3.3</b> Model Fitting</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>5.2.1</b> Processed Dataset</a></li>
-<li class="chapter" data-level="5.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>5.2.2</b> Exposure</a></li>
+<li class="chapter" data-level="3.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>3.3.1</b> Initial Model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>3.3.2</b> Deriving the Holiday List</a></li>
+<li class="chapter" data-level="3.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>3.3.3</b> Hurricane Effect Window</a></li>
+<li class="chapter" data-level="3.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>3.3.4</b> Penultimate Model</a></li>
+<li class="chapter" data-level="3.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>3.3.5</b> Serial Autocorrelation of Errors</a></li>
+<li class="chapter" data-level="3.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>3.3.6</b> Heteroskedasticity</a></li>
+<li class="chapter" data-level="3.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>3.3.7</b> Final Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>5.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="5.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model"><i class="fa fa-check"></i><b>5.4</b> Using the Model</a></li>
+<li class="chapter" data-level="3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#using-the-model"><i class="fa fa-check"></i><b>3.4</b> Using the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>4</b> Valuation of Care Interventions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Processed Dataset</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>4.2.2</b> Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -211,17 +220,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="hurricane-impact-valuation" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Hurricane Impact Valuation<a href="hurricane-impact-valuation.html#hurricane-impact-valuation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introduction-1" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Introduction<a href="hurricane-impact-valuation.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hurricane-impact-valuation" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Hurricane Impact Valuation<a href="hurricane-impact-valuation.html#hurricane-impact-valuation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-2" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introduction<a href="hurricane-impact-valuation.html#introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Another very similar way I use GAMs is to value utilization impacts caused by storms.
 The main impacts a health insurer sees from something like a hurricane is a slowdown in utilization from the danger and difficulty traveling caused by the storm.
 We can adapt the tools we already have from the previous chapter and add things in order to strengthen our model to be able to use it for hyptothesis testing and quantification.
 In order to model the hurricane’s effects as rigorously as possible, we need to do some more thorough model validation so we can make sound statistical deductions from it.</p>
 </div>
-<div id="data-2" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Data<a href="hurricane-impact-valuation.html#data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-2" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data<a href="hurricane-impact-valuation.html#data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data this time is utilization for a random set of services for UHC’s commercial fully-insured book of business in Texas.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="hurricane-impact-valuation.html#cb54-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">fread</span>(</span>
 <span id="cb54-2"><a href="hurricane-impact-valuation.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;hurr_data.csv&#39;</span>),</span>
@@ -235,7 +244,7 @@ In order to model the hurricane’s effects as rigorously as possible, we need t
 <span id="cb54-10"><a href="hurricane-impact-valuation.html#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb54-11"><a href="hurricane-impact-valuation.html#cb54-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-12"><a href="hurricane-impact-valuation.html#cb54-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>The COVID slowdown is also clearly visible. Note also that this data has runout effects at the end of the training period, i.e. the most recent time periods have had less times for claims to process.</p>
 <p>As you may remember, Texas was hit by the historic Hurricane Harvey in 2017.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="hurricane-impact-valuation.html#cb55-1" aria-hidden="true" tabindex="-1"></a>landfall <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&#39;2017-8-25&#39;</span>)</span>
@@ -253,7 +262,7 @@ In order to model the hurricane’s effects as rigorously as possible, we need t
 <span id="cb55-13"><a href="hurricane-impact-valuation.html#cb55-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb55-14"><a href="hurricane-impact-valuation.html#cb55-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-15"><a href="hurricane-impact-valuation.html#cb55-15" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Now we add the date variables we’ve been discussing.
 We will use an initial holiday list and iteratively improve it.
 For the COVID term, we will just use the parameters I’ve already determined at work to make the example shorter.
@@ -295,10 +304,10 @@ In a real modeling context, you would determine the width of the COVID window an
 <span id="cb56-35"><a href="hurricane-impact-valuation.html#cb56-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-36"><a href="hurricane-impact-valuation.html#cb56-36" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(dat, ds)</span></code></pre></div>
 </div>
-<div id="model-fitting-3" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Model Fitting<a href="hurricane-impact-valuation.html#model-fitting-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="initial-model" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Initial Model<a href="hurricane-impact-valuation.html#initial-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="model-fitting-3" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Model Fitting<a href="hurricane-impact-valuation.html#model-fitting-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="initial-model" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Initial Model<a href="hurricane-impact-valuation.html#initial-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To start with, we can fit an initial model that’s basically the same as the forecasting model we were working with in the prior chapter.
 I like to account for runout by setting more knot points for the trend component to allow it to capture the sharp drop in claims.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="hurricane-impact-valuation.html#cb57-1" aria-hidden="true" tabindex="-1"></a>ts <span class="ot">&lt;-</span> dat[</span>
@@ -316,10 +325,10 @@ I like to account for runout by setting more knot points for the trend component
 <pre><code>## Warning in mgcv::s(covid, k = 122/7): argument k of s() should be integer
 ## and has been rounded</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="hurricane-impact-valuation.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_init, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
-<div id="deriving-the-holiday-list" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Deriving the Holiday List<a href="hurricane-impact-valuation.html#deriving-the-holiday-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="deriving-the-holiday-list" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Deriving the Holiday List<a href="hurricane-impact-valuation.html#deriving-the-holiday-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>My method for figuring out a good list of holidays to use is pretty simple: just examine residuals until there aren’t any holiday effects in the days with the largest prediction error.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="hurricane-impact-valuation.html#cb60-1" aria-hidden="true" tabindex="-1"></a>dat[</span>
 <span id="cb60-2"><a href="hurricane-impact-valuation.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
@@ -358,7 +367,7 @@ As for holidays, the main potential that jumps out at me right now is effects re
 <span id="cb62-2"><a href="hurricane-impact-valuation.html#cb62-2" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> dat[</span>
 <span id="cb62-3"><a href="hurricane-impact-valuation.html#cb62-3" aria-hidden="true" tabindex="-1"></a>  ,</span>
 <span id="cb62-4"><a href="hurricane-impact-valuation.html#cb62-4" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">day =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%m%d&#39;</span>), <span class="at">yr =</span> <span class="fu">year</span>(ds) <span class="sc">+</span> (<span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">12</span>),</span>
-<span id="cb62-5"><a href="hurricane-impact-valuation.html#cb62-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">wkdy =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%u&#39;</span>), err)</span>
+<span id="cb62-5"><a href="hurricane-impact-valuation.html#cb62-5" aria-hidden="true" tabindex="-1"></a>    wkdy, err)</span>
 <span id="cb62-6"><a href="hurricane-impact-valuation.html#cb62-6" aria-hidden="true" tabindex="-1"></a>][</span>
 <span id="cb62-7"><a href="hurricane-impact-valuation.html#cb62-7" aria-hidden="true" tabindex="-1"></a>  .(lbls),</span>
 <span id="cb62-8"><a href="hurricane-impact-valuation.html#cb62-8" aria-hidden="true" tabindex="-1"></a>  on <span class="ot">=</span> <span class="st">&#39;day&#39;</span></span>
@@ -384,7 +393,7 @@ As for holidays, the main potential that jumps out at me right now is effects re
 <span id="cb62-28"><a href="hurricane-impact-valuation.html#cb62-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb62-29"><a href="hurricane-impact-valuation.html#cb62-29" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb62-30"><a href="hurricane-impact-valuation.html#cb62-30" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Chistmas Eve and New Year’s Eve appear to be exhibiting what I call “bridge effects:” the days only seem to have slowdowns when they create a four-day weekend along with the main holiday.
 Independence Day also displayed a similar pattern.
 I will skip straight to the final holiday list, but you would keep iterating on fitting models and examining the residuals to add more holiday or other outlier terms.</p>
@@ -400,8 +409,8 @@ I will skip straight to the final holiday list, but you would keep iterating on 
 <span id="cb63-10"><a href="hurricane-impact-valuation.html#cb63-10" aria-hidden="true" tabindex="-1"></a>dat[<span class="fu">is.na</span>(hol), hol <span class="sc">:</span><span class="er">=</span> <span class="st">&#39;none&#39;</span>]</span>
 <span id="cb63-11"><a href="hurricane-impact-valuation.html#cb63-11" aria-hidden="true" tabindex="-1"></a>dat[, hol <span class="sc">:</span><span class="er">=</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(hol), <span class="at">ref =</span> <span class="st">&#39;none&#39;</span>)]</span></code></pre></div>
 </div>
-<div id="hurricane-effect-window" class="section level3 hasAnchor" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Hurricane Effect Window<a href="hurricane-impact-valuation.html#hurricane-effect-window" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="hurricane-effect-window" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Hurricane Effect Window<a href="hurricane-impact-valuation.html#hurricane-effect-window" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The last thing we need to do with out initial model is figure out a good effect window to assume for the hurricane.
 I do this in a similar way to creating the holiday list, by examining initial model residuals around landfall.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="hurricane-impact-valuation.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
@@ -416,12 +425,12 @@ I do this in a similar way to creating the holiday list, by examining initial mo
 <span id="cb64-10"><a href="hurricane-impact-valuation.html#cb64-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb64-11"><a href="hurricane-impact-valuation.html#cb64-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb64-12"><a href="hurricane-impact-valuation.html#cb64-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>Like with holidays, I’m going to skip to using the window I already derived at work.
 To do it on your own, you would iterate through fitting a model with a potential hurricane window, examining the estimated smooth to make sure it’s reasonable, and examining the prediction errors around landfall for that model.</p>
 </div>
-<div id="penultimate-model" class="section level3 hasAnchor" number="4.3.4">
-<h3><span class="header-section-number">4.3.4</span> Penultimate Model<a href="hurricane-impact-valuation.html#penultimate-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="penultimate-model" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Penultimate Model<a href="hurricane-impact-valuation.html#penultimate-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>After the above process is done, we have a specification for all of the outliers and interventions we need for the penultimate, or next to last, model.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="hurricane-impact-valuation.html#cb65-1" aria-hidden="true" tabindex="-1"></a>dat[, uri <span class="sc">:</span><span class="er">=</span> 0L]</span>
 <span id="cb65-2"><a href="hurricane-impact-valuation.html#cb65-2" aria-hidden="true" tabindex="-1"></a>dat[</span>
@@ -516,12 +525,12 @@ To do it on your own, you would iterate through fitting a model with a potential
 ## R-sq.(adj) =  0.983   Deviance explained = 98.3%
 ## GCV = 5.2655  Scale est. = 5.132     n = 2181</code></pre>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="hurricane-impact-valuation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_penult, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <p>From a quick look at <code>summary()</code> and <code>plot()</code>, it looks like our model is on the right track.
 There are two things we need to test for and correct before we can make valid statistical deductions from the model, however.</p>
 </div>
-<div id="serial-autocorrelation-of-errors" class="section level3 hasAnchor" number="4.3.5">
-<h3><span class="header-section-number">4.3.5</span> Serial Autocorrelation of Errors<a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="serial-autocorrelation-of-errors" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Serial Autocorrelation of Errors<a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since we are working with time series data, observations are correlated through time.
 A regression model cannot have any serial autocorrelation of errors, however, because the standard errors of the estimated coefficients will be too small.
 We check for serial autocorrelation using ACF and PACF plots.</p>
@@ -579,11 +588,11 @@ We check for serial autocorrelation using ACF and PACF plots.</p>
 <span id="cb70-52"><a href="hurricane-impact-valuation.html#cb70-52" aria-hidden="true" tabindex="-1"></a>  mypacf,</span>
 <span id="cb70-53"><a href="hurricane-impact-valuation.html#cb70-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
 <span id="cb70-54"><a href="hurricane-impact-valuation.html#cb70-54" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>A valid model will have all of the vertical lines (very close to) within the confidence bands.</p>
 </div>
-<div id="heteroskedasticity" class="section level3 hasAnchor" number="4.3.6">
-<h3><span class="header-section-number">4.3.6</span> Heteroskedasticity<a href="hurricane-impact-valuation.html#heteroskedasticity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="heteroskedasticity" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> Heteroskedasticity<a href="hurricane-impact-valuation.html#heteroskedasticity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A regression model must also exhibit <em>homoskedasticity</em>, or have constant error variance.
 Violating this assumption not only decreases the standard errors but can also bias coefficient estimates.
 The fitting algorithms used by regression models assume that every observation contributes an equal amount of information to coefficient estimation.
@@ -609,13 +618,13 @@ Heteroskedasticity entails that the higher-variance regions in the training data
 <span id="cb71-19"><a href="hurricane-impact-valuation.html#cb71-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Sqrt Std Pearson Residuals&#39;</span></span>
 <span id="cb71-20"><a href="hurricane-impact-valuation.html#cb71-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb71-21"><a href="hurricane-impact-valuation.html#cb71-21" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Heteroskedasticity manifests in a scale-location plot as deviations from a flat, straight red line.
 A quick way to correct for it is to weight training observations with the errors from the penultimate model.
 It would be more elegant to use a priori weights, but I haven’t yet come up with a good algorithm for calculating those for the general utilization dataset.</p>
 </div>
-<div id="final-model" class="section level3 hasAnchor" number="4.3.7">
-<h3><span class="header-section-number">4.3.7</span> Final Model<a href="hurricane-impact-valuation.html#final-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="final-model" class="section level3 hasAnchor" number="3.3.7">
+<h3><span class="header-section-number">3.3.7</span> Final Model<a href="hurricane-impact-valuation.html#final-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To complete model fitting, we re-fit the penultimate model with an error correlation model to correct for serial autocorrelation and weights to correct for heteroskedasticity.
 Unfortunately, the best way I have come up with to correct for serial autocorrelation is very labor-intensive: you have to build a correlation model by hand, eyeballing the coefficients using the ACF and PACF plots.
 In general, the lines on the ACF chart tell you the lag-n autocorrelation coefficient, and those on the PACF the moving average coefficient.
@@ -624,8 +633,7 @@ I start with the lag 1 and multiples of 7 autoregressive coefficients and go fro
 It is not important to get these estimates exactly right, you just need a good enough correlation model to account for correlated residuals.
 We use the <code>gamm()</code> function to pass in a correlation model for the errors and supply a <code>weights</code> argument for heteroskedasticity.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="hurricane-impact-valuation.html#cb72-1" aria-hidden="true" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">abs</span>(<span class="fu">residuals</span>(m_penult, <span class="at">type =</span> <span class="st">&#39;scaled.pearson&#39;</span>)))</span></code></pre></div>
-<p>Fitting this model took many hours because of all of the modifications we’ve added, so I’ve just cached the fitted model in the <code>data</code> subfolder of our Github repository.
-The code to fit the model would look like this.</p>
+<p>The code to fit the model would look like this.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="hurricane-impact-valuation.html#cb73-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">55</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
 <span id="cb73-2"><a href="hurricane-impact-valuation.html#cb73-2" aria-hidden="true" tabindex="-1"></a>       <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">07</span>,</span>
 <span id="cb73-3"><a href="hurricane-impact-valuation.html#cb73-3" aria-hidden="true" tabindex="-1"></a>       <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">06</span>)</span>
@@ -648,6 +656,7 @@ The code to fit the model would look like this.</p>
 <span id="cb73-20"><a href="hurricane-impact-valuation.html#cb73-20" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb73-21"><a href="hurricane-impact-valuation.html#cb73-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> wts</span>
 <span id="cb73-22"><a href="hurricane-impact-valuation.html#cb73-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Fitting this model took many hours because of all of the modifications we’ve added, so I’ve just cached the fitted model in the <code>data</code> subfolder of our Github repository.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="hurricane-impact-valuation.html#cb74-1" aria-hidden="true" tabindex="-1"></a>m_final <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;m_final.RDS&#39;</span>))</span>
 <span id="cb74-2"><a href="hurricane-impact-valuation.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_final<span class="sc">$</span>gam)</span></code></pre></div>
 <pre><code>## 
@@ -719,7 +728,7 @@ The code to fit the model would look like this.</p>
 ## R-sq.(adj) =  0.923   
 ##   Scale est. = 11.506    n = 2181</code></pre>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="hurricane-impact-valuation.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_final<span class="sc">$</span>gam, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="hurricane-impact-valuation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_final<span class="sc">$</span>lme, <span class="at">type =</span> <span class="st">&#39;normalized&#39;</span>)</span>
 <span id="cb77-2"><a href="hurricane-impact-valuation.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-3"><a href="hurricane-impact-valuation.html#cb77-3" aria-hidden="true" tabindex="-1"></a>myacf <span class="ot">&lt;-</span> <span class="fu">acf</span>(res, <span class="at">plot =</span> F)</span>
@@ -773,7 +782,7 @@ The code to fit the model would look like this.</p>
 <span id="cb77-51"><a href="hurricane-impact-valuation.html#cb77-51" aria-hidden="true" tabindex="-1"></a>  mypacf,</span>
 <span id="cb77-52"><a href="hurricane-impact-valuation.html#cb77-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
 <span id="cb77-53"><a href="hurricane-impact-valuation.html#cb77-53" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="hurricane-impact-valuation.html#cb78-1" aria-hidden="true" tabindex="-1"></a>wpr <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_final<span class="sc">$</span>gam, <span class="at">type =</span> <span class="st">&#39;pearson&#39;</span>) <span class="sc">/</span> wts</span>
 <span id="cb78-2"><a href="hurricane-impact-valuation.html#cb78-2" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
 <span id="cb78-3"><a href="hurricane-impact-valuation.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sqrt standardized Pearson residuals</span></span>
@@ -795,7 +804,7 @@ The code to fit the model would look like this.</p>
 <span id="cb78-19"><a href="hurricane-impact-valuation.html#cb78-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Sqrt Std Pearson Residuals&#39;</span></span>
 <span id="cb78-20"><a href="hurricane-impact-valuation.html#cb78-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb78-21"><a href="hurricane-impact-valuation.html#cb78-21" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>We are using the parameters I’ve already come up with, but in reality, we would cycle through examining these four outputs and tweaking model parameters until everything looks good.
 This is a time-consuming and sometimes frustrating process!</p>
 <p>At the end of all this, however, we have a mathematically-robust estimate of the utilization impact due to Hurricane Harvey.
@@ -833,9 +842,12 @@ We can visualize the estimated smooth like this.</p>
 <span id="cb79-31"><a href="hurricane-impact-valuation.html#cb79-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb79-32"><a href="hurricane-impact-valuation.html#cb79-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb79-33"><a href="hurricane-impact-valuation.html#cb79-33" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
-
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 </div>
+</div>
+<div id="using-the-model" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Using the Model<a href="hurricane-impact-valuation.html#using-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
 </div>
 </div>
             </section>

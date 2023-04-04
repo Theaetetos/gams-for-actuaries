@@ -1,17 +1,71 @@
 ---
 title: "Generalized Additive Models for Actuaries"
 author: "Nathan Cornwell"
-date: "`r Sys.Date()`"
+date: "`r strftime(Sys.Date(), '%B %d %Y')`"
 site: bookdown::gitbook
 documentclass: book
-bibliography: [book.bib]
+bibliography: book.bib
 biblio-style: apalike
 link-citations: yes
-github-repo: 
-description: "An Introduction to Generalized Additive Models for Actuarial Business Problems."
+github-repo: null
+description: An Introduction to Generalized Additive Models for Health Actuarial Business
+  Problems.
 ---
 
-# Introduction {#intro}
+```{r, echo=FALSE}
+htmltools::img(
+  src = file.path('img', 'Optum_Logo.png'),
+  alt = 'logo',
+  style = 'position:absolute; top:0; right:0; padding:10px;',
+  height = '80px'
+)
+```
+
+# Introduction {.unnumbered}
+
+## Our Workspace
+
+[R/RStudio](https://posit.co/download/rstudio-desktop/)
+
+[Github Repo](https://github.com/Theaetetos/gams-for-actuaries)
+
+[Github Page](https://theaetetos.github.io/gams-for-actuaries/)
+
+## Preliminaries
+
+### Packages
+
+Here are all of the packages we will need for this presentation.
+You only need to run the first code chunk once for each installation of R you have, while you need to run the second.
+
+```{r, eval=FALSE}
+install.packages(
+  c('data.table', 'ggplot2', 'gratia', 'gridExtra', 'insuranceData',
+    'mgcv', 'parallel', 'scales')
+)
+```
+
+```{r, message=FALSE}
+library(data.table)
+library(ggplot2)
+library(gratia)
+library(gridExtra)
+library(insuranceData)
+library(mgcv)
+library(parallel)
+library(scales)
+```
+
+### (Some of our) Datasets
+
+Finally, these are two of the datasets we will use in the examples.
+
+```{r}
+data('diamonds')
+data('dataCar')
+```
+
+### Branding Code
 
 This is just some branding stuff that I use to make my plots look nice and comply with Optum and UHC branding guidelines.
 You don't need it outside of the code in the presentation, but you can use it as a template for customizing your own plots, if you wish.
@@ -27,7 +81,6 @@ viz_colors <- list(Violet = '#422C88', Iris = '#8061BC',
 colors <- list(Primary = primary_colors, Secondary = sec_colors,
                Typography = type_colors, Visualization = viz_colors)
 
-# plotting
 scale_discrete_optum <- function(aesthetics, ...){
   discrete_scale(
     aesthetics = aesthetics,
@@ -53,32 +106,4 @@ theme_optum_plot <- theme(
 )
 
 mytheme <- theme_optum_plot + theme_titles
-```
-
-Here are all of the packages we will need for this presentation.
-You only need to run the first code chunk once for each installation of R you have, while you need to run the second.
-
-```{r, eval=FALSE}
-install.packages(
-  c('data.table', 'ggplot2', 'gratia', 'gridExtra', 'insuranceData',
-    'mgcv', 'parallel', 'scales')
-)
-```
-
-```{r}
-library(data.table)
-library(ggplot2)
-library(gratia)
-library(gridExtra)
-library(insuranceData)
-library(mgcv)
-library(parallel)
-library(scales)
-```
-
-Finally, these are two of the datasets we will use in the examples.
-
-```{r}
-data('diamonds')
-data('dataCar')
 ```

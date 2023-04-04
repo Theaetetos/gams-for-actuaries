@@ -12,3 +12,22 @@ pre {
 pre code {
   white-space: inherit;
 }
+h1 {
+  color: #002677;
+  font-weight: bold;
+}
+h1.title {
+  color: #FF612B;
+}
+h2 {
+  color: #5A5A5A;
+  font-weight: bold;
+  text-decoration:underline;
+}
+h3 {
+  color: #5A5A5A;
+  font-weight: bold;
+}
+h4 {
+  color: #5A5A5A;
+}

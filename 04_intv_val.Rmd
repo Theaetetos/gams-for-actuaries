@@ -22,18 +22,18 @@ dat[]
 This dataset is a combination of items from many sources, representing a significant analytic challenge.
 Here is a data dictionary summarizing the elements of this final table, along with some info about how it was processed into this final state.  
 
-* yr - Year  
-* mth - Month  
-* qty - Scripts * Doses. Taken from claims data.  
-* gdr - Gender code. Taken from membership data.  
-* prdct - Product code, like PPO, HMO, etc. Taken from membership data.  
-* cdhp - Indicator for whether or not the product is a high-deductible health plan. Taken from membership data.  
-* funding - Funding type for the product, fully-insured or advisory services only. Taken from membership data.  
-* state - Indicator for the state the member resides in. Taken from membership data.  
-* covid - Indicator for whether or not the current month is 202003. Remember, the main COVID impact to the Rx line of business is a spike in utilization at the beginning of the pandemic as companies allowed members to stockpile medications.  
-* rs - Risk score for the individual. These are the output of a proprietary Optum model meant to track the costliness of a member. Note that these are only calculated quarterly, so the last known value is carried forward.  
-* intv - Indicator for whether or not the intervention has taken place. Calculated by joining data from operations tracking files to claims and membership data.  
-* dur - The number of months since the intervention has occurred.  
+* `yr` - Year  
+* `mth` - Month  
+* `scrpts` - Number of scripts filled by the member that month. Taken from claims data.  
+* `gdr` - Member's gender code. Taken from membership data.  
+* `prdct` - Product code, like PPO, HMO, etc. Taken from membership data.  
+* `cdhp` - Indicator for whether or not the product is a high-deductible health plan. Taken from membership data.  
+* `funding` - Funding type for the product, fully-insured or advisory services only. Taken from membership data.  
+* `state` - Indicator for the state the member resides in. Taken from membership data.  
+* `covid` - Indicator for whether or not the current month is 202003. Remember, the main COVID impact to the Rx line of business is a spike in utilization at the beginning of the pandemic as companies allowed members to stockpile medications.  
+* `rs` - Risk score for the individual. These are the output of a proprietary Optum model meant to track the costliness of a member. Note that these are only calculated quarterly, so the last known value is carried forward.  
+* `intv` - Indicator for whether or not the intervention has taken place. Calculated by joining data from operations tracking files to claims and membership data.  
+* `dur` - The number of months since the intervention has occurred.  
 
 To summarize, then, we have four data sources that needed to be processed.  
 
@@ -87,7 +87,6 @@ This is preferable in many circumstances, one of which being those we have here,
 It's not just unlikely that the mean pharmacy quantity consumed by this population is anything like the true mean of the entire UHC book of business, much less the US as a whole: we know this beforehand because we are taking a sample of some of the most expensive members that UHC covers.
 Being able to use a model form that takes into account the bias in our sample will improve the ability of the model to generate useful, generalizable insights.  
 
-Again, I have cached the fitted model in our Github repo for ease of use.
 The code to fit it is found in the following chunk.
 
 ```{r, eval=FALSE}
@@ -114,6 +113,8 @@ stopCluster(cl)
 saveRDS(m, file = file.path('data', 'm_intv.RDS'))
 ```
 
+Again, I have cached the fitted model in our Github repo for ease of use.
+
 ```{r}
 m <- readRDS(file = file.path('data', 'm_intv.RDS'))
 summary(m)
@@ -135,3 +136,5 @@ plot(m, select = 3)
 ```
 
 ## Using the Model
+
+

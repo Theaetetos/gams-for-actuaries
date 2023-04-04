@@ -141,7 +141,7 @@ lbls <- c(paste0(12, 16:31), paste0('01', 0, 1:9))
 pdat <- dat[
   ,
   .(day = strftime(ds, '%m%d'), yr = year(ds) + (month(ds) == 12),
-    wkdy = strftime(ds, '%u'), err)
+    wkdy, err)
 ][
   .(lbls),
   on = 'day'
@@ -361,7 +361,6 @@ We use the `gamm()` function to pass in a correlation model for the errors and s
 wts <- sqrt(abs(residuals(m_penult, type = 'scaled.pearson')))
 ```
 
-Fitting this model took many hours because of all of the modifications we've added, so I've just cached the fitted model in the `data` subfolder of our Github repository.
 The code to fit the model would look like this.
 
 ```{r, eval=FALSE}
@@ -388,6 +387,8 @@ m_final <- gamm(
   weights = wts
 )
 ```
+
+Fitting this model took many hours because of all of the modifications we've added, so I've just cached the fitted model in the `data` subfolder of our Github repository.
 
 ```{r}
 m_final <- readRDS(file = file.path('data', 'm_final.RDS'))
@@ -519,3 +520,7 @@ ggplot(pdat, mapping = aes(ind)) +
   ) +
   mytheme
 ```
+
+## Using the Model
+
+

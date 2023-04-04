@@ -80,7 +80,7 @@ ggplot(dat, aes(yrfrac, y)) +
 
 ### Holidays
 
-We will cover a more rigorous method for selecting a holiday list in a later section.
+We will cover a more rigorous method for selecting a holiday list in the next section.
 For now, we will just use the "big six."
 Just using this holiday list usually will get you most of the way there.
 With some insured populations, however, days outside the list of U.S. federal holidays need to be accounted for.
@@ -91,7 +91,7 @@ lbls <- c(paste0(12, 16:31), paste0('01', 0, 1:9))
 pdat <- dat[
   ,
   .(day = strftime(ds, '%m%d'), yr = year(ds) + (month(ds) == 12),
-    wkdy = strftime(ds, '%u'), y)
+    wkdy, y)
 ][
   .(lbls),
   on = 'day'
@@ -274,7 +274,8 @@ testset[
   covid := .I
 ]
 # holidays
-# there are more efficient ways to do this, but they required more advanced coding outside the scope of this module
+## there are more efficient ways to do this, but they required more advanced coding outside the
+## scope of this module
 hols <- rbind(
   hols,
   data.table(ds = as.Date('2024-1-1'), hol = 'New Year'),

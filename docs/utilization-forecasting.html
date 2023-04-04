@@ -4,26 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Utilization Forecasting | Generalized Additive Models for Actuaries</title>
-  <meta name="description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <title>Chapter 2 Utilization Forecasting | Generalized Additive Models for Actuaries</title>
+  <meta name="description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Utilization Forecasting | Generalized Additive Models for Actuaries" />
+  <meta property="og:title" content="Chapter 2 Utilization Forecasting | Generalized Additive Models for Actuaries" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Utilization Forecasting | Generalized Additive Models for Actuaries" />
+  <meta name="twitter:title" content="Chapter 2 Utilization Forecasting | Generalized Additive Models for Actuaries" />
   
-  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   
 
 <meta name="author" content="Nathan Cornwell" />
 
 
-<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,60 +135,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Bookdown Book</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>2</b> Motivating GAMs</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>2.1</b> Linear Regression</a></li>
-<li class="chapter" data-level="2.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
-<li class="chapter" data-level="2.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>2.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="2.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>2.4</b> Generalized Linear Models</a></li>
-<li class="chapter" data-level="2.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>2.5</b> Generalized Additive Models</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>3</b> Utilization Forecasting</a>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#our-workspace"><i class="fa fa-check"></i><b>0.1</b> Our Workspace</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#preliminaries"><i class="fa fa-check"></i><b>0.2</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
-<li class="chapter" data-level="3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>3.3</b> Predictors</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>3.3.1</b> Weekday</a></li>
-<li class="chapter" data-level="3.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>3.3.2</b> In-year</a></li>
-<li class="chapter" data-level="3.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>3.3.3</b> Holidays</a></li>
-<li class="chapter" data-level="3.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>3.3.4</b> COVID</a></li>
-<li class="chapter" data-level="3.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>3.3.5</b> Trend</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>3.4</b> Model Fitting</a></li>
-<li class="chapter" data-level="3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>3.5</b> Making Predictions</a></li>
-<li class="chapter" data-level="3.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>3.6</b> Alternative Trend Forecast</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>3.6.1</b> Model Fitting</a></li>
-<li class="chapter" data-level="3.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>3.6.2</b> Making Predictions</a></li>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.1</b> Branding Code</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.2</b> Packages</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.3</b> (Some of our) Datasets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>4</b> Hurricane Impact Valuation</a>
+<li class="chapter" data-level="1" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>1</b> Motivating GAMs</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
-<li class="chapter" data-level="4.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a>
+<li class="chapter" data-level="1.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>1.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="1.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>1.2</b> Data</a></li>
+<li class="chapter" data-level="1.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>1.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="1.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>1.4</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="1.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>1.5</b> Generalized Additive Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>2</b> Utilization Forecasting</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>4.3.1</b> Initial Model</a></li>
-<li class="chapter" data-level="4.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>4.3.2</b> Deriving the Holiday List</a></li>
-<li class="chapter" data-level="4.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>4.3.3</b> Hurricane Effect Window</a></li>
-<li class="chapter" data-level="4.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>4.3.4</b> Penultimate Model</a></li>
-<li class="chapter" data-level="4.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>4.3.5</b> Serial Autocorrelation of Errors</a></li>
-<li class="chapter" data-level="4.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>4.3.6</b> Heteroskedasticity</a></li>
-<li class="chapter" data-level="4.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>4.3.7</b> Final Model</a></li>
+<li class="chapter" data-level="2.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>2.3</b> Predictors</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>2.3.1</b> Weekday</a></li>
+<li class="chapter" data-level="2.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>2.3.2</b> In-year</a></li>
+<li class="chapter" data-level="2.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>2.3.3</b> Holidays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>2.3.4</b> COVID</a></li>
+<li class="chapter" data-level="2.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>2.3.5</b> Trend</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>2.4</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>2.5</b> Making Predictions</a></li>
+<li class="chapter" data-level="2.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>2.6</b> Alternative Trend Forecast</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>2.6.1</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>2.6.2</b> Making Predictions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>5</b> Valuation of Care Interventions</a>
+<li class="chapter" data-level="3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>3</b> Hurricane Impact Valuation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>5.2</b> Data</a>
+<li class="chapter" data-level="3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>3.3</b> Model Fitting</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>5.2.1</b> Processed Dataset</a></li>
-<li class="chapter" data-level="5.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>5.2.2</b> Exposure</a></li>
+<li class="chapter" data-level="3.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>3.3.1</b> Initial Model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>3.3.2</b> Deriving the Holiday List</a></li>
+<li class="chapter" data-level="3.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>3.3.3</b> Hurricane Effect Window</a></li>
+<li class="chapter" data-level="3.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>3.3.4</b> Penultimate Model</a></li>
+<li class="chapter" data-level="3.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>3.3.5</b> Serial Autocorrelation of Errors</a></li>
+<li class="chapter" data-level="3.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>3.3.6</b> Heteroskedasticity</a></li>
+<li class="chapter" data-level="3.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>3.3.7</b> Final Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>5.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="5.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model"><i class="fa fa-check"></i><b>5.4</b> Using the Model</a></li>
+<li class="chapter" data-level="3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#using-the-model"><i class="fa fa-check"></i><b>3.4</b> Using the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>4</b> Valuation of Care Interventions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Processed Dataset</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>4.2.2</b> Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -211,15 +220,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="utilization-forecasting" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Utilization Forecasting<a href="utilization-forecasting.html#utilization-forecasting" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introduction" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Introduction<a href="utilization-forecasting.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="utilization-forecasting" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Utilization Forecasting<a href="utilization-forecasting.html#utilization-forecasting" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction<a href="utilization-forecasting.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One of the key use cases for GAMs in my work is in utilization forecasting.
 In this case study, I will walk through how I do so using a particular example drug.</p>
 </div>
-<div id="data-1" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Data<a href="utilization-forecasting.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-1" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Data<a href="utilization-forecasting.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data we will use is a table of daily utilization according to an unspecified metric for an unspecified drug.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="utilization-forecasting.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">fread</span>(</span>
 <span id="cb21-2"><a href="utilization-forecasting.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;rx_data.csv&#39;</span>),</span>
@@ -233,12 +242,12 @@ In this case study, I will walk through how I do so using a particular example d
 <span id="cb21-10"><a href="utilization-forecasting.html#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb21-11"><a href="utilization-forecasting.html#cb21-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb21-12"><a href="utilization-forecasting.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 </div>
-<div id="predictors" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Predictors<a href="utilization-forecasting.html#predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="weekday" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Weekday<a href="utilization-forecasting.html#weekday" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="predictors" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Predictors<a href="utilization-forecasting.html#predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="weekday" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Weekday<a href="utilization-forecasting.html#weekday" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first and largest source of variation is due to the day of the week.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="utilization-forecasting.html#cb22-1" aria-hidden="true" tabindex="-1"></a>dat[</span>
 <span id="cb22-2"><a href="utilization-forecasting.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
@@ -256,10 +265,10 @@ In this case study, I will walk through how I do so using a particular example d
 <span id="cb22-14"><a href="utilization-forecasting.html#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb22-15"><a href="utilization-forecasting.html#cb22-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb22-16"><a href="utilization-forecasting.html#cb22-16" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
-<div id="in-year" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> In-year<a href="utilization-forecasting.html#in-year" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="in-year" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> In-year<a href="utilization-forecasting.html#in-year" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next source of variation is the time of year.
 A phenomenon called <em>induced utilization</em> is almost always present in health claims, where members are more likely to seek care later in the year as their deductible gets used up.
 Some drugs display other effects, as well, like flu treatments, which spike in Winter, and immunizations, which spike in Fall before the school year starts.</p>
@@ -284,11 +293,11 @@ Some drugs display other effects, as well, like flu treatments, which spike in W
 <span id="cb23-19"><a href="utilization-forecasting.html#cb23-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb23-20"><a href="utilization-forecasting.html#cb23-20" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula = &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
-<div id="holidays" class="section level3 hasAnchor" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> Holidays<a href="utilization-forecasting.html#holidays" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will cover a more rigorous method for selecting a holiday list in a later section.
+<div id="holidays" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Holidays<a href="utilization-forecasting.html#holidays" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will cover a more rigorous method for selecting a holiday list in the next section.
 For now, we will just use the “big six.”
 Just using this holiday list usually will get you most of the way there.
 With some insured populations, however, days outside the list of U.S. federal holidays need to be accounted for.
@@ -297,7 +306,7 @@ In addition, billing practices can cause spikes on days like the first of the mo
 <span id="cb25-2"><a href="utilization-forecasting.html#cb25-2" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> dat[</span>
 <span id="cb25-3"><a href="utilization-forecasting.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  ,</span>
 <span id="cb25-4"><a href="utilization-forecasting.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">day =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%m%d&#39;</span>), <span class="at">yr =</span> <span class="fu">year</span>(ds) <span class="sc">+</span> (<span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">12</span>),</span>
-<span id="cb25-5"><a href="utilization-forecasting.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">wkdy =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%u&#39;</span>), y)</span>
+<span id="cb25-5"><a href="utilization-forecasting.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    wkdy, y)</span>
 <span id="cb25-6"><a href="utilization-forecasting.html#cb25-6" aria-hidden="true" tabindex="-1"></a>][</span>
 <span id="cb25-7"><a href="utilization-forecasting.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  .(lbls),</span>
 <span id="cb25-8"><a href="utilization-forecasting.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  on <span class="ot">=</span> <span class="st">&#39;day&#39;</span></span>
@@ -323,7 +332,7 @@ In addition, billing practices can cause spikes on days like the first of the mo
 <span id="cb25-28"><a href="utilization-forecasting.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb25-29"><a href="utilization-forecasting.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb25-30"><a href="utilization-forecasting.html#cb25-30" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="utilization-forecasting.html#cb26-1" aria-hidden="true" tabindex="-1"></a>ny <span class="ot">&lt;-</span> dat[<span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="fu">mday</span>(ds) <span class="sc">==</span> <span class="dv">1</span>, .(ds, <span class="at">hol =</span> <span class="st">&#39;New Year&#39;</span>)]</span>
 <span id="cb26-2"><a href="utilization-forecasting.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">&lt;-</span> dat[</span>
 <span id="cb26-3"><a href="utilization-forecasting.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span></span>
@@ -388,8 +397,8 @@ In addition, billing practices can cause spikes on days like the first of the mo
 ## 2952: 2023-01-30     none 175.67447    M 2023 0.081967213
 ## 2953: 2023-01-31     none 156.08502    T 2023 0.084699454</code></pre>
 </div>
-<div id="covid" class="section level3 hasAnchor" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> COVID<a href="utilization-forecasting.html#covid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="covid" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> COVID<a href="utilization-forecasting.html#covid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The most common impact to the Pharmacy line of business is actually a large spike in utilization at the start of lockdowns.
 This occurred at UHC, at least, because we removed several restrictions designed to prevent stockpiling and other forms of overutilization so that members could stock up on the medicines they need in the face of the very uncertain short-term future at the time.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="utilization-forecasting.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
@@ -400,7 +409,7 @@ This occurred at UHC, at least, because we removed several restrictions designed
 <span id="cb28-6"><a href="utilization-forecasting.html#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb28-7"><a href="utilization-forecasting.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb28-8"><a href="utilization-forecasting.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="utilization-forecasting.html#cb29-1" aria-hidden="true" tabindex="-1"></a>dat[, covid <span class="sc">:</span><span class="er">=</span> 0L]</span>
 <span id="cb29-2"><a href="utilization-forecasting.html#cb29-2" aria-hidden="true" tabindex="-1"></a>dat[</span>
 <span id="cb29-3"><a href="utilization-forecasting.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>) <span class="sc">==</span> <span class="st">&#39;202003&#39;</span>,</span>
@@ -420,8 +429,8 @@ This occurred at UHC, at least, because we removed several restrictions designed
 ## 2952: 2023-01-30     none 175.67447    M 2023 0.081967213     0
 ## 2953: 2023-01-31     none 156.08502    T 2023 0.084699454     0</code></pre>
 </div>
-<div id="trend" class="section level3 hasAnchor" number="3.3.5">
-<h3><span class="header-section-number">3.3.5</span> Trend<a href="utilization-forecasting.html#trend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="trend" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> Trend<a href="utilization-forecasting.html#trend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="utilization-forecasting.html#cb31-1" aria-hidden="true" tabindex="-1"></a>dat[, t <span class="sc">:</span><span class="er">=</span> .I]</span>
 <span id="cb31-2"><a href="utilization-forecasting.html#cb31-2" aria-hidden="true" tabindex="-1"></a>dat[]</span></code></pre></div>
 <pre><code>##               ds      hol         y wkdy   yr      yrfrac covid    t
@@ -438,8 +447,8 @@ This occurred at UHC, at least, because we removed several restrictions designed
 ## 2953: 2023-01-31     none 156.08502    T 2023 0.084699454     0 2953</code></pre>
 </div>
 </div>
-<div id="model-fitting-1" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Model Fitting<a href="utilization-forecasting.html#model-fitting-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="model-fitting-1" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Model Fitting<a href="utilization-forecasting.html#model-fitting-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="utilization-forecasting.html#cb33-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
 <span id="cb33-2"><a href="utilization-forecasting.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> <span class="fu">s</span>(t) <span class="sc">+</span> <span class="fu">s</span>(yrfrac) <span class="sc">+</span> <span class="fu">s</span>(covid) <span class="sc">+</span> wkdy <span class="sc">+</span> hol,</span>
 <span id="cb33-3"><a href="utilization-forecasting.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&#39;log&#39;</span>),</span>
@@ -482,7 +491,7 @@ This occurred at UHC, at least, because we removed several restrictions designed
 ## R-sq.(adj) =  0.962   Deviance explained = 96.2%
 ## GCV = 48.978  Scale est. = 48.408    n = 2953</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="utilization-forecasting.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>Although the in-year term is statistically significant, it is not a likely shape, so I am concerned that it is overfitting the training data.
 Right now, we have the luxury of trying out alternative model forms, but in production I would likely just leave it alone because it will contribute very little to forecasts.
 The help page for <code>s()</code> (<code>?s</code> in the console) directs us to a help page for <code>smooth.terms</code>, which contains a list of different options to use.
@@ -529,14 +538,14 @@ We see that by specifying <code>bs = 'ts'</code>, we can apply a stricter penalt
 ## R-sq.(adj) =  0.962   Deviance explained = 96.2%
 ## GCV = 48.978  Scale est. = 48.408    n = 2953</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="utilization-forecasting.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>It turns out that the estimate is robust to the extra penalty.
 Perhaps there is some residual month-specific variation that the weekday and holiday components aren’t capturing by themselves.
 It could also be that overall trend is masking the true in-year variation.
 We’ll leave it alone but try another way to forecast this drug a little later.</p>
 </div>
-<div id="making-predictions" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Making Predictions<a href="utilization-forecasting.html#making-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="making-predictions" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Making Predictions<a href="utilization-forecasting.html#making-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="utilization-forecasting.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all dates we want predictions for</span></span>
 <span id="cb39-2"><a href="utilization-forecasting.html#cb39-2" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
 <span id="cb39-3"><a href="utilization-forecasting.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ds =</span> <span class="fu">seq</span>(<span class="at">from =</span> dat[, <span class="fu">min</span>(ds)], <span class="at">to =</span> <span class="fu">as.Date</span>(<span class="st">&#39;2024-12-31&#39;</span>), <span class="at">by =</span> <span class="dv">1</span>)</span>
@@ -565,58 +574,59 @@ We’ll leave it alone but try another way to forecast this drug a little later.
 <span id="cb39-26"><a href="utilization-forecasting.html#cb39-26" aria-hidden="true" tabindex="-1"></a>  covid <span class="sc">:</span><span class="er">=</span> .I</span>
 <span id="cb39-27"><a href="utilization-forecasting.html#cb39-27" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb39-28"><a href="utilization-forecasting.html#cb39-28" aria-hidden="true" tabindex="-1"></a><span class="co"># holidays</span></span>
-<span id="cb39-29"><a href="utilization-forecasting.html#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="co"># there are more efficient ways to do this, but they required more advanced coding outside the scope of this module</span></span>
-<span id="cb39-30"><a href="utilization-forecasting.html#cb39-30" aria-hidden="true" tabindex="-1"></a>hols <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb39-31"><a href="utilization-forecasting.html#cb39-31" aria-hidden="true" tabindex="-1"></a>  hols,</span>
-<span id="cb39-32"><a href="utilization-forecasting.html#cb39-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(<span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="st">&#39;2024-1-1&#39;</span>), <span class="at">hol =</span> <span class="st">&#39;New Year&#39;</span>),</span>
-<span id="cb39-33"><a href="utilization-forecasting.html#cb39-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
-<span id="cb39-34"><a href="utilization-forecasting.html#cb39-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-5-29&#39;</span>, <span class="st">&#39;2024-5-27&#39;</span>)),</span>
-<span id="cb39-35"><a href="utilization-forecasting.html#cb39-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Memorial Day&#39;</span></span>
-<span id="cb39-36"><a href="utilization-forecasting.html#cb39-36" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb39-37"><a href="utilization-forecasting.html#cb39-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
-<span id="cb39-38"><a href="utilization-forecasting.html#cb39-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-7-4&#39;</span>, <span class="st">&#39;2024-7-4&#39;</span>)),</span>
-<span id="cb39-39"><a href="utilization-forecasting.html#cb39-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Independence Day&#39;</span></span>
-<span id="cb39-40"><a href="utilization-forecasting.html#cb39-40" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb39-41"><a href="utilization-forecasting.html#cb39-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
-<span id="cb39-42"><a href="utilization-forecasting.html#cb39-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-9-4&#39;</span>, <span class="st">&#39;2024-9-2&#39;</span>)),</span>
-<span id="cb39-43"><a href="utilization-forecasting.html#cb39-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Labor Day&#39;</span></span>
-<span id="cb39-44"><a href="utilization-forecasting.html#cb39-44" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb39-45"><a href="utilization-forecasting.html#cb39-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
-<span id="cb39-46"><a href="utilization-forecasting.html#cb39-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-11-23&#39;</span>, <span class="st">&#39;2024-11-28&#39;</span>)),</span>
-<span id="cb39-47"><a href="utilization-forecasting.html#cb39-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Thanksgiving&#39;</span></span>
-<span id="cb39-48"><a href="utilization-forecasting.html#cb39-48" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb39-49"><a href="utilization-forecasting.html#cb39-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
-<span id="cb39-50"><a href="utilization-forecasting.html#cb39-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-12-25&#39;</span>, <span class="st">&#39;2024-12-25&#39;</span>)),</span>
-<span id="cb39-51"><a href="utilization-forecasting.html#cb39-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Christmas&#39;</span></span>
-<span id="cb39-52"><a href="utilization-forecasting.html#cb39-52" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb39-53"><a href="utilization-forecasting.html#cb39-53" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-54"><a href="utilization-forecasting.html#cb39-54" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> hols[testset, on <span class="ot">=</span> <span class="st">&#39;ds&#39;</span>]</span>
-<span id="cb39-55"><a href="utilization-forecasting.html#cb39-55" aria-hidden="true" tabindex="-1"></a>testset[<span class="fu">is.na</span>(hol), hol <span class="sc">:</span><span class="er">=</span> <span class="st">&#39;none&#39;</span>]</span>
-<span id="cb39-56"><a href="utilization-forecasting.html#cb39-56" aria-hidden="true" tabindex="-1"></a>testset[, hol <span class="sc">:</span><span class="er">=</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(hol), <span class="at">ref =</span> <span class="st">&#39;none&#39;</span>)]</span>
-<span id="cb39-57"><a href="utilization-forecasting.html#cb39-57" aria-hidden="true" tabindex="-1"></a><span class="co"># predictions</span></span>
-<span id="cb39-58"><a href="utilization-forecasting.html#cb39-58" aria-hidden="true" tabindex="-1"></a>testset[</span>
-<span id="cb39-59"><a href="utilization-forecasting.html#cb39-59" aria-hidden="true" tabindex="-1"></a>  ,</span>
-<span id="cb39-60"><a href="utilization-forecasting.html#cb39-60" aria-hidden="true" tabindex="-1"></a>  yhat <span class="sc">:</span><span class="er">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(m, <span class="at">newdata =</span> testset, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>))</span>
-<span id="cb39-61"><a href="utilization-forecasting.html#cb39-61" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb39-62"><a href="utilization-forecasting.html#cb39-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-63"><a href="utilization-forecasting.html#cb39-63" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> testset[</span>
-<span id="cb39-64"><a href="utilization-forecasting.html#cb39-64" aria-hidden="true" tabindex="-1"></a>  ,</span>
-<span id="cb39-65"><a href="utilization-forecasting.html#cb39-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(.SD, sum),</span>
-<span id="cb39-66"><a href="utilization-forecasting.html#cb39-66" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>)),</span>
-<span id="cb39-67"><a href="utilization-forecasting.html#cb39-67" aria-hidden="true" tabindex="-1"></a>  .SDcols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;y&#39;</span>, <span class="st">&#39;yhat&#39;</span>)</span>
-<span id="cb39-68"><a href="utilization-forecasting.html#cb39-68" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb39-69"><a href="utilization-forecasting.html#cb39-69" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(yrmo))) <span class="sc">+</span></span>
-<span id="cb39-70"><a href="utilization-forecasting.html#cb39-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb39-71"><a href="utilization-forecasting.html#cb39-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> yhat), <span class="at">color =</span> colors<span class="sc">$</span>Visualization<span class="sc">$</span>Strawberry) <span class="sc">+</span></span>
-<span id="cb39-72"><a href="utilization-forecasting.html#cb39-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb39-73"><a href="utilization-forecasting.html#cb39-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Actual vs. Predicted&#39;</span>,</span>
-<span id="cb39-74"><a href="utilization-forecasting.html#cb39-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&#39;Month&#39;</span>,</span>
-<span id="cb39-75"><a href="utilization-forecasting.html#cb39-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Annualized Utilization PMPM&#39;</span></span>
-<span id="cb39-76"><a href="utilization-forecasting.html#cb39-76" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb39-77"><a href="utilization-forecasting.html#cb39-77" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
-<span id="cb39-78"><a href="utilization-forecasting.html#cb39-78" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
+<span id="cb39-29"><a href="utilization-forecasting.html#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="do">## there are more efficient ways to do this, but they required more advanced coding outside the</span></span>
+<span id="cb39-30"><a href="utilization-forecasting.html#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="do">## scope of this module</span></span>
+<span id="cb39-31"><a href="utilization-forecasting.html#cb39-31" aria-hidden="true" tabindex="-1"></a>hols <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb39-32"><a href="utilization-forecasting.html#cb39-32" aria-hidden="true" tabindex="-1"></a>  hols,</span>
+<span id="cb39-33"><a href="utilization-forecasting.html#cb39-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(<span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="st">&#39;2024-1-1&#39;</span>), <span class="at">hol =</span> <span class="st">&#39;New Year&#39;</span>),</span>
+<span id="cb39-34"><a href="utilization-forecasting.html#cb39-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-35"><a href="utilization-forecasting.html#cb39-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-5-29&#39;</span>, <span class="st">&#39;2024-5-27&#39;</span>)),</span>
+<span id="cb39-36"><a href="utilization-forecasting.html#cb39-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Memorial Day&#39;</span></span>
+<span id="cb39-37"><a href="utilization-forecasting.html#cb39-37" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-38"><a href="utilization-forecasting.html#cb39-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-39"><a href="utilization-forecasting.html#cb39-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-7-4&#39;</span>, <span class="st">&#39;2024-7-4&#39;</span>)),</span>
+<span id="cb39-40"><a href="utilization-forecasting.html#cb39-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Independence Day&#39;</span></span>
+<span id="cb39-41"><a href="utilization-forecasting.html#cb39-41" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-42"><a href="utilization-forecasting.html#cb39-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-43"><a href="utilization-forecasting.html#cb39-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-9-4&#39;</span>, <span class="st">&#39;2024-9-2&#39;</span>)),</span>
+<span id="cb39-44"><a href="utilization-forecasting.html#cb39-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Labor Day&#39;</span></span>
+<span id="cb39-45"><a href="utilization-forecasting.html#cb39-45" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-46"><a href="utilization-forecasting.html#cb39-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-47"><a href="utilization-forecasting.html#cb39-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-11-23&#39;</span>, <span class="st">&#39;2024-11-28&#39;</span>)),</span>
+<span id="cb39-48"><a href="utilization-forecasting.html#cb39-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Thanksgiving&#39;</span></span>
+<span id="cb39-49"><a href="utilization-forecasting.html#cb39-49" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-50"><a href="utilization-forecasting.html#cb39-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-51"><a href="utilization-forecasting.html#cb39-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-12-25&#39;</span>, <span class="st">&#39;2024-12-25&#39;</span>)),</span>
+<span id="cb39-52"><a href="utilization-forecasting.html#cb39-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Christmas&#39;</span></span>
+<span id="cb39-53"><a href="utilization-forecasting.html#cb39-53" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-54"><a href="utilization-forecasting.html#cb39-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-55"><a href="utilization-forecasting.html#cb39-55" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> hols[testset, on <span class="ot">=</span> <span class="st">&#39;ds&#39;</span>]</span>
+<span id="cb39-56"><a href="utilization-forecasting.html#cb39-56" aria-hidden="true" tabindex="-1"></a>testset[<span class="fu">is.na</span>(hol), hol <span class="sc">:</span><span class="er">=</span> <span class="st">&#39;none&#39;</span>]</span>
+<span id="cb39-57"><a href="utilization-forecasting.html#cb39-57" aria-hidden="true" tabindex="-1"></a>testset[, hol <span class="sc">:</span><span class="er">=</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(hol), <span class="at">ref =</span> <span class="st">&#39;none&#39;</span>)]</span>
+<span id="cb39-58"><a href="utilization-forecasting.html#cb39-58" aria-hidden="true" tabindex="-1"></a><span class="co"># predictions</span></span>
+<span id="cb39-59"><a href="utilization-forecasting.html#cb39-59" aria-hidden="true" tabindex="-1"></a>testset[</span>
+<span id="cb39-60"><a href="utilization-forecasting.html#cb39-60" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb39-61"><a href="utilization-forecasting.html#cb39-61" aria-hidden="true" tabindex="-1"></a>  yhat <span class="sc">:</span><span class="er">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(m, <span class="at">newdata =</span> testset, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>))</span>
+<span id="cb39-62"><a href="utilization-forecasting.html#cb39-62" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb39-63"><a href="utilization-forecasting.html#cb39-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-64"><a href="utilization-forecasting.html#cb39-64" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> testset[</span>
+<span id="cb39-65"><a href="utilization-forecasting.html#cb39-65" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb39-66"><a href="utilization-forecasting.html#cb39-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(.SD, sum),</span>
+<span id="cb39-67"><a href="utilization-forecasting.html#cb39-67" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>)),</span>
+<span id="cb39-68"><a href="utilization-forecasting.html#cb39-68" aria-hidden="true" tabindex="-1"></a>  .SDcols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;y&#39;</span>, <span class="st">&#39;yhat&#39;</span>)</span>
+<span id="cb39-69"><a href="utilization-forecasting.html#cb39-69" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb39-70"><a href="utilization-forecasting.html#cb39-70" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(yrmo))) <span class="sc">+</span></span>
+<span id="cb39-71"><a href="utilization-forecasting.html#cb39-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb39-72"><a href="utilization-forecasting.html#cb39-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> yhat), <span class="at">color =</span> colors<span class="sc">$</span>Visualization<span class="sc">$</span>Strawberry) <span class="sc">+</span></span>
+<span id="cb39-73"><a href="utilization-forecasting.html#cb39-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb39-74"><a href="utilization-forecasting.html#cb39-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Actual vs. Predicted&#39;</span>,</span>
+<span id="cb39-75"><a href="utilization-forecasting.html#cb39-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&#39;Month&#39;</span>,</span>
+<span id="cb39-76"><a href="utilization-forecasting.html#cb39-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Annualized Utilization PMPM&#39;</span></span>
+<span id="cb39-77"><a href="utilization-forecasting.html#cb39-77" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb39-78"><a href="utilization-forecasting.html#cb39-78" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
+<span id="cb39-79"><a href="utilization-forecasting.html#cb39-79" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
 <pre><code>## Warning: Removed 23 rows containing missing values (`geom_point()`).</code></pre>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>Splines make predictions outside of the range of the training data by means of linear extrapolation using the first derivative of the estimated smooth at the endpoint.
 Since we use a log link, this means that trend is assumed to be exponential, which can cause problems if the trend slope at the end of the training data is too large.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="utilization-forecasting.html#cb41-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
@@ -646,7 +656,7 @@ Since we use a log link, this means that trend is assumed to be exponential, whi
 <span id="cb41-25"><a href="utilization-forecasting.html#cb41-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb41-26"><a href="utilization-forecasting.html#cb41-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb41-27"><a href="utilization-forecasting.html#cb41-27" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>Ours looks fine, however.</p>
 <p>In addition to this consideration, the linear extrapolation method can also be problematic if the model fits a wiggly smooth to the data.
 The estimated slope at the end of the training period could be very different from the overall trend.
@@ -666,7 +676,7 @@ You can pass a list of knot points for the model to use for a particular smooth 
 <span id="cb42-12"><a href="utilization-forecasting.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">knots =</span> <span class="fu">list</span>(<span class="at">t =</span> ts)</span>
 <span id="cb42-13"><a href="utilization-forecasting.html#cb42-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb42-14"><a href="utilization-forecasting.html#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="utilization-forecasting.html#cb43-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
 <span id="cb43-2"><a href="utilization-forecasting.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  testset[, .(ds)],</span>
 <span id="cb43-3"><a href="utilization-forecasting.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">exp</span>(</span>
@@ -694,18 +704,18 @@ You can pass a list of knot points for the model to use for a particular smooth 
 <span id="cb43-25"><a href="utilization-forecasting.html#cb43-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb43-26"><a href="utilization-forecasting.html#cb43-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb43-27"><a href="utilization-forecasting.html#cb43-27" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>It doesn’t make much of a difference, if any, with this drug because the trend component is quite regular.</p>
 </div>
-<div id="alternative-trend-forecast" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Alternative Trend Forecast<a href="utilization-forecasting.html#alternative-trend-forecast" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="alternative-trend-forecast" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Alternative Trend Forecast<a href="utilization-forecasting.html#alternative-trend-forecast" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We’ll try modeled core trend in another way to see if that improves the in-year component, and just for personal interest.
 This method is more in accordance with classic actuarial forecasting methods.
 In this framework, future trend is estimated as some sort of average of historical trends.
 We can estimate year-over-year trend for each year in historicals by using a dummy variable corresponding to the year.
 To fit a model, we just need to turn the <code>yr</code> variable into a factor and change the formula accordingly.</p>
-<div id="model-fitting-2" class="section level3 hasAnchor" number="3.6.1">
-<h3><span class="header-section-number">3.6.1</span> Model Fitting<a href="utilization-forecasting.html#model-fitting-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="model-fitting-2" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Model Fitting<a href="utilization-forecasting.html#model-fitting-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="utilization-forecasting.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dat[, yr <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(yr)]</span>
 <span id="cb44-2"><a href="utilization-forecasting.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="utilization-forecasting.html#cb44-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
@@ -757,11 +767,11 @@ To fit a model, we just need to turn the <code>yr</code> variable into a factor 
 ## R-sq.(adj) =  0.961   Deviance explained = 96.2%
 ## GCV = 49.716  Scale est. = 49.106    n = 2953</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="utilization-forecasting.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>Some of the slope in the data is now attributed to in-year variation, which we may or may not want depending on the application.</p>
 </div>
-<div id="making-predictions-1" class="section level3 hasAnchor" number="3.6.2">
-<h3><span class="header-section-number">3.6.2</span> Making Predictions<a href="utilization-forecasting.html#making-predictions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="making-predictions-1" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Making Predictions<a href="utilization-forecasting.html#making-predictions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since the model won’t know what to do with years that are beyond the last year in the training data, we have to start by transforming that variable in the forecasting dataset accordingly.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="utilization-forecasting.html#cb47-1" aria-hidden="true" tabindex="-1"></a>testset2 <span class="ot">&lt;-</span> <span class="fu">copy</span>(testset)</span>
 <span id="cb47-2"><a href="utilization-forecasting.html#cb47-2" aria-hidden="true" tabindex="-1"></a>testset2[, yr <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">pmin</span>(yr, <span class="dv">2023</span>))]</span></code></pre></div>
@@ -840,7 +850,7 @@ I will just use a weighted average by the number of months completed in each yea
 <span id="cb52-34"><a href="utilization-forecasting.html#cb52-34" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb52-35"><a href="utilization-forecasting.html#cb52-35" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
 <pre><code>## Warning: Removed 46 rows containing missing values (`geom_line()`).</code></pre>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 
 </div>
 </div>

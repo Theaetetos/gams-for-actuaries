@@ -5,25 +5,24 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Generalized Additive Models for Actuaries</title>
-  <meta name="description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta name="description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Generalized Additive Models for Actuaries" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Generalized Additive Models for Actuaries" />
   
-  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
   
 
 <meta name="author" content="Nathan Cornwell" />
 
 
-<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,60 +135,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Bookdown Book</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>2</b> Motivating GAMs</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>2.1</b> Linear Regression</a></li>
-<li class="chapter" data-level="2.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
-<li class="chapter" data-level="2.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>2.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="2.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>2.4</b> Generalized Linear Models</a></li>
-<li class="chapter" data-level="2.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>2.5</b> Generalized Additive Models</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>3</b> Utilization Forecasting</a>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#our-workspace"><i class="fa fa-check"></i><b>0.1</b> Our Workspace</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#preliminaries"><i class="fa fa-check"></i><b>0.2</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
-<li class="chapter" data-level="3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>3.3</b> Predictors</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>3.3.1</b> Weekday</a></li>
-<li class="chapter" data-level="3.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>3.3.2</b> In-year</a></li>
-<li class="chapter" data-level="3.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>3.3.3</b> Holidays</a></li>
-<li class="chapter" data-level="3.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>3.3.4</b> COVID</a></li>
-<li class="chapter" data-level="3.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>3.3.5</b> Trend</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>3.4</b> Model Fitting</a></li>
-<li class="chapter" data-level="3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>3.5</b> Making Predictions</a></li>
-<li class="chapter" data-level="3.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>3.6</b> Alternative Trend Forecast</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>3.6.1</b> Model Fitting</a></li>
-<li class="chapter" data-level="3.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>3.6.2</b> Making Predictions</a></li>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.1</b> Branding Code</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.2</b> Packages</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.3</b> (Some of our) Datasets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>4</b> Hurricane Impact Valuation</a>
+<li class="chapter" data-level="1" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>1</b> Motivating GAMs</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
-<li class="chapter" data-level="4.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a>
+<li class="chapter" data-level="1.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>1.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="1.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>1.2</b> Data</a></li>
+<li class="chapter" data-level="1.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>1.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="1.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>1.4</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="1.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>1.5</b> Generalized Additive Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>2</b> Utilization Forecasting</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>4.3.1</b> Initial Model</a></li>
-<li class="chapter" data-level="4.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>4.3.2</b> Deriving the Holiday List</a></li>
-<li class="chapter" data-level="4.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>4.3.3</b> Hurricane Effect Window</a></li>
-<li class="chapter" data-level="4.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>4.3.4</b> Penultimate Model</a></li>
-<li class="chapter" data-level="4.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>4.3.5</b> Serial Autocorrelation of Errors</a></li>
-<li class="chapter" data-level="4.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>4.3.6</b> Heteroskedasticity</a></li>
-<li class="chapter" data-level="4.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>4.3.7</b> Final Model</a></li>
+<li class="chapter" data-level="2.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>2.3</b> Predictors</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>2.3.1</b> Weekday</a></li>
+<li class="chapter" data-level="2.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>2.3.2</b> In-year</a></li>
+<li class="chapter" data-level="2.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>2.3.3</b> Holidays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>2.3.4</b> COVID</a></li>
+<li class="chapter" data-level="2.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>2.3.5</b> Trend</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>2.4</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>2.5</b> Making Predictions</a></li>
+<li class="chapter" data-level="2.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>2.6</b> Alternative Trend Forecast</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>2.6.1</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>2.6.2</b> Making Predictions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>5</b> Valuation of Care Interventions</a>
+<li class="chapter" data-level="3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>3</b> Hurricane Impact Valuation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>5.2</b> Data</a>
+<li class="chapter" data-level="3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>3.3</b> Model Fitting</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>5.2.1</b> Processed Dataset</a></li>
-<li class="chapter" data-level="5.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>5.2.2</b> Exposure</a></li>
+<li class="chapter" data-level="3.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>3.3.1</b> Initial Model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>3.3.2</b> Deriving the Holiday List</a></li>
+<li class="chapter" data-level="3.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>3.3.3</b> Hurricane Effect Window</a></li>
+<li class="chapter" data-level="3.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>3.3.4</b> Penultimate Model</a></li>
+<li class="chapter" data-level="3.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>3.3.5</b> Serial Autocorrelation of Errors</a></li>
+<li class="chapter" data-level="3.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>3.3.6</b> Heteroskedasticity</a></li>
+<li class="chapter" data-level="3.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>3.3.7</b> Final Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>5.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="5.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model"><i class="fa fa-check"></i><b>5.4</b> Using the Model</a></li>
+<li class="chapter" data-level="3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#using-the-model"><i class="fa fa-check"></i><b>3.4</b> Using the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>4</b> Valuation of Care Interventions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Processed Dataset</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>4.2.2</b> Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -214,10 +223,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Generalized Additive Models for Actuaries</h1>
 <p class="author"><em>Nathan Cornwell</em></p>
-<p class="date"><em>2023-04-03</em></p>
+<p class="date"><em>April 04 2023</em></p>
 </div>
-<div id="intro" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level1 unnumbered hasAnchor">
+<h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="our-workspace" class="section level2 hasAnchor" number="0.1">
+<h2><span class="header-section-number">0.1</span> Our Workspace<a href="index.html#our-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://posit.co/download/rstudio-desktop/">R/RStudio</a></p>
+<p><a href="https://github.com/Theaetetos/gams-for-actuaries">Github Repo</a></p>
+<p><a href="https://theaetetos.github.io/gams-for-actuaries/">Github Page</a></p>
+</div>
+<div id="preliminaries" class="section level2 hasAnchor" number="0.2">
+<h2><span class="header-section-number">0.2</span> Preliminaries<a href="index.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="branding-code" class="section level3 hasAnchor" number="0.2.1">
+<h3><span class="header-section-number">0.2.1</span> Branding Code<a href="index.html#branding-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is just some branding stuff that I use to make my plots look nice and comply with Optum and UHC branding guidelines.
 You don’t need it outside of the code in the presentation, but you can use it as a template for customizing your own plots, if you wish.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>primary_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Optum Orange</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#FF612B&#39;</span>)</span>
@@ -230,32 +249,34 @@ You don’t need it outside of the code in the presentation, but you can use it 
 <span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Primary =</span> primary_colors, <span class="at">Secondary =</span> sec_colors,</span>
 <span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">Typography =</span> type_colors, <span class="at">Visualization =</span> viz_colors)</span>
 <span id="cb1-10"><a href="index.html#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting</span></span>
-<span id="cb1-12"><a href="index.html#cb1-12" aria-hidden="true" tabindex="-1"></a>scale_discrete_optum <span class="ot">&lt;-</span> <span class="cf">function</span>(aesthetics, ...){</span>
-<span id="cb1-13"><a href="index.html#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(</span>
-<span id="cb1-14"><a href="index.html#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">aesthetics =</span> aesthetics,</span>
-<span id="cb1-15"><a href="index.html#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale_name =</span> <span class="st">&#39;optum&#39;</span>,</span>
-<span id="cb1-16"><a href="index.html#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(</span>
-<span id="cb1-17"><a href="index.html#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(colors<span class="sc">$</span>Visualization[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>)])</span>
-<span id="cb1-18"><a href="index.html#cb1-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-19"><a href="index.html#cb1-19" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb1-20"><a href="index.html#cb1-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-21"><a href="index.html#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-22"><a href="index.html#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="index.html#cb1-23" aria-hidden="true" tabindex="-1"></a>theme_titles <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
-<span id="cb1-24"><a href="index.html#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>),</span>
-<span id="cb1-25"><a href="index.html#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>)</span>
-<span id="cb1-26"><a href="index.html#cb1-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-27"><a href="index.html#cb1-27" aria-hidden="true" tabindex="-1"></a>theme_rotx <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
-<span id="cb1-28"><a href="index.html#cb1-28" aria-hidden="true" tabindex="-1"></a>theme_optum_plot <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
-<span id="cb1-29"><a href="index.html#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span>),</span>
-<span id="cb1-30"><a href="index.html#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
-<span id="cb1-31"><a href="index.html#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> colors<span class="sc">$</span>Secondary<span class="sc">$</span>White,</span>
-<span id="cb1-32"><a href="index.html#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span></span>
-<span id="cb1-33"><a href="index.html#cb1-33" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-34"><a href="index.html#cb1-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-35"><a href="index.html#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="index.html#cb1-36" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span> theme_optum_plot <span class="sc">+</span> theme_titles</span></code></pre></div>
+<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a>scale_discrete_optum <span class="ot">&lt;-</span> <span class="cf">function</span>(aesthetics, ...){</span>
+<span id="cb1-12"><a href="index.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(</span>
+<span id="cb1-13"><a href="index.html#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">aesthetics =</span> aesthetics,</span>
+<span id="cb1-14"><a href="index.html#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale_name =</span> <span class="st">&#39;optum&#39;</span>,</span>
+<span id="cb1-15"><a href="index.html#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(</span>
+<span id="cb1-16"><a href="index.html#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(colors<span class="sc">$</span>Visualization[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>)])</span>
+<span id="cb1-17"><a href="index.html#cb1-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-18"><a href="index.html#cb1-18" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-19"><a href="index.html#cb1-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-20"><a href="index.html#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="index.html#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="index.html#cb1-22" aria-hidden="true" tabindex="-1"></a>theme_titles <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<span id="cb1-23"><a href="index.html#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>),</span>
+<span id="cb1-24"><a href="index.html#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>)</span>
+<span id="cb1-25"><a href="index.html#cb1-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-26"><a href="index.html#cb1-26" aria-hidden="true" tabindex="-1"></a>theme_rotx <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
+<span id="cb1-27"><a href="index.html#cb1-27" aria-hidden="true" tabindex="-1"></a>theme_optum_plot <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<span id="cb1-28"><a href="index.html#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span>),</span>
+<span id="cb1-29"><a href="index.html#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
+<span id="cb1-30"><a href="index.html#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> colors<span class="sc">$</span>Secondary<span class="sc">$</span>White,</span>
+<span id="cb1-31"><a href="index.html#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span></span>
+<span id="cb1-32"><a href="index.html#cb1-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-33"><a href="index.html#cb1-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-34"><a href="index.html#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="index.html#cb1-35" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span> theme_optum_plot <span class="sc">+</span> theme_titles</span></code></pre></div>
+</div>
+<div id="packages" class="section level3 hasAnchor" number="0.2.2">
+<h3><span class="header-section-number">0.2.2</span> Packages<a href="index.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here are all of the packages we will need for this presentation.
 You only need to run the first code chunk once for each installation of R you have, while you need to run the second.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
@@ -270,10 +291,15 @@ You only need to run the first code chunk once for each installation of R you ha
 <span id="cb3-6"><a href="index.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
 <span id="cb3-7"><a href="index.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
 <span id="cb3-8"><a href="index.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
+</div>
+<div id="some-of-our-datasets" class="section level3 hasAnchor" number="0.2.3">
+<h3><span class="header-section-number">0.2.3</span> (Some of our) Datasets<a href="index.html#some-of-our-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Finally, these are two of the datasets we will use in the examples.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;diamonds&#39;</span>)</span>
 <span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;dataCar&#39;</span>)</span></code></pre></div>
 
+</div>
+</div>
 </div>
             </section>
 
