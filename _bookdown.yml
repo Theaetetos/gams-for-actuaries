@@ -1,0 +1,6 @@
+book_filename: "gams-for-actuaries"
+chapter_name: "Chapter "
+repo:
+output_dir: docs
+clean: [packages.bib, bookdown.bbl]
+new_session: no

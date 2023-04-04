@@ -1,0 +1,307 @@
+# Motivating GAMs
+
+## Linear Regression
+
+We'll start with good ol' linear regression and build up to generalized additive models.
+The mathematical form of linear regression is
+
+$$
+y \sim \beta_0+\sum_{i=1}^n \beta_i x_i+ \epsilon \\
+\epsilon \sim N(0,\sigma^2)
+$$
+In English, some _response variable_ $y$ is modeled as the sum of an _intercept_ term $\beta_0$ and $n$ _predictor variables_ $x_1,...,x_n$ with random _error_ $\epsilon \sim N(0,\sigma^2)$.
+
+## Data
+
+I will skip straight to a fully-processed dataset based on other tutorials I've given with this data.
+The main things I'm doing are converting the categorical variables to factors (they are ordered factors in the original data for some reason) and setting the reference level to the one that occurs the most frequently in the data.
+As you have learned or will learn on the Predictive Analytics exam, this is general best practice.
+
+```{r}
+dat <- as.data.table(diamonds)
+dat[
+  ,
+  clarity := relevel(
+    factor(
+      clarity,
+      ordered = F
+    ),
+    ref = 'SI1'
+  )
+]
+dat[
+  ,
+  color := relevel(
+    factor(
+      color,
+      ordered = F
+    ),
+    ref = 'G'
+  )
+]
+dat[
+  ,
+  cut := relevel(
+    factor(
+      cut,
+      ordered = F
+    ),
+    ref = 'Ideal'
+  )
+]
+```
+
+## Model Fitting
+
+We can fit a linear regression to our diamonds dataset as follows.
+I leave out the `depth` and `table` variables because, although I've tried quite a bit, I don't understand them and don't trust their contributions to the model.
+You'll just have to trust me on this for now, but I'd love to have someone explain how to incorporate them into a model in a rigorous way.
+
+```{r}
+m_lm <- lm(price ~ carat + cut + color + clarity, data = dat)
+```
+
+The first thing to do with a model is to examine the estimated coefficients.
+
+```{r}
+summary(m_lm)
+```
+
+This readout gives us a ton of information.
+
+The first thing I like to look at is the _p-values_ for all of the terms we included in our model.
+This can be found in the column labeled `Pr(>|t|)`.
+These are the probabilities that we would observe an effect of the size estimated by the model due to chance.
+We want this probability to be below some _critical value_ $\alpha$, which is usually set to .05.
+If the probability is above $\alpha$, then we don't have enough evidence to include that term in our model.
+We call estimated coefficients with a p-value less than $\alpha$ _statistically significant_.
+
+The second thing I look at is the _adjusted R-squared_, or $R^2_{adj}$.
+$R^2$ is usually interpreted as the proportion of variance in the response variable that is explained by the model.
+Higher values are always better, but there is no overarching threshold that you should shoot for.
+Some fields of study, such as biology, psychology, and unfortunately for us, short-term actuarial science, are simply subject to very high variance, so $R^2$ as low as .1 can be acceptable even for peer-reviewed studies.
+$R^2_{adj}$ adds a penalty for each term in the model, since $R^2$ always improves by at least a little whenever a term is added.
+
+Even though we've learned a lot from this readout, and all of it sounds good, we are by no means done.
+The next thing I like to do is plot actuals vs. predicted to see if the relationships between variables estimated by the model are tracking those in the data.
+
+```{r}
+preds <- cbind(dat, predicted = predict(m_lm))
+
+ggplot(preds) +
+  geom_point(aes(price, predicted)) +
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    color = colors$Visualization$Strawberry
+  ) +
+  scale_x_continuous(labels = dollar) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = 'Actual', y = 'Predicted') +
+  mytheme
+```
+
+This plot shows us that our model may not be so great after all.
+The red line shows us what a perfect model with zero residual variance would look like.
+It's clear that our model is significantly over-predicting the prices of very cheap and very expensive diamonds.
+Our coefficients may have passed the test for statistical significance, but it looks there's more going on in the data than we were able to capture.
+
+There is a lot more validation work to be done, but I am going to put that off until we get to GAMs because that is the model form we're most interested in.
+
+## Generalized Linear Models
+
+Generalized linear models (GLMs) were introduced in 1972 as a formal specification of a family of models that includes linear regression as well as many others. Compared to linear regression, GLMs have relaxed constraints on the assumed error distribution and add a _link function_ to the model form. Mathematically, a GLM is:  
+
+1. A random variable $Y$ that is conditionally distributed according to a member of the _linear exponential family_ of distributions;  
+2. A linear predictor $\eta = \sum_{i=0}^n{\beta_iX_i}$; and  
+3. A link function $g$ such that $E(Y|X) = g^{-1}(\eta)$.  
+
+We don't need to bother with the mathematics of the linear exponential family. It's enough for us to note that it contains a distribution for basically any modeling problem:  
+
+- Bernoulli - The probability that an event will occur; e.g. a patient will develop sepsis  
+- Binomial/Negative Binomial - The expected number of occurrences out of $N$ trials; e.g. the count of distinct medications a member will take in a year    
+- Poisson - The expected number of occurrences in a given amount of time/space; e.g. the number of patients visiting a doctor's office in a day  
+- Normal - A numeric value on the real line  
+
+You can see a full list [here](https://en.wikipedia.org/wiki/Generalized_linear_model).  
+
+Note that the last error assumption, when paired with the identity link function, is simply linear regression. You may also know the Bernoulli case as _logistic regression_, named for its canonical link function, the logistic function $\frac{L}{1+e^{-k(x-x_0)}}$.
+
+We will first take advantage of the GLM's ability to add a link function.
+It's basically always a good idea to use a log link when working with price data, if only because the range of possible predicted values is restricted to the positive reals - we almost never want to predict a negative price.
+
+```{r}
+m_glm <- glm(
+  price ~ carat + cut + color + clarity,
+  family = gaussian(link = 'log'),
+  data = dat
+)
+summary(m_glm)
+```
+
+```{r}
+# type argument must be specified for GLMs
+preds <- cbind(dat, predicted = predict(m_glm, type = 'response'))
+
+ggplot(preds) +
+  geom_point(aes(price, predicted)) +
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    color = colors$Visualization$Strawberry
+  ) +
+  scale_x_continuous(labels = dollar) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = 'Actual', y = 'Predicted') +
+  mytheme
+```
+
+The bulk of our predictions are now centered around the red line, but the problem of predictions being too high for more expensive diamonds is worse.
+In addition, there is a region of data points below the main region.
+This suggests that the model is missing some relationship in the data.
+
+```{r}
+ggplot(preds) +
+  geom_point(
+    aes(
+      price,
+      predicted,
+      # I do this just to make the legend a little more readable
+      color = factor(
+        clarity,
+        levels = rev(
+          c('I1', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF')
+        )
+      )
+    )
+  ) +
+  scale_discrete_optum('color') +
+  scale_x_continuous(labels = dollar) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = 'Actual', y = 'Predicted', color = element_blank()) +
+  mytheme
+```
+
+This residual plot makes the cause of the grouping issue very clear: the price slope for diamonds of clarity IF looks to be quite different from the slopes of the rest of the clarity ratings.
+Based on the groupings visible in the above plot, we need to allow the price slope to vary by clarity.
+The other main issue is not as clear, but I will skip straight to it to save us time: the price-carat relationship also needs to be able to change slope.
+We can implement these changes with the below code.
+
+```{r}
+m_glm2 <- glm(
+  price ~ poly(carat, 3)*clarity + cut + color,
+  data = dat,
+  family = gaussian(link = 'log')
+)
+summary(m_glm2)
+```
+
+```{r}
+preds <- cbind(dat, predicted = predict(m_glm2, type = 'response'))
+
+ggplot(preds) +
+  geom_point(aes(price, predicted)) +
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    color = colors$Visualization$Strawberry
+  ) +
+  scale_x_continuous(labels = dollar) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = 'Actual', y = 'Predicted') +
+  mytheme
+```
+
+This now looks good enough to get on with.
+We can visualize our fancy new price slopes in the following chart.
+
+```{r}
+# CJ stands for 'Cross Join', and creates a data.table that is the cartesian product of all of the input vectors
+pdat <- CJ(
+  # we need to apply the link function to any numeric variables
+  carat = log(seq(from = .01, to = 5.01, by = .01)),
+  clarity = factor(
+    levels(dat$clarity),
+    levels = c('IF', 'VVS1', 'VVS2', 'VS1', 'VS2', 'SI1', 'SI2', 'I1')
+  ),
+  cut = factor('Ideal', levels = levels(dat$cut)),
+  color = factor('G', levels = levels(dat$color))
+)
+pdat[
+# setting type = 'response' applies the inverse link function to the linear predictor for us
+  ,
+  pred := predict(m_glm2, newdata = pdat, type = 'response')
+]
+
+ggplot(pdat, aes(x = exp(carat), group = clarity, color = clarity)) +
+  geom_line(aes(y = pred)) +
+  scale_discrete_optum(aesthetics = 'color') +
+  scale_y_continuous(labels = dollar) +
+  labs(
+    title = 'Visualization of Price Slopes',
+    x = 'Carat',
+    y = 'Price',
+    color = 'Clarity'
+  ) +
+  mytheme
+```
+
+## Generalized Additive Models
+
+Generalized Additive Models (GAMs) were introduced in the 90s by Simon Wood as an extension of GLMs that incorporate a form of _functional regression_.  
+They have all of the same characteristics of GLMs in addition to the ability to model functional, not just linear, relationships between predictor variables and the response, as well as an expanded field of error distributions, most notably for actuarial work the Tweedie and Negative Binomial.  
+Functional relationships are modeled by GAMs using various types of _splines_, which are piecewise functions that are used to interpolate a continuously-differentiable curve between a collection of points.  
+The linear predictor for a GAM, therefore, looks like this:  
+
+$$\eta = \sum_{i=0}^n\sum_{j=0}^m\beta_{ij}f_j(X_i)$$
+
+With the added dimension $j$ denoting the _basis dimension_, or each "piece" of the piecewise spline $f_j(X_i)$.  
+This sounds a lot scarier than it is; it should become clear how splines work in GAMs once we fit one to our diamonds dataset.  
+
+GAMs are fit a lot like GLMs.  
+The function to use is called `gam()`, and it takes the same arguments `formula`, `data`, and `family` as `glm()`.  
+You specify a functional term by wrapping it in `s()` or one of the other [smooth constructors](https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html) offered in the `mgcv` package.  
+Here, I am using the `ti()` (short for <u>t</u>ensor <u>i</u>nteraction) constructor because this is the recommended way to create interaction terms in the context of GAMs.  
+I also parallelize model fitting, because otherwise fitting takes hours on my 32G work laptop (!).  
+The `bam()` function is just short for <u>b</u>ig g<u>am</u> and includes a new argument, `cluster`, which is a parallel computing cluster created using the `parallel` package.  
+It is recommended to fit GAMs in parallel if the number of rows in your training dataset is five figures or more.  
+
+```{r}
+cluster <- makePSOCKcluster(detectCores())
+m_gam <- bam(
+  price ~ ti(carat) + clarity + ti(carat, by = clarity) + cut + color,
+  data = dat,
+  family = gaussian(link = 'log'),
+  cluster = cluster
+)
+# you must always stop the cluster you create
+stopCluster(cluster)
+summary(m_gam)
+```
+
+Let's compare these price slopes to those from our original GLM fit.  
+
+```{r}
+pdat[
+  ,
+  `:=`(
+    gam = predict(m_gam, newdata = pdat, type = 'response'),
+    glm = pred
+  )
+]
+
+ggplot(pdat, aes(x = exp(carat), group = clarity, color = clarity)) +
+  geom_line(aes(y = glm), linetype = 'dashed') +
+  geom_line(aes(y = gam)) +
+  scale_discrete_optum(aesthetics = 'color') +
+  scale_y_continuous(labels = dollar) +
+  labs(
+    title = 'Visualization of Price Slopes',
+    x = 'Carat',
+    y = 'Price',
+    color = 'Clarity'
+  ) +
+  mytheme
+```
+
+Here, we can see that the polynomial relationship between carat and price we modeled in the GLM is picked up automatically by the GAM.  

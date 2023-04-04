@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Utilization Forecasting | Generalized Additive Models for Actuaries</title>
+  <meta name="description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Utilization Forecasting | Generalized Additive Models for Actuaries" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Utilization Forecasting | Generalized Additive Models for Actuaries" />
+  
+  <meta name="twitter:description" content="An Introduction to Generalized Additive Models for Actuarial Business Problems." />
+  
+
+<meta name="author" content="Nathan Cornwell" />
+
+
+<meta name="date" content="2023-04-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="motivating-gams.html"/>
+<link rel="next" href="hurricane-impact-valuation.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Bookdown Book</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>2</b> Motivating GAMs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="motivating-gams.html"><a href="motivating-gams.html#linear-regression"><i class="fa fa-check"></i><b>2.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="2.2" data-path="motivating-gams.html"><a href="motivating-gams.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="motivating-gams.html"><a href="motivating-gams.html#model-fitting"><i class="fa fa-check"></i><b>2.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="2.4" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-linear-models"><i class="fa fa-check"></i><b>2.4</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="2.5" data-path="motivating-gams.html"><a href="motivating-gams.html#generalized-additive-models"><i class="fa fa-check"></i><b>2.5</b> Generalized Additive Models</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html"><i class="fa fa-check"></i><b>3</b> Utilization Forecasting</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#predictors"><i class="fa fa-check"></i><b>3.3</b> Predictors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#weekday"><i class="fa fa-check"></i><b>3.3.1</b> Weekday</a></li>
+<li class="chapter" data-level="3.3.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#in-year"><i class="fa fa-check"></i><b>3.3.2</b> In-year</a></li>
+<li class="chapter" data-level="3.3.3" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#holidays"><i class="fa fa-check"></i><b>3.3.3</b> Holidays</a></li>
+<li class="chapter" data-level="3.3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#covid"><i class="fa fa-check"></i><b>3.3.4</b> COVID</a></li>
+<li class="chapter" data-level="3.3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#trend"><i class="fa fa-check"></i><b>3.3.5</b> Trend</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-1"><i class="fa fa-check"></i><b>3.4</b> Model Fitting</a></li>
+<li class="chapter" data-level="3.5" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions"><i class="fa fa-check"></i><b>3.5</b> Making Predictions</a></li>
+<li class="chapter" data-level="3.6" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#alternative-trend-forecast"><i class="fa fa-check"></i><b>3.6</b> Alternative Trend Forecast</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#model-fitting-2"><i class="fa fa-check"></i><b>3.6.1</b> Model Fitting</a></li>
+<li class="chapter" data-level="3.6.2" data-path="utilization-forecasting.html"><a href="utilization-forecasting.html#making-predictions-1"><i class="fa fa-check"></i><b>3.6.2</b> Making Predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html"><i class="fa fa-check"></i><b>4</b> Hurricane Impact Valuation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
+<li class="chapter" data-level="4.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#model-fitting-3"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#initial-model"><i class="fa fa-check"></i><b>4.3.1</b> Initial Model</a></li>
+<li class="chapter" data-level="4.3.2" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#deriving-the-holiday-list"><i class="fa fa-check"></i><b>4.3.2</b> Deriving the Holiday List</a></li>
+<li class="chapter" data-level="4.3.3" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#hurricane-effect-window"><i class="fa fa-check"></i><b>4.3.3</b> Hurricane Effect Window</a></li>
+<li class="chapter" data-level="4.3.4" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#penultimate-model"><i class="fa fa-check"></i><b>4.3.4</b> Penultimate Model</a></li>
+<li class="chapter" data-level="4.3.5" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors"><i class="fa fa-check"></i><b>4.3.5</b> Serial Autocorrelation of Errors</a></li>
+<li class="chapter" data-level="4.3.6" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#heteroskedasticity"><i class="fa fa-check"></i><b>4.3.6</b> Heteroskedasticity</a></li>
+<li class="chapter" data-level="4.3.7" data-path="hurricane-impact-valuation.html"><a href="hurricane-impact-valuation.html#final-model"><i class="fa fa-check"></i><b>4.3.7</b> Final Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html"><i class="fa fa-check"></i><b>5</b> Valuation of Care Interventions</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>5.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>5.2.1</b> Processed Dataset</a></li>
+<li class="chapter" data-level="5.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>5.2.2</b> Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>5.3</b> Model Fitting</a></li>
+<li class="chapter" data-level="5.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model"><i class="fa fa-check"></i><b>5.4</b> Using the Model</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Generalized Additive Models for Actuaries</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="utilization-forecasting" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Utilization Forecasting<a href="utilization-forecasting.html#utilization-forecasting" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introduction<a href="utilization-forecasting.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the key use cases for GAMs in my work is in utilization forecasting.
+In this case study, I will walk through how I do so using a particular example drug.</p>
+</div>
+<div id="data-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data<a href="utilization-forecasting.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The data we will use is a table of daily utilization according to an unspecified metric for an unspecified drug.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="utilization-forecasting.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">fread</span>(</span>
+<span id="cb21-2"><a href="utilization-forecasting.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;rx_data.csv&#39;</span>),</span>
+<span id="cb21-3"><a href="utilization-forecasting.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="at">ds =</span> <span class="st">&#39;Date&#39;</span>)</span>
+<span id="cb21-4"><a href="utilization-forecasting.html#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-5"><a href="utilization-forecasting.html#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="utilization-forecasting.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="utilization-forecasting.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(ds, y)) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="utilization-forecasting.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-9"><a href="utilization-forecasting.html#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-10"><a href="utilization-forecasting.html#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
+<span id="cb21-11"><a href="utilization-forecasting.html#cb21-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="utilization-forecasting.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="predictors" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Predictors<a href="utilization-forecasting.html#predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="weekday" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Weekday<a href="utilization-forecasting.html#weekday" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first and largest source of variation is due to the day of the week.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="utilization-forecasting.html#cb22-1" aria-hidden="true" tabindex="-1"></a>dat[</span>
+<span id="cb22-2"><a href="utilization-forecasting.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb22-3"><a href="utilization-forecasting.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  wkdy <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(</span>
+<span id="cb22-4"><a href="utilization-forecasting.html#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">strftime</span>(ds, <span class="st">&#39;%u&#39;</span>),</span>
+<span id="cb22-5"><a href="utilization-forecasting.html#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>),</span>
+<span id="cb22-6"><a href="utilization-forecasting.html#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;M&#39;</span>, <span class="st">&#39;T&#39;</span>, <span class="st">&#39;W&#39;</span>, <span class="st">&#39;Tr&#39;</span>, <span class="st">&#39;F&#39;</span>, <span class="st">&#39;Sat&#39;</span>, <span class="st">&#39;Sun&#39;</span>)</span>
+<span id="cb22-7"><a href="utilization-forecasting.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-8"><a href="utilization-forecasting.html#cb22-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb22-9"><a href="utilization-forecasting.html#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="utilization-forecasting.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="utilization-forecasting.html#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(wkdy, y)) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="utilization-forecasting.html#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-13"><a href="utilization-forecasting.html#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-14"><a href="utilization-forecasting.html#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
+<span id="cb22-15"><a href="utilization-forecasting.html#cb22-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-16"><a href="utilization-forecasting.html#cb22-16" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="in-year" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> In-year<a href="utilization-forecasting.html#in-year" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The next source of variation is the time of year.
+A phenomenon called <em>induced utilization</em> is almost always present in health claims, where members are more likely to seek care later in the year as their deductible gets used up.
+Some drugs display other effects, as well, like flu treatments, which spike in Winter, and immunizations, which spike in Fall before the school year starts.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="utilization-forecasting.html#cb23-1" aria-hidden="true" tabindex="-1"></a>dat[</span>
+<span id="cb23-2"><a href="utilization-forecasting.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb23-3"><a href="utilization-forecasting.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  yr <span class="sc">:</span><span class="er">=</span> <span class="fu">year</span>(ds)</span>
+<span id="cb23-4"><a href="utilization-forecasting.html#cb23-4" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb23-5"><a href="utilization-forecasting.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb23-6"><a href="utilization-forecasting.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  yrfrac <span class="sc">:</span><span class="er">=</span> <span class="fu">as.numeric</span>(<span class="fu">strftime</span>(ds, <span class="st">&#39;%j&#39;</span>))</span>
+<span id="cb23-7"><a href="utilization-forecasting.html#cb23-7" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb23-8"><a href="utilization-forecasting.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb23-9"><a href="utilization-forecasting.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  yrfrac <span class="sc">:</span><span class="er">=</span> yrfrac <span class="sc">/</span> <span class="fu">max</span>(yrfrac)</span>
+<span id="cb23-10"><a href="utilization-forecasting.html#cb23-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb23-11"><a href="utilization-forecasting.html#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="utilization-forecasting.html#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(yrfrac, y)) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="utilization-forecasting.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">90</span>, <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="utilization-forecasting.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-15"><a href="utilization-forecasting.html#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb23-16"><a href="utilization-forecasting.html#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-17"><a href="utilization-forecasting.html#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&#39;Proportion of Year Completed&#39;</span>,</span>
+<span id="cb23-18"><a href="utilization-forecasting.html#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
+<span id="cb23-19"><a href="utilization-forecasting.html#cb23-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-20"><a href="utilization-forecasting.html#cb23-20" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula = &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="holidays" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Holidays<a href="utilization-forecasting.html#holidays" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will cover a more rigorous method for selecting a holiday list in a later section.
+For now, we will just use the “big six.”
+Just using this holiday list usually will get you most of the way there.
+With some insured populations, however, days outside the list of U.S. federal holidays need to be accounted for.
+In addition, billing practices can cause spikes on days like the first of the month.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="utilization-forecasting.html#cb25-1" aria-hidden="true" tabindex="-1"></a>lbls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="dv">12</span>, <span class="dv">16</span><span class="sc">:</span><span class="dv">31</span>), <span class="fu">paste0</span>(<span class="st">&#39;01&#39;</span>, <span class="dv">0</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>))</span>
+<span id="cb25-2"><a href="utilization-forecasting.html#cb25-2" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> dat[</span>
+<span id="cb25-3"><a href="utilization-forecasting.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb25-4"><a href="utilization-forecasting.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">day =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%m%d&#39;</span>), <span class="at">yr =</span> <span class="fu">year</span>(ds) <span class="sc">+</span> (<span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">12</span>),</span>
+<span id="cb25-5"><a href="utilization-forecasting.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">wkdy =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%u&#39;</span>), y)</span>
+<span id="cb25-6"><a href="utilization-forecasting.html#cb25-6" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb25-7"><a href="utilization-forecasting.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  .(lbls),</span>
+<span id="cb25-8"><a href="utilization-forecasting.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  on <span class="ot">=</span> <span class="st">&#39;day&#39;</span></span>
+<span id="cb25-9"><a href="utilization-forecasting.html#cb25-9" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb25-10"><a href="utilization-forecasting.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb25-11"><a href="utilization-forecasting.html#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb25-12"><a href="utilization-forecasting.html#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">yr =</span> <span class="fu">factor</span>(yr),</span>
+<span id="cb25-13"><a href="utilization-forecasting.html#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">day =</span> <span class="fu">factor</span>(day, <span class="at">levels =</span> lbls)</span>
+<span id="cb25-14"><a href="utilization-forecasting.html#cb25-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-15"><a href="utilization-forecasting.html#cb25-15" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb25-16"><a href="utilization-forecasting.html#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat) <span class="sc">+</span></span>
+<span id="cb25-17"><a href="utilization-forecasting.html#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb25-18"><a href="utilization-forecasting.html#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(day, y, <span class="at">group =</span> wkdy, <span class="at">fill =</span> wkdy),</span>
+<span id="cb25-19"><a href="utilization-forecasting.html#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">&#39;identity&#39;</span></span>
+<span id="cb25-20"><a href="utilization-forecasting.html#cb25-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-21"><a href="utilization-forecasting.html#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(yr <span class="sc">~</span>.) <span class="sc">+</span></span>
+<span id="cb25-22"><a href="utilization-forecasting.html#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_discrete_optum</span>(<span class="st">&#39;fill&#39;</span>) <span class="sc">+</span></span>
+<span id="cb25-23"><a href="utilization-forecasting.html#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-24"><a href="utilization-forecasting.html#cb25-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&#39;Christmas and New Year</span><span class="sc">\&#39;</span><span class="st">s&#39;</span>,</span>
+<span id="cb25-25"><a href="utilization-forecasting.html#cb25-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-26"><a href="utilization-forecasting.html#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span>,</span>
+<span id="cb25-27"><a href="utilization-forecasting.html#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&#39;Weekday&#39;</span></span>
+<span id="cb25-28"><a href="utilization-forecasting.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-29"><a href="utilization-forecasting.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
+<span id="cb25-30"><a href="utilization-forecasting.html#cb25-30" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="utilization-forecasting.html#cb26-1" aria-hidden="true" tabindex="-1"></a>ny <span class="ot">&lt;-</span> dat[<span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="fu">mday</span>(ds) <span class="sc">==</span> <span class="dv">1</span>, .(ds, <span class="at">hol =</span> <span class="st">&#39;New Year&#39;</span>)]</span>
+<span id="cb26-2"><a href="utilization-forecasting.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">&lt;-</span> dat[</span>
+<span id="cb26-3"><a href="utilization-forecasting.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span></span>
+<span id="cb26-4"><a href="utilization-forecasting.html#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(wkdy) <span class="sc">==</span> <span class="st">&#39;M&#39;</span>,</span>
+<span id="cb26-5"><a href="utilization-forecasting.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">ds =</span> <span class="fu">tail</span>(ds, <span class="dv">1</span>), <span class="at">hol =</span> <span class="st">&#39;Memorial Day&#39;</span>),</span>
+<span id="cb26-6"><a href="utilization-forecasting.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(yr)</span>
+<span id="cb26-7"><a href="utilization-forecasting.html#cb26-7" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb26-8"><a href="utilization-forecasting.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb26-9"><a href="utilization-forecasting.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  yr <span class="sc">:</span><span class="er">=</span> <span class="cn">NULL</span></span>
+<span id="cb26-10"><a href="utilization-forecasting.html#cb26-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb26-11"><a href="utilization-forecasting.html#cb26-11" aria-hidden="true" tabindex="-1"></a>indep <span class="ot">&lt;-</span> dat[</span>
+<span id="cb26-12"><a href="utilization-forecasting.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">7</span> <span class="sc">&amp;</span></span>
+<span id="cb26-13"><a href="utilization-forecasting.html#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mday</span>(ds) <span class="sc">==</span> <span class="dv">4</span>,</span>
+<span id="cb26-14"><a href="utilization-forecasting.html#cb26-14" aria-hidden="true" tabindex="-1"></a>  .(ds, <span class="at">hol =</span> <span class="st">&#39;Independence Day&#39;</span>)]</span>
+<span id="cb26-15"><a href="utilization-forecasting.html#cb26-15" aria-hidden="true" tabindex="-1"></a>labor <span class="ot">&lt;-</span> dat[</span>
+<span id="cb26-16"><a href="utilization-forecasting.html#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">9</span> <span class="sc">&amp;</span></span>
+<span id="cb26-17"><a href="utilization-forecasting.html#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(wkdy) <span class="sc">==</span> <span class="st">&#39;M&#39;</span>,</span>
+<span id="cb26-18"><a href="utilization-forecasting.html#cb26-18" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">ds =</span> <span class="fu">head</span>(ds, <span class="dv">1</span>), <span class="at">hol =</span> <span class="st">&#39;Labor Day&#39;</span>),</span>
+<span id="cb26-19"><a href="utilization-forecasting.html#cb26-19" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(yr)</span>
+<span id="cb26-20"><a href="utilization-forecasting.html#cb26-20" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb26-21"><a href="utilization-forecasting.html#cb26-21" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb26-22"><a href="utilization-forecasting.html#cb26-22" aria-hidden="true" tabindex="-1"></a>  yr <span class="sc">:</span><span class="er">=</span> <span class="cn">NULL</span></span>
+<span id="cb26-23"><a href="utilization-forecasting.html#cb26-23" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb26-24"><a href="utilization-forecasting.html#cb26-24" aria-hidden="true" tabindex="-1"></a>thnks <span class="ot">&lt;-</span> dat[</span>
+<span id="cb26-25"><a href="utilization-forecasting.html#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">11</span> <span class="sc">&amp;</span></span>
+<span id="cb26-26"><a href="utilization-forecasting.html#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(wkdy) <span class="sc">==</span> <span class="st">&#39;Tr&#39;</span></span>
+<span id="cb26-27"><a href="utilization-forecasting.html#cb26-27" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb26-28"><a href="utilization-forecasting.html#cb26-28" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb26-29"><a href="utilization-forecasting.html#cb26-29" aria-hidden="true" tabindex="-1"></a>  i <span class="sc">:</span><span class="er">=</span> <span class="fu">seq_len</span>(.N),</span>
+<span id="cb26-30"><a href="utilization-forecasting.html#cb26-30" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(yr)</span>
+<span id="cb26-31"><a href="utilization-forecasting.html#cb26-31" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb26-32"><a href="utilization-forecasting.html#cb26-32" aria-hidden="true" tabindex="-1"></a>  i <span class="sc">==</span> <span class="dv">4</span>,</span>
+<span id="cb26-33"><a href="utilization-forecasting.html#cb26-33" aria-hidden="true" tabindex="-1"></a>  .(ds, <span class="at">hol =</span> <span class="st">&#39;Thanksgiving&#39;</span>)</span>
+<span id="cb26-34"><a href="utilization-forecasting.html#cb26-34" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb26-35"><a href="utilization-forecasting.html#cb26-35" aria-hidden="true" tabindex="-1"></a>xmas <span class="ot">&lt;-</span> dat[</span>
+<span id="cb26-36"><a href="utilization-forecasting.html#cb26-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">12</span> <span class="sc">&amp;</span></span>
+<span id="cb26-37"><a href="utilization-forecasting.html#cb26-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mday</span>(ds) <span class="sc">==</span> <span class="dv">25</span>,</span>
+<span id="cb26-38"><a href="utilization-forecasting.html#cb26-38" aria-hidden="true" tabindex="-1"></a>  .(ds, <span class="at">hol =</span> <span class="st">&#39;Christmas&#39;</span>)</span>
+<span id="cb26-39"><a href="utilization-forecasting.html#cb26-39" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb26-40"><a href="utilization-forecasting.html#cb26-40" aria-hidden="true" tabindex="-1"></a>hols <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb26-41"><a href="utilization-forecasting.html#cb26-41" aria-hidden="true" tabindex="-1"></a>  ny,</span>
+<span id="cb26-42"><a href="utilization-forecasting.html#cb26-42" aria-hidden="true" tabindex="-1"></a>  mem,</span>
+<span id="cb26-43"><a href="utilization-forecasting.html#cb26-43" aria-hidden="true" tabindex="-1"></a>  indep,</span>
+<span id="cb26-44"><a href="utilization-forecasting.html#cb26-44" aria-hidden="true" tabindex="-1"></a>  labor,</span>
+<span id="cb26-45"><a href="utilization-forecasting.html#cb26-45" aria-hidden="true" tabindex="-1"></a>  thnks,</span>
+<span id="cb26-46"><a href="utilization-forecasting.html#cb26-46" aria-hidden="true" tabindex="-1"></a>  xmas</span>
+<span id="cb26-47"><a href="utilization-forecasting.html#cb26-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-48"><a href="utilization-forecasting.html#cb26-48" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> hols[dat, on <span class="ot">=</span> <span class="st">&#39;ds&#39;</span>]</span>
+<span id="cb26-49"><a href="utilization-forecasting.html#cb26-49" aria-hidden="true" tabindex="-1"></a>dat[<span class="fu">is.na</span>(hol), hol <span class="sc">:</span><span class="er">=</span> <span class="st">&#39;none&#39;</span>]</span>
+<span id="cb26-50"><a href="utilization-forecasting.html#cb26-50" aria-hidden="true" tabindex="-1"></a>dat[, hol <span class="sc">:</span><span class="er">=</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(hol), <span class="at">ref =</span> <span class="st">&#39;none&#39;</span>)]</span>
+<span id="cb26-51"><a href="utilization-forecasting.html#cb26-51" aria-hidden="true" tabindex="-1"></a>dat[]</span></code></pre></div>
+<pre><code>##               ds      hol         y wkdy   yr      yrfrac
+##    1: 2015-01-01 New Year  20.35787   Tr 2015 0.002732240
+##    2: 2015-01-02     none  49.75367    F 2015 0.005464481
+##    3: 2015-01-03     none  28.11368  Sat 2015 0.008196721
+##    4: 2015-01-04     none  30.62088  Sun 2015 0.010928962
+##    5: 2015-01-05     none  83.43423    M 2015 0.013661202
+##   ---                                                    
+## 2949: 2023-01-27     none 132.02780    F 2023 0.073770492
+## 2950: 2023-01-28     none  74.57140  Sat 2023 0.076502732
+## 2951: 2023-01-29     none  69.18019  Sun 2023 0.079234973
+## 2952: 2023-01-30     none 175.67447    M 2023 0.081967213
+## 2953: 2023-01-31     none 156.08502    T 2023 0.084699454</code></pre>
+</div>
+<div id="covid" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> COVID<a href="utilization-forecasting.html#covid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The most common impact to the Pharmacy line of business is actually a large spike in utilization at the start of lockdowns.
+This occurred at UHC, at least, because we removed several restrictions designed to prevent stockpiling and other forms of overutilization so that members could stock up on the medicines they need in the face of the very uncertain short-term future at the time.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="utilization-forecasting.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="utilization-forecasting.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(ds, y)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="utilization-forecasting.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2020-3-1&#39;</span>, <span class="st">&#39;2020-3-31&#39;</span>))) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="utilization-forecasting.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-5"><a href="utilization-forecasting.html#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb28-6"><a href="utilization-forecasting.html#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
+<span id="cb28-7"><a href="utilization-forecasting.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="utilization-forecasting.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="utilization-forecasting.html#cb29-1" aria-hidden="true" tabindex="-1"></a>dat[, covid <span class="sc">:</span><span class="er">=</span> 0L]</span>
+<span id="cb29-2"><a href="utilization-forecasting.html#cb29-2" aria-hidden="true" tabindex="-1"></a>dat[</span>
+<span id="cb29-3"><a href="utilization-forecasting.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>) <span class="sc">==</span> <span class="st">&#39;202003&#39;</span>,</span>
+<span id="cb29-4"><a href="utilization-forecasting.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  covid <span class="sc">:</span><span class="er">=</span> .I</span>
+<span id="cb29-5"><a href="utilization-forecasting.html#cb29-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb29-6"><a href="utilization-forecasting.html#cb29-6" aria-hidden="true" tabindex="-1"></a>dat[]</span></code></pre></div>
+<pre><code>##               ds      hol         y wkdy   yr      yrfrac covid
+##    1: 2015-01-01 New Year  20.35787   Tr 2015 0.002732240     0
+##    2: 2015-01-02     none  49.75367    F 2015 0.005464481     0
+##    3: 2015-01-03     none  28.11368  Sat 2015 0.008196721     0
+##    4: 2015-01-04     none  30.62088  Sun 2015 0.010928962     0
+##    5: 2015-01-05     none  83.43423    M 2015 0.013661202     0
+##   ---                                                          
+## 2949: 2023-01-27     none 132.02780    F 2023 0.073770492     0
+## 2950: 2023-01-28     none  74.57140  Sat 2023 0.076502732     0
+## 2951: 2023-01-29     none  69.18019  Sun 2023 0.079234973     0
+## 2952: 2023-01-30     none 175.67447    M 2023 0.081967213     0
+## 2953: 2023-01-31     none 156.08502    T 2023 0.084699454     0</code></pre>
+</div>
+<div id="trend" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Trend<a href="utilization-forecasting.html#trend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="utilization-forecasting.html#cb31-1" aria-hidden="true" tabindex="-1"></a>dat[, t <span class="sc">:</span><span class="er">=</span> .I]</span>
+<span id="cb31-2"><a href="utilization-forecasting.html#cb31-2" aria-hidden="true" tabindex="-1"></a>dat[]</span></code></pre></div>
+<pre><code>##               ds      hol         y wkdy   yr      yrfrac covid    t
+##    1: 2015-01-01 New Year  20.35787   Tr 2015 0.002732240     0    1
+##    2: 2015-01-02     none  49.75367    F 2015 0.005464481     0    2
+##    3: 2015-01-03     none  28.11368  Sat 2015 0.008196721     0    3
+##    4: 2015-01-04     none  30.62088  Sun 2015 0.010928962     0    4
+##    5: 2015-01-05     none  83.43423    M 2015 0.013661202     0    5
+##   ---                                                               
+## 2949: 2023-01-27     none 132.02780    F 2023 0.073770492     0 2949
+## 2950: 2023-01-28     none  74.57140  Sat 2023 0.076502732     0 2950
+## 2951: 2023-01-29     none  69.18019  Sun 2023 0.079234973     0 2951
+## 2952: 2023-01-30     none 175.67447    M 2023 0.081967213     0 2952
+## 2953: 2023-01-31     none 156.08502    T 2023 0.084699454     0 2953</code></pre>
+</div>
+</div>
+<div id="model-fitting-1" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Model Fitting<a href="utilization-forecasting.html#model-fitting-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="utilization-forecasting.html#cb33-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb33-2"><a href="utilization-forecasting.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> <span class="fu">s</span>(t) <span class="sc">+</span> <span class="fu">s</span>(yrfrac) <span class="sc">+</span> <span class="fu">s</span>(covid) <span class="sc">+</span> wkdy <span class="sc">+</span> hol,</span>
+<span id="cb33-3"><a href="utilization-forecasting.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&#39;log&#39;</span>),</span>
+<span id="cb33-4"><a href="utilization-forecasting.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat</span>
+<span id="cb33-5"><a href="utilization-forecasting.html#cb33-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-6"><a href="utilization-forecasting.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>## 
+## Family: gaussian 
+## Link function: log 
+## 
+## Formula:
+## y ~ s(t) + s(yrfrac) + s(covid) + wkdy + hol
+## 
+## Parametric coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          4.759475   0.002884 1650.54   &lt;2e-16 ***
+## wkdyT               -0.109329   0.004116  -26.56   &lt;2e-16 ***
+## wkdyW               -0.144918   0.004204  -34.47   &lt;2e-16 ***
+## wkdyTr              -0.183170   0.004319  -42.41   &lt;2e-16 ***
+## wkdyF               -0.274914   0.004542  -60.52   &lt;2e-16 ***
+## wkdySat             -0.785000   0.006598 -118.98   &lt;2e-16 ***
+## wkdySun             -0.842564   0.006926 -121.65   &lt;2e-16 ***
+## holChristmas        -1.365148   0.110336  -12.37   &lt;2e-16 ***
+## holIndependence Day -0.945942   0.065771  -14.38   &lt;2e-16 ***
+## holLabor Day        -0.948133   0.050228  -18.88   &lt;2e-16 ***
+## holMemorial Day     -0.968767   0.051515  -18.81   &lt;2e-16 ***
+## holNew Year         -0.890186   0.064132  -13.88   &lt;2e-16 ***
+## holThanksgiving     -1.276025   0.080959  -15.76   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Approximate significance of smooth terms:
+##             edf Ref.df       F p-value    
+## s(t)      6.053  7.191 4110.09  &lt;2e-16 ***
+## s(yrfrac) 8.916  8.998   14.34  &lt;2e-16 ***
+## s(covid)  6.367  7.450   14.98  &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## R-sq.(adj) =  0.962   Deviance explained = 96.2%
+## GCV = 48.978  Scale est. = 48.408    n = 2953</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="utilization-forecasting.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Although the in-year term is statistically significant, it is not a likely shape, so I am concerned that it is overfitting the training data.
+Right now, we have the luxury of trying out alternative model forms, but in production I would likely just leave it alone because it will contribute very little to forecasts.
+The help page for <code>s()</code> (<code>?s</code> in the console) directs us to a help page for <code>smooth.terms</code>, which contains a list of different options to use.
+We see that by specifying <code>bs = 'ts'</code>, we can apply a stricter penalty to the spline to yield a smoother–potentially even null–estimate.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="utilization-forecasting.html#cb36-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb36-2"><a href="utilization-forecasting.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> <span class="fu">s</span>(t) <span class="sc">+</span> <span class="fu">s</span>(yrfrac, <span class="at">bs =</span> <span class="st">&#39;ts&#39;</span>) <span class="sc">+</span> <span class="fu">s</span>(covid) <span class="sc">+</span> wkdy <span class="sc">+</span> hol,</span>
+<span id="cb36-3"><a href="utilization-forecasting.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&#39;log&#39;</span>),</span>
+<span id="cb36-4"><a href="utilization-forecasting.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat</span>
+<span id="cb36-5"><a href="utilization-forecasting.html#cb36-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-6"><a href="utilization-forecasting.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>## 
+## Family: gaussian 
+## Link function: log 
+## 
+## Formula:
+## y ~ s(t) + s(yrfrac, bs = &quot;ts&quot;) + s(covid) + wkdy + hol
+## 
+## Parametric coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          4.759475   0.002884 1650.54   &lt;2e-16 ***
+## wkdyT               -0.109329   0.004116  -26.56   &lt;2e-16 ***
+## wkdyW               -0.144918   0.004204  -34.47   &lt;2e-16 ***
+## wkdyTr              -0.183170   0.004319  -42.41   &lt;2e-16 ***
+## wkdyF               -0.274914   0.004542  -60.52   &lt;2e-16 ***
+## wkdySat             -0.785000   0.006598 -118.98   &lt;2e-16 ***
+## wkdySun             -0.842564   0.006926 -121.65   &lt;2e-16 ***
+## holChristmas        -1.365150   0.110336  -12.37   &lt;2e-16 ***
+## holIndependence Day -0.945942   0.065771  -14.38   &lt;2e-16 ***
+## holLabor Day        -0.948133   0.050228  -18.88   &lt;2e-16 ***
+## holMemorial Day     -0.968767   0.051515  -18.81   &lt;2e-16 ***
+## holNew Year         -0.890185   0.064132  -13.88   &lt;2e-16 ***
+## holThanksgiving     -1.276024   0.080959  -15.76   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Approximate significance of smooth terms:
+##             edf Ref.df       F p-value    
+## s(t)      6.053  7.191 4110.09  &lt;2e-16 ***
+## s(yrfrac) 8.916  9.000   14.32  &lt;2e-16 ***
+## s(covid)  6.367  7.450   14.98  &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## R-sq.(adj) =  0.962   Deviance explained = 96.2%
+## GCV = 48.978  Scale est. = 48.408    n = 2953</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="utilization-forecasting.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>It turns out that the estimate is robust to the extra penalty.
+Perhaps there is some residual month-specific variation that the weekday and holiday components aren’t capturing by themselves.
+It could also be that overall trend is masking the true in-year variation.
+We’ll leave it alone but try another way to forecast this drug a little later.</p>
+</div>
+<div id="making-predictions" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Making Predictions<a href="utilization-forecasting.html#making-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="utilization-forecasting.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all dates we want predictions for</span></span>
+<span id="cb39-2"><a href="utilization-forecasting.html#cb39-2" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb39-3"><a href="utilization-forecasting.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ds =</span> <span class="fu">seq</span>(<span class="at">from =</span> dat[, <span class="fu">min</span>(ds)], <span class="at">to =</span> <span class="fu">as.Date</span>(<span class="st">&#39;2024-12-31&#39;</span>), <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb39-4"><a href="utilization-forecasting.html#cb39-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-5"><a href="utilization-forecasting.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add historicals</span></span>
+<span id="cb39-6"><a href="utilization-forecasting.html#cb39-6" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> dat[, .(ds, y)][testset, on <span class="ot">=</span> <span class="st">&#39;ds&#39;</span>]</span>
+<span id="cb39-7"><a href="utilization-forecasting.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># redo date processing</span></span>
+<span id="cb39-8"><a href="utilization-forecasting.html#cb39-8" aria-hidden="true" tabindex="-1"></a>testset[</span>
+<span id="cb39-9"><a href="utilization-forecasting.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb39-10"><a href="utilization-forecasting.html#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb39-11"><a href="utilization-forecasting.html#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">t =</span> .I,</span>
+<span id="cb39-12"><a href="utilization-forecasting.html#cb39-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">yr =</span> <span class="fu">year</span>(ds),</span>
+<span id="cb39-13"><a href="utilization-forecasting.html#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">yrfrac =</span> <span class="fu">as.numeric</span>(<span class="fu">strftime</span>(ds, <span class="st">&#39;%j&#39;</span>)),</span>
+<span id="cb39-14"><a href="utilization-forecasting.html#cb39-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">covid =</span> 0L,</span>
+<span id="cb39-15"><a href="utilization-forecasting.html#cb39-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">wkdy =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-16"><a href="utilization-forecasting.html#cb39-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">strftime</span>(ds, <span class="st">&#39;%u&#39;</span>),</span>
+<span id="cb39-17"><a href="utilization-forecasting.html#cb39-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;M&#39;</span>, <span class="st">&#39;T&#39;</span>, <span class="st">&#39;W&#39;</span> ,<span class="st">&#39;Tr&#39;</span>, <span class="st">&#39;F&#39;</span>, <span class="st">&#39;Sat&#39;</span>, <span class="st">&#39;Sun&#39;</span>)</span>
+<span id="cb39-18"><a href="utilization-forecasting.html#cb39-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb39-19"><a href="utilization-forecasting.html#cb39-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-20"><a href="utilization-forecasting.html#cb39-20" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb39-21"><a href="utilization-forecasting.html#cb39-21" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb39-22"><a href="utilization-forecasting.html#cb39-22" aria-hidden="true" tabindex="-1"></a>  yrfrac <span class="sc">:</span><span class="er">=</span> yrfrac <span class="sc">/</span> <span class="fu">max</span>(yrfrac),</span>
+<span id="cb39-23"><a href="utilization-forecasting.html#cb39-23" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(yr)</span>
+<span id="cb39-24"><a href="utilization-forecasting.html#cb39-24" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb39-25"><a href="utilization-forecasting.html#cb39-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>) <span class="sc">==</span> <span class="st">&#39;202003&#39;</span>,</span>
+<span id="cb39-26"><a href="utilization-forecasting.html#cb39-26" aria-hidden="true" tabindex="-1"></a>  covid <span class="sc">:</span><span class="er">=</span> .I</span>
+<span id="cb39-27"><a href="utilization-forecasting.html#cb39-27" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb39-28"><a href="utilization-forecasting.html#cb39-28" aria-hidden="true" tabindex="-1"></a><span class="co"># holidays</span></span>
+<span id="cb39-29"><a href="utilization-forecasting.html#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="co"># there are more efficient ways to do this, but they required more advanced coding outside the scope of this module</span></span>
+<span id="cb39-30"><a href="utilization-forecasting.html#cb39-30" aria-hidden="true" tabindex="-1"></a>hols <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb39-31"><a href="utilization-forecasting.html#cb39-31" aria-hidden="true" tabindex="-1"></a>  hols,</span>
+<span id="cb39-32"><a href="utilization-forecasting.html#cb39-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(<span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="st">&#39;2024-1-1&#39;</span>), <span class="at">hol =</span> <span class="st">&#39;New Year&#39;</span>),</span>
+<span id="cb39-33"><a href="utilization-forecasting.html#cb39-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-34"><a href="utilization-forecasting.html#cb39-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-5-29&#39;</span>, <span class="st">&#39;2024-5-27&#39;</span>)),</span>
+<span id="cb39-35"><a href="utilization-forecasting.html#cb39-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Memorial Day&#39;</span></span>
+<span id="cb39-36"><a href="utilization-forecasting.html#cb39-36" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-37"><a href="utilization-forecasting.html#cb39-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-38"><a href="utilization-forecasting.html#cb39-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-7-4&#39;</span>, <span class="st">&#39;2024-7-4&#39;</span>)),</span>
+<span id="cb39-39"><a href="utilization-forecasting.html#cb39-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Independence Day&#39;</span></span>
+<span id="cb39-40"><a href="utilization-forecasting.html#cb39-40" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-41"><a href="utilization-forecasting.html#cb39-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-42"><a href="utilization-forecasting.html#cb39-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-9-4&#39;</span>, <span class="st">&#39;2024-9-2&#39;</span>)),</span>
+<span id="cb39-43"><a href="utilization-forecasting.html#cb39-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Labor Day&#39;</span></span>
+<span id="cb39-44"><a href="utilization-forecasting.html#cb39-44" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-45"><a href="utilization-forecasting.html#cb39-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-46"><a href="utilization-forecasting.html#cb39-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-11-23&#39;</span>, <span class="st">&#39;2024-11-28&#39;</span>)),</span>
+<span id="cb39-47"><a href="utilization-forecasting.html#cb39-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Thanksgiving&#39;</span></span>
+<span id="cb39-48"><a href="utilization-forecasting.html#cb39-48" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb39-49"><a href="utilization-forecasting.html#cb39-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(</span>
+<span id="cb39-50"><a href="utilization-forecasting.html#cb39-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&#39;2023-12-25&#39;</span>, <span class="st">&#39;2024-12-25&#39;</span>)),</span>
+<span id="cb39-51"><a href="utilization-forecasting.html#cb39-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">hol =</span> <span class="st">&#39;Christmas&#39;</span></span>
+<span id="cb39-52"><a href="utilization-forecasting.html#cb39-52" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-53"><a href="utilization-forecasting.html#cb39-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-54"><a href="utilization-forecasting.html#cb39-54" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> hols[testset, on <span class="ot">=</span> <span class="st">&#39;ds&#39;</span>]</span>
+<span id="cb39-55"><a href="utilization-forecasting.html#cb39-55" aria-hidden="true" tabindex="-1"></a>testset[<span class="fu">is.na</span>(hol), hol <span class="sc">:</span><span class="er">=</span> <span class="st">&#39;none&#39;</span>]</span>
+<span id="cb39-56"><a href="utilization-forecasting.html#cb39-56" aria-hidden="true" tabindex="-1"></a>testset[, hol <span class="sc">:</span><span class="er">=</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(hol), <span class="at">ref =</span> <span class="st">&#39;none&#39;</span>)]</span>
+<span id="cb39-57"><a href="utilization-forecasting.html#cb39-57" aria-hidden="true" tabindex="-1"></a><span class="co"># predictions</span></span>
+<span id="cb39-58"><a href="utilization-forecasting.html#cb39-58" aria-hidden="true" tabindex="-1"></a>testset[</span>
+<span id="cb39-59"><a href="utilization-forecasting.html#cb39-59" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb39-60"><a href="utilization-forecasting.html#cb39-60" aria-hidden="true" tabindex="-1"></a>  yhat <span class="sc">:</span><span class="er">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(m, <span class="at">newdata =</span> testset, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>))</span>
+<span id="cb39-61"><a href="utilization-forecasting.html#cb39-61" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb39-62"><a href="utilization-forecasting.html#cb39-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-63"><a href="utilization-forecasting.html#cb39-63" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> testset[</span>
+<span id="cb39-64"><a href="utilization-forecasting.html#cb39-64" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb39-65"><a href="utilization-forecasting.html#cb39-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(.SD, sum),</span>
+<span id="cb39-66"><a href="utilization-forecasting.html#cb39-66" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>)),</span>
+<span id="cb39-67"><a href="utilization-forecasting.html#cb39-67" aria-hidden="true" tabindex="-1"></a>  .SDcols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;y&#39;</span>, <span class="st">&#39;yhat&#39;</span>)</span>
+<span id="cb39-68"><a href="utilization-forecasting.html#cb39-68" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb39-69"><a href="utilization-forecasting.html#cb39-69" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(yrmo))) <span class="sc">+</span></span>
+<span id="cb39-70"><a href="utilization-forecasting.html#cb39-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb39-71"><a href="utilization-forecasting.html#cb39-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> yhat), <span class="at">color =</span> colors<span class="sc">$</span>Visualization<span class="sc">$</span>Strawberry) <span class="sc">+</span></span>
+<span id="cb39-72"><a href="utilization-forecasting.html#cb39-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb39-73"><a href="utilization-forecasting.html#cb39-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Actual vs. Predicted&#39;</span>,</span>
+<span id="cb39-74"><a href="utilization-forecasting.html#cb39-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&#39;Month&#39;</span>,</span>
+<span id="cb39-75"><a href="utilization-forecasting.html#cb39-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Annualized Utilization PMPM&#39;</span></span>
+<span id="cb39-76"><a href="utilization-forecasting.html#cb39-76" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb39-77"><a href="utilization-forecasting.html#cb39-77" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
+<span id="cb39-78"><a href="utilization-forecasting.html#cb39-78" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
+<pre><code>## Warning: Removed 23 rows containing missing values (`geom_point()`).</code></pre>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>Splines make predictions outside of the range of the training data by means of linear extrapolation using the first derivative of the estimated smooth at the endpoint.
+Since we use a log link, this means that trend is assumed to be exponential, which can cause problems if the trend slope at the end of the training data is too large.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="utilization-forecasting.html#cb41-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb41-2"><a href="utilization-forecasting.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  testset[, .(ds)],</span>
+<span id="cb41-3"><a href="utilization-forecasting.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">exp</span>(</span>
+<span id="cb41-4"><a href="utilization-forecasting.html#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.vector</span>(</span>
+<span id="cb41-5"><a href="utilization-forecasting.html#cb41-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(</span>
+<span id="cb41-6"><a href="utilization-forecasting.html#cb41-6" aria-hidden="true" tabindex="-1"></a>        m,</span>
+<span id="cb41-7"><a href="utilization-forecasting.html#cb41-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> testset,</span>
+<span id="cb41-8"><a href="utilization-forecasting.html#cb41-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">&#39;terms&#39;</span>,</span>
+<span id="cb41-9"><a href="utilization-forecasting.html#cb41-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">terms =</span> <span class="st">&#39;s(t)&#39;</span></span>
+<span id="cb41-10"><a href="utilization-forecasting.html#cb41-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb41-11"><a href="utilization-forecasting.html#cb41-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb41-12"><a href="utilization-forecasting.html#cb41-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-13"><a href="utilization-forecasting.html#cb41-13" aria-hidden="true" tabindex="-1"></a>)[</span>
+<span id="cb41-14"><a href="utilization-forecasting.html#cb41-14" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb41-15"><a href="utilization-forecasting.html#cb41-15" aria-hidden="true" tabindex="-1"></a>  grp <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(ds <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">&#39;2023-2-1&#39;</span>), <span class="st">&#39;Historical&#39;</span>, <span class="st">&#39;Forecasted&#39;</span>)</span>
+<span id="cb41-16"><a href="utilization-forecasting.html#cb41-16" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb41-17"><a href="utilization-forecasting.html#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="utilization-forecasting.html#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat) <span class="sc">+</span></span>
+<span id="cb41-19"><a href="utilization-forecasting.html#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(ds, t, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> grp)) <span class="sc">+</span></span>
+<span id="cb41-20"><a href="utilization-forecasting.html#cb41-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_discrete_optum</span>(<span class="st">&#39;color&#39;</span>) <span class="sc">+</span></span>
+<span id="cb41-21"><a href="utilization-forecasting.html#cb41-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb41-22"><a href="utilization-forecasting.html#cb41-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&#39;Modeled Trend Component&#39;</span>,</span>
+<span id="cb41-23"><a href="utilization-forecasting.html#cb41-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb41-24"><a href="utilization-forecasting.html#cb41-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb41-25"><a href="utilization-forecasting.html#cb41-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb41-26"><a href="utilization-forecasting.html#cb41-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb41-27"><a href="utilization-forecasting.html#cb41-27" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Ours looks fine, however.</p>
+<p>In addition to this consideration, the linear extrapolation method can also be problematic if the model fits a wiggly smooth to the data.
+The estimated slope at the end of the training period could be very different from the overall trend.
+To guard against this possibility, I like to prevent the model from using any knot points in the last 80% of the training period.
+You can pass a list of knot points for the model to use for a particular smooth like below.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="utilization-forecasting.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I like to allow trend to change every half year</span></span>
+<span id="cb42-2"><a href="utilization-forecasting.html#cb42-2" aria-hidden="true" tabindex="-1"></a>ts <span class="ot">&lt;-</span> dat[<span class="fu">month</span>(ds) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>) <span class="sc">&amp;</span> <span class="fu">mday</span>(ds) <span class="sc">==</span> <span class="dv">1</span>, t]</span>
+<span id="cb42-3"><a href="utilization-forecasting.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove knot points outside of the allowed range</span></span>
+<span id="cb42-4"><a href="utilization-forecasting.html#cb42-4" aria-hidden="true" tabindex="-1"></a>ts <span class="ot">&lt;-</span> ts[ts <span class="sc">&lt;</span> .<span class="dv">8</span> <span class="sc">*</span> dat[, <span class="fu">max</span>(t)]]</span>
+<span id="cb42-5"><a href="utilization-forecasting.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add back the last day counter</span></span>
+<span id="cb42-6"><a href="utilization-forecasting.html#cb42-6" aria-hidden="true" tabindex="-1"></a>ts <span class="ot">&lt;-</span> <span class="fu">c</span>(ts, dat[, <span class="fu">max</span>(t)])</span>
+<span id="cb42-7"><a href="utilization-forecasting.html#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="utilization-forecasting.html#cb42-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb42-9"><a href="utilization-forecasting.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> <span class="fu">s</span>(t) <span class="sc">+</span> <span class="fu">s</span>(yrfrac, <span class="at">bs =</span> <span class="st">&#39;ts&#39;</span>) <span class="sc">+</span> <span class="fu">s</span>(covid) <span class="sc">+</span> wkdy <span class="sc">+</span> hol,</span>
+<span id="cb42-10"><a href="utilization-forecasting.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&#39;log&#39;</span>),</span>
+<span id="cb42-11"><a href="utilization-forecasting.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb42-12"><a href="utilization-forecasting.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">knots =</span> <span class="fu">list</span>(<span class="at">t =</span> ts)</span>
+<span id="cb42-13"><a href="utilization-forecasting.html#cb42-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-14"><a href="utilization-forecasting.html#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="utilization-forecasting.html#cb43-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb43-2"><a href="utilization-forecasting.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  testset[, .(ds)],</span>
+<span id="cb43-3"><a href="utilization-forecasting.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">exp</span>(</span>
+<span id="cb43-4"><a href="utilization-forecasting.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.vector</span>(</span>
+<span id="cb43-5"><a href="utilization-forecasting.html#cb43-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(</span>
+<span id="cb43-6"><a href="utilization-forecasting.html#cb43-6" aria-hidden="true" tabindex="-1"></a>        m,</span>
+<span id="cb43-7"><a href="utilization-forecasting.html#cb43-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> testset,</span>
+<span id="cb43-8"><a href="utilization-forecasting.html#cb43-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">&#39;terms&#39;</span>,</span>
+<span id="cb43-9"><a href="utilization-forecasting.html#cb43-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">terms =</span> <span class="st">&#39;s(t)&#39;</span></span>
+<span id="cb43-10"><a href="utilization-forecasting.html#cb43-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb43-11"><a href="utilization-forecasting.html#cb43-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-12"><a href="utilization-forecasting.html#cb43-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-13"><a href="utilization-forecasting.html#cb43-13" aria-hidden="true" tabindex="-1"></a>)[</span>
+<span id="cb43-14"><a href="utilization-forecasting.html#cb43-14" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb43-15"><a href="utilization-forecasting.html#cb43-15" aria-hidden="true" tabindex="-1"></a>  grp <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(ds <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">&#39;2023-2-1&#39;</span>), <span class="st">&#39;Historical&#39;</span>, <span class="st">&#39;Forecasted&#39;</span>)</span>
+<span id="cb43-16"><a href="utilization-forecasting.html#cb43-16" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb43-17"><a href="utilization-forecasting.html#cb43-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-18"><a href="utilization-forecasting.html#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat) <span class="sc">+</span></span>
+<span id="cb43-19"><a href="utilization-forecasting.html#cb43-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(ds, t, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> grp)) <span class="sc">+</span></span>
+<span id="cb43-20"><a href="utilization-forecasting.html#cb43-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_discrete_optum</span>(<span class="st">&#39;color&#39;</span>) <span class="sc">+</span></span>
+<span id="cb43-21"><a href="utilization-forecasting.html#cb43-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb43-22"><a href="utilization-forecasting.html#cb43-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&#39;Modeled Trend Component&#39;</span>,</span>
+<span id="cb43-23"><a href="utilization-forecasting.html#cb43-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb43-24"><a href="utilization-forecasting.html#cb43-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb43-25"><a href="utilization-forecasting.html#cb43-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb43-26"><a href="utilization-forecasting.html#cb43-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb43-27"><a href="utilization-forecasting.html#cb43-27" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>It doesn’t make much of a difference, if any, with this drug because the trend component is quite regular.</p>
+</div>
+<div id="alternative-trend-forecast" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Alternative Trend Forecast<a href="utilization-forecasting.html#alternative-trend-forecast" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’ll try modeled core trend in another way to see if that improves the in-year component, and just for personal interest.
+This method is more in accordance with classic actuarial forecasting methods.
+In this framework, future trend is estimated as some sort of average of historical trends.
+We can estimate year-over-year trend for each year in historicals by using a dummy variable corresponding to the year.
+To fit a model, we just need to turn the <code>yr</code> variable into a factor and change the formula accordingly.</p>
+<div id="model-fitting-2" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Model Fitting<a href="utilization-forecasting.html#model-fitting-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="utilization-forecasting.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dat[, yr <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(yr)]</span>
+<span id="cb44-2"><a href="utilization-forecasting.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="utilization-forecasting.html#cb44-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
+<span id="cb44-4"><a href="utilization-forecasting.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> yr <span class="sc">+</span> <span class="fu">s</span>(yrfrac, <span class="at">bs =</span> <span class="st">&#39;ts&#39;</span>) <span class="sc">+</span> <span class="fu">s</span>(covid) <span class="sc">+</span> wkdy <span class="sc">+</span> hol,</span>
+<span id="cb44-5"><a href="utilization-forecasting.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&#39;log&#39;</span>),</span>
+<span id="cb44-6"><a href="utilization-forecasting.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat</span>
+<span id="cb44-7"><a href="utilization-forecasting.html#cb44-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-8"><a href="utilization-forecasting.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>## 
+## Family: gaussian 
+## Link function: log 
+## 
+## Formula:
+## y ~ yr + s(yrfrac, bs = &quot;ts&quot;) + s(covid) + wkdy + hol
+## 
+## Parametric coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          4.330717   0.006733  643.20   &lt;2e-16 ***
+## yr2016               0.119264   0.008381   14.23   &lt;2e-16 ***
+## yr2017               0.255153   0.007936   32.15   &lt;2e-16 ***
+## yr2018               0.400342   0.007548   53.04   &lt;2e-16 ***
+## yr2019               0.510325   0.007312   69.79   &lt;2e-16 ***
+## yr2020               0.617541   0.007196   85.81   &lt;2e-16 ***
+## yr2021               0.714179   0.006977  102.36   &lt;2e-16 ***
+## yr2022               0.779075   0.006897  112.96   &lt;2e-16 ***
+## yr2023               0.858760   0.012225   70.25   &lt;2e-16 ***
+## wkdyT               -0.109370   0.004145  -26.38   &lt;2e-16 ***
+## wkdyW               -0.145014   0.004235  -34.24   &lt;2e-16 ***
+## wkdyTr              -0.183225   0.004350  -42.12   &lt;2e-16 ***
+## wkdyF               -0.275055   0.004575  -60.12   &lt;2e-16 ***
+## wkdySat             -0.785103   0.006646 -118.13   &lt;2e-16 ***
+## wkdySun             -0.842488   0.006976 -120.76   &lt;2e-16 ***
+## holChristmas        -1.353773   0.110659  -12.23   &lt;2e-16 ***
+## holIndependence Day -0.945311   0.066230  -14.27   &lt;2e-16 ***
+## holLabor Day        -0.948453   0.050598  -18.75   &lt;2e-16 ***
+## holMemorial Day     -0.968776   0.051878  -18.67   &lt;2e-16 ***
+## holNew Year         -0.895965   0.064755  -13.84   &lt;2e-16 ***
+## holThanksgiving     -1.274799   0.081439  -15.65   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Approximate significance of smooth terms:
+##             edf Ref.df     F p-value    
+## s(yrfrac) 8.920  9.000 55.97  &lt;2e-16 ***
+## s(covid)  6.301  7.385 14.59  &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## R-sq.(adj) =  0.961   Deviance explained = 96.2%
+## GCV = 49.716  Scale est. = 49.106    n = 2953</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="utilization-forecasting.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>Some of the slope in the data is now attributed to in-year variation, which we may or may not want depending on the application.</p>
+</div>
+<div id="making-predictions-1" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Making Predictions<a href="utilization-forecasting.html#making-predictions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Since the model won’t know what to do with years that are beyond the last year in the training data, we have to start by transforming that variable in the forecasting dataset accordingly.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="utilization-forecasting.html#cb47-1" aria-hidden="true" tabindex="-1"></a>testset2 <span class="ot">&lt;-</span> <span class="fu">copy</span>(testset)</span>
+<span id="cb47-2"><a href="utilization-forecasting.html#cb47-2" aria-hidden="true" tabindex="-1"></a>testset2[, yr <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">pmin</span>(yr, <span class="dv">2023</span>))]</span></code></pre></div>
+<p>We can convert the trend estimates for each year to annual trends for analysis like so.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="utilization-forecasting.html#cb48-1" aria-hidden="true" tabindex="-1"></a>trnds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb48-2"><a href="utilization-forecasting.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  dat[, .(ds)],</span>
+<span id="cb48-3"><a href="utilization-forecasting.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fctr =</span> <span class="fu">exp</span>(<span class="fu">as.vector</span>(<span class="fu">predict</span>(m, <span class="at">type =</span> <span class="st">&#39;terms&#39;</span>, <span class="at">terms =</span> <span class="st">&#39;yr&#39;</span>)))</span>
+<span id="cb48-4"><a href="utilization-forecasting.html#cb48-4" aria-hidden="true" tabindex="-1"></a>)[</span>
+<span id="cb48-5"><a href="utilization-forecasting.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb48-6"><a href="utilization-forecasting.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">fctr =</span> <span class="fu">mean</span>(fctr)),</span>
+<span id="cb48-7"><a href="utilization-forecasting.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(<span class="at">yr =</span> <span class="fu">year</span>(ds))</span>
+<span id="cb48-8"><a href="utilization-forecasting.html#cb48-8" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb48-9"><a href="utilization-forecasting.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb48-10"><a href="utilization-forecasting.html#cb48-10" aria-hidden="true" tabindex="-1"></a>  trnd <span class="sc">:</span><span class="er">=</span> fctr<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> (.I <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb48-11"><a href="utilization-forecasting.html#cb48-11" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb48-12"><a href="utilization-forecasting.html#cb48-12" aria-hidden="true" tabindex="-1"></a>  yr <span class="sc">&gt;</span> <span class="fu">min</span>(yr),</span>
+<span id="cb48-13"><a href="utilization-forecasting.html#cb48-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb48-14"><a href="utilization-forecasting.html#cb48-14" aria-hidden="true" tabindex="-1"></a>trnds[]</span></code></pre></div>
+<pre><code>##      yr     fctr      trnd
+## 1: 2016 1.126667 0.1266674
+## 2: 2017 1.290659 0.1360717
+## 3: 2018 1.492336 0.1427612
+## 4: 2019 1.665832 0.1360771
+## 5: 2020 1.854362 0.1314592
+## 6: 2021 2.042509 0.1264035
+## 7: 2022 2.179455 0.1177262
+## 8: 2023 2.360233 0.1133183</code></pre>
+<p>Now we can use whatever method we like to calculate a future trend assumption.
+I will just use a weighted average by the number of months completed in each year, but we could easily imagine situations in which we may want to recognize the steady decrease in trend starting in 2019 and use some sort of extrapolation, instead.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="utilization-forecasting.html#cb50-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> trnds[</span>
+<span id="cb50-2"><a href="utilization-forecasting.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb50-3"><a href="utilization-forecasting.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  wt <span class="sc">:</span><span class="er">=</span> <span class="dv">1</span></span>
+<span id="cb50-4"><a href="utilization-forecasting.html#cb50-4" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb50-5"><a href="utilization-forecasting.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  .N,</span>
+<span id="cb50-6"><a href="utilization-forecasting.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  wt <span class="sc">:</span><span class="er">=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span></span>
+<span id="cb50-7"><a href="utilization-forecasting.html#cb50-7" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb50-8"><a href="utilization-forecasting.html#cb50-8" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb50-9"><a href="utilization-forecasting.html#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(trnd <span class="sc">*</span> wt) <span class="sc">/</span> <span class="fu">sum</span>(wt)</span>
+<span id="cb50-10"><a href="utilization-forecasting.html#cb50-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb50-11"><a href="utilization-forecasting.html#cb50-11" aria-hidden="true" tabindex="-1"></a>i</span></code></pre></div>
+<pre><code>## [1] 0.1308155</code></pre>
+<p>I will only use our estimated trend in 2024 to avoid a lot of tedious number-crunching to avoid a disconnect between the 2023 actuals and forecasts.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="utilization-forecasting.html#cb52-1" aria-hidden="true" tabindex="-1"></a>testset2[</span>
+<span id="cb52-2"><a href="utilization-forecasting.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb52-3"><a href="utilization-forecasting.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  yhat <span class="sc">:</span><span class="er">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(m, <span class="at">newdata =</span> testset2, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>))</span>
+<span id="cb52-4"><a href="utilization-forecasting.html#cb52-4" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb52-5"><a href="utilization-forecasting.html#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">year</span>(ds) <span class="sc">==</span> <span class="dv">2024</span>,</span>
+<span id="cb52-6"><a href="utilization-forecasting.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  yhat <span class="sc">:</span><span class="er">=</span> yhat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> i)</span>
+<span id="cb52-7"><a href="utilization-forecasting.html#cb52-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb52-8"><a href="utilization-forecasting.html#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="utilization-forecasting.html#cb52-9" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> testset2[</span>
+<span id="cb52-10"><a href="utilization-forecasting.html#cb52-10" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb52-11"><a href="utilization-forecasting.html#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(.SD, sum),</span>
+<span id="cb52-12"><a href="utilization-forecasting.html#cb52-12" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>)),</span>
+<span id="cb52-13"><a href="utilization-forecasting.html#cb52-13" aria-hidden="true" tabindex="-1"></a>  .SDcols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;y&#39;</span>, <span class="st">&#39;yhat&#39;</span>)</span>
+<span id="cb52-14"><a href="utilization-forecasting.html#cb52-14" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb52-15"><a href="utilization-forecasting.html#cb52-15" aria-hidden="true" tabindex="-1"></a>  testset[</span>
+<span id="cb52-16"><a href="utilization-forecasting.html#cb52-16" aria-hidden="true" tabindex="-1"></a>    ,</span>
+<span id="cb52-17"><a href="utilization-forecasting.html#cb52-17" aria-hidden="true" tabindex="-1"></a>    .(<span class="at">Smooth =</span> <span class="fu">sum</span>(yhat)),</span>
+<span id="cb52-18"><a href="utilization-forecasting.html#cb52-18" aria-hidden="true" tabindex="-1"></a>    by <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>))</span>
+<span id="cb52-19"><a href="utilization-forecasting.html#cb52-19" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb52-20"><a href="utilization-forecasting.html#cb52-20" aria-hidden="true" tabindex="-1"></a>  on <span class="ot">=</span> <span class="st">&#39;yrmo&#39;</span></span>
+<span id="cb52-21"><a href="utilization-forecasting.html#cb52-21" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb52-22"><a href="utilization-forecasting.html#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(pdat, <span class="at">old =</span> <span class="st">&#39;yhat&#39;</span>, <span class="at">new =</span> <span class="st">&#39;Annual&#39;</span>)</span>
+<span id="cb52-23"><a href="utilization-forecasting.html#cb52-23" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">melt</span>(pdat, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&#39;yrmo&#39;</span>, <span class="st">&#39;y&#39;</span>))</span>
+<span id="cb52-24"><a href="utilization-forecasting.html#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(yrmo))) <span class="sc">+</span></span>
+<span id="cb52-25"><a href="utilization-forecasting.html#cb52-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y, <span class="at">group =</span> variable)) <span class="sc">+</span></span>
+<span id="cb52-26"><a href="utilization-forecasting.html#cb52-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">color =</span> variable)) <span class="sc">+</span></span>
+<span id="cb52-27"><a href="utilization-forecasting.html#cb52-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_discrete_optum</span>(<span class="st">&#39;color&#39;</span>) <span class="sc">+</span></span>
+<span id="cb52-28"><a href="utilization-forecasting.html#cb52-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb52-29"><a href="utilization-forecasting.html#cb52-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Actual vs. Predicted&#39;</span>,</span>
+<span id="cb52-30"><a href="utilization-forecasting.html#cb52-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&#39;Month&#39;</span>,</span>
+<span id="cb52-31"><a href="utilization-forecasting.html#cb52-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Annualized Utilization PMPM&#39;</span>,</span>
+<span id="cb52-32"><a href="utilization-forecasting.html#cb52-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&#39;Model&#39;</span></span>
+<span id="cb52-33"><a href="utilization-forecasting.html#cb52-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-34"><a href="utilization-forecasting.html#cb52-34" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
+<span id="cb52-35"><a href="utilization-forecasting.html#cb52-35" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
+<pre><code>## Warning: Removed 46 rows containing missing values (`geom_line()`).</code></pre>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="motivating-gams.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hurricane-impact-valuation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

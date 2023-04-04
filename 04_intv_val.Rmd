@@ -1,0 +1,137 @@
+# Valuation of Care Interventions
+
+## Introduction
+
+
+
+## Data
+
+### Processed Dataset
+
+Data preparation is an even more important step than usual in workflows like this.
+Unfortunately, it involves a lot of protected health information, so we have to start with the processed, anonymized dataset.  
+
+```{r}
+dat <- fread(file = file.path('data', 'intv_data.csv'))
+fctrs <- c('gdr', 'prdct', 'cdhp', 'funding', 'state', 'covid',
+           'intv')
+for(fctr in fctrs) dat[, (fctr) := factor(get(fctr))]
+dat[]
+```
+
+This dataset is a combination of items from many sources, representing a significant analytic challenge.
+Here is a data dictionary summarizing the elements of this final table, along with some info about how it was processed into this final state.  
+
+* yr - Year  
+* mth - Month  
+* qty - Scripts * Doses. Taken from claims data.  
+* gdr - Gender code. Taken from membership data.  
+* prdct - Product code, like PPO, HMO, etc. Taken from membership data.  
+* cdhp - Indicator for whether or not the product is a high-deductible health plan. Taken from membership data.  
+* funding - Funding type for the product, fully-insured or advisory services only. Taken from membership data.  
+* state - Indicator for the state the member resides in. Taken from membership data.  
+* covid - Indicator for whether or not the current month is 202003. Remember, the main COVID impact to the Rx line of business is a spike in utilization at the beginning of the pandemic as companies allowed members to stockpile medications.  
+* rs - Risk score for the individual. These are the output of a proprietary Optum model meant to track the costliness of a member. Note that these are only calculated quarterly, so the last known value is carried forward.  
+* intv - Indicator for whether or not the intervention has taken place. Calculated by joining data from operations tracking files to claims and membership data.  
+* dur - The number of months since the intervention has occurred.  
+
+To summarize, then, we have four data sources that needed to be processed.  
+
+1. Claims - As a mature insurer, UHC has a strictly-structured claims database that serves as the source of truth for all clinical and financial operations around the company. Individuals are assigned a unique ID to facilitate joins.  
+2. Membership - The same goes for membership and eligibility data at UHC.  
+3. Risk Scores - These are maintained separately from claims and membership under the Symmetry product organization.
+Unfortunately, this data source uses a different unique ID than the claims and membership data source.  
+4. Operations tracking files - a series of Excel workbooks maintained by the team actually administering the care intervention.
+These files are, of course, ignorant of the claims, membership, and risk score unique IDs, and are instead organized by member name.  
+
+The bulk of the initial work, therefore, was mapping member names to data source unique IDs.
+
+### Exposure
+
+Let's take a look at what the time series of scripts looks like.  
+
+```{r}
+pdat <- dat[
+  ,
+  .(scrpts = sum(scrpts)),
+  keyby = .(yrmo = paste0(yr, ifelse(mth < 10, 0, ''), mth))
+]
+ggplot(pdat) +
+  geom_line(aes(factor(yrmo), scrpts, group = 1)) +
+  scale_y_continuous(labels = comma) +
+  labs(x = element_blank(), y = element_blank()) +
+  mytheme +
+  theme_rotx
+```
+
+```{r}
+exposure <- dat[
+  ,
+  .N,
+  keyby = .(dur)
+]
+
+ggplot(exposure) +
+  geom_line(aes(dur, N)) +
+  scale_y_continuous(labels = comma) +
+  labs(x = 'Observations', y = 'Months Since Intervention') +
+  mytheme
+```
+
+## Model Fitting
+
+For this model, I made use of the random effects spline basis.
+If you scroll almost all the way down to the bottom of the output of `?smooth.terms`, you will find out that there is a way of constructing a smooth term that yields the equivalent of a random effects term from mixed models.
+A random effects model treats the estimated coefficients as realizations of a random variable.
+This is preferable in many circumstances, one of which being those we have here, where we have a small sample of a much larger population.
+It's not just unlikely that the mean pharmacy quantity consumed by this population is anything like the true mean of the entire UHC book of business, much less the US as a whole: we know this beforehand because we are taking a sample of some of the most expensive members that UHC covers.
+Being able to use a model form that takes into account the bias in our sample will improve the ability of the model to generate useful, generalizable insights.  
+
+Again, I have cached the fitted model in our Github repo for ease of use.
+The code to fit it is found in the following chunk.
+
+```{r, eval=FALSE}
+cl <- makePSOCKcluster(detectCores())
+m <- bam(
+  scrpts ~ s(yr, k = 3)
+         + s(mth, k = 4)
+         + covid
+         + s(rs, bs = 'cs')
+         + s(gdr, bs = 're')
+         + s(prdct, bs = 're')
+         + s(state, bs = 're')
+         + s(cdhp, bs = 're')
+         + s(funding, bs = 're')
+         + intv,
+  family = nb(),
+  data = dat[
+    exposure[N > 99, ],
+    on = 'dur'
+  ],
+  cluster = cl
+)
+stopCluster(cl)
+saveRDS(m, file = file.path('data', 'm_intv.RDS'))
+```
+
+```{r}
+m <- readRDS(file = file.path('data', 'm_intv.RDS'))
+summary(m)
+```
+
+An $R^2$ of ~20% is actually quite good for monthly, individual-level claims data.
+Like I said earlier, healthcare claims are just one of those subject areas that exhibit very high variance.  
+
+```{r}
+plot(m, select = 1)
+```
+
+```{r}
+plot(m, select = 2)
+```
+
+```{r}
+plot(m, select = 3)
+```
+
+## Using the Model

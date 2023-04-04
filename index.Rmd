@@ -1,0 +1,84 @@
+---
+title: "Generalized Additive Models for Actuaries"
+author: "Nathan Cornwell"
+date: "`r Sys.Date()`"
+site: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: 
+description: "An Introduction to Generalized Additive Models for Actuarial Business Problems."
+---
+
+# Introduction {#intro}
+
+This is just some branding stuff that I use to make my plots look nice and comply with Optum and UHC branding guidelines.
+You don't need it outside of the code in the presentation, but you can use it as a template for customizing your own plots, if you wish.
+
+```{r}
+primary_colors <- list(`Optum Orange` = '#FF612B')
+sec_colors <- list(White = '#FFFFFF', `Sky Blue` = '#D9F6FA',
+                   `Warm White` = '#FBF9F4')
+type_colors <- list(`Dark Blue` = '#002677', `Dark Gray` = '#5A5A5A')
+viz_colors <- list(Violet = '#422C88', Iris = '#8061BC',
+                   Lagoon = '#007C89', Rainwater = '#6FC1B1',
+                   Strawberry = '#A32A2E', Apple = '#D13F44')
+colors <- list(Primary = primary_colors, Secondary = sec_colors,
+               Typography = type_colors, Visualization = viz_colors)
+
+# plotting
+scale_discrete_optum <- function(aesthetics, ...){
+  discrete_scale(
+    aesthetics = aesthetics,
+    scale_name = 'optum',
+    palette = grDevices::colorRampPalette(
+      as.character(colors$Visualization[c(4, 3, 1, 2, 6, 5)])
+    ),
+    ...
+  )
+}
+
+theme_titles <- theme(
+  plot.title = element_text(hjust = .5),
+  plot.subtitle = element_text(hjust = .5)
+)
+theme_rotx <- theme(axis.text.x = element_text(angle = 90))
+theme_optum_plot <- theme(
+  text = element_text(color = colors$Typography$`Dark Gray`),
+  panel.background = element_rect(
+    fill = colors$Secondary$White,
+    color = colors$Typography$`Dark Gray`
+  )
+)
+
+mytheme <- theme_optum_plot + theme_titles
+```
+
+Here are all of the packages we will need for this presentation.
+You only need to run the first code chunk once for each installation of R you have, while you need to run the second.
+
+```{r, eval=FALSE}
+install.packages(
+  c('data.table', 'ggplot2', 'gratia', 'gridExtra', 'insuranceData',
+    'mgcv', 'parallel', 'scales')
+)
+```
+
+```{r}
+library(data.table)
+library(ggplot2)
+library(gratia)
+library(gridExtra)
+library(insuranceData)
+library(mgcv)
+library(parallel)
+library(scales)
+```
+
+Finally, these are two of the datasets we will use in the examples.
+
+```{r}
+data('diamonds')
+data('dataCar')
+```

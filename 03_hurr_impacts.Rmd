@@ -1,0 +1,521 @@
+# Hurricane Impact Valuation
+
+## Introduction
+
+Another very similar way I use GAMs is to value utilization impacts caused by storms.
+The main impacts a health insurer sees from something like a hurricane is a slowdown in utilization from the danger and difficulty traveling caused by the storm.
+We can adapt the tools we already have from the previous chapter and add things in order to strengthen our model to be able to use it for hyptothesis testing and quantification.
+In order to model the hurricane's effects as rigorously as possible, we need to do some more thorough model validation so we can make sound statistical deductions from it.
+
+## Data
+
+The data this time is utilization for a random set of services for UHC's commercial fully-insured book of business in Texas.  
+
+```{r}
+dat <- fread(
+  file = file.path('data', 'hurr_data.csv'),
+  colClasses = c(ds = 'Date')
+)
+
+ggplot(dat) +
+  geom_line(aes(ds, y)) +
+  labs(
+    x = element_blank(),
+    y = 'Utilization'
+  ) +
+  mytheme
+```
+
+The COVID slowdown is also clearly visible. Note also that this data has runout effects at the end of the training period, i.e. the most recent time periods have had less times for claims to process.  
+
+As you may remember, Texas was hit by the historic Hurricane Harvey in 2017.  
+
+```{r}
+landfall <- as.Date('2017-8-25')
+
+ggplot(dat) +
+  geom_vline(
+    xintercept = landfall,
+    color = colors$Visualization$Lagoon,
+    linetype = 'dashed'
+  ) +
+  geom_line(aes(ds, y)) +
+  coord_cartesian(xlim = as.Date(c('2017-8-1', '2017-9-30'))) +
+  labs(
+    x = element_blank(),
+    y = 'Utilization'
+  ) +
+  mytheme
+```
+
+Now we add the date variables we've been discussing.
+We will use an initial holiday list and iteratively improve it.
+For the COVID term, we will just use the parameters I've already determined at work to make the example shorter.
+In a real modeling context, you would determine the width of the COVID window and the optimal smooth parameters using the same methods we will employ to create the hurricane term.
+
+```{r}
+dat[
+  ,
+  `:=`(
+    t = .I,
+    yr = year(ds),
+    yrfrac = as.numeric(strftime(ds, '%j')),
+    covid = 0L,
+    wkdy = factor(
+      strftime(ds, '%u'),
+      labels = c('M', 'T', 'W' ,'Tr', 'F', 'Sat', 'Sun')
+    )
+  )
+][
+  ,
+  yrfrac := yrfrac / max(yrfrac),
+  by = .(yr)
+][
+  .(seq(from = as.Date('2020-3-1'), length.out = 122, by = 1)),
+  covid := .I,
+  on = 'ds'
+]
+
+hols_st <- fread(
+  file = file.path('data', 'hols_st.csv'),
+  colClasses = c(ds = 'Date')
+)
+
+dat <- hols_st[
+  dat,
+  on = 'ds'
+][
+  is.na(hol),
+  hol := 'none'
+]
+
+setkey(dat, ds)
+```
+
+## Model Fitting
+
+### Initial Model
+
+To start with, we can fit an initial model that's basically the same as the forecasting model we were working with in the prior chapter.
+I like to account for runout by setting more knot points for the trend component to allow it to capture the sharp drop in claims.
+
+```{r}
+ts <- dat[
+  mday(ds) == 1 &
+    (month(ds) == 1 | ds > as.Date('2021-6-30')),
+  t
+]
+
+m_init <- gam(
+  y ~ s(t) + s(yrfrac) + s(covid, k = 122 / 7) + wkdy + hol,
+  family = gaussian(link = 'log'),
+  data = dat,
+  knots = list(t = ts)
+)
+
+plot(m_init, pages = 1)
+```
+
+### Deriving the Holiday List
+
+My method for figuring out a good list of holidays to use is pretty simple: just examine residuals until there aren't any holiday effects in the days with the largest prediction error.  
+
+```{r}
+dat[
+  ,
+  yhat := as.vector(predict(m_init, type = 'response'))
+][
+  ,
+  err := y - yhat
+]
+
+dat[order(-abs(err)), .(ds, hol, err)][1:20, ]
+```
+
+There's actually a pattern in the residuals that I forgot about: Winter Storm Uri, the unofficial name for the ice storms that hit Texas in 2021.
+We'll add a term for that below.
+As for holidays, the main potential that jumps out at me right now is effects related to Christmas Eve, so let's examine that more closely.  
+
+```{r}
+lbls <- c(paste0(12, 16:31), paste0('01', 0, 1:9))
+pdat <- dat[
+  ,
+  .(day = strftime(ds, '%m%d'), yr = year(ds) + (month(ds) == 12),
+    wkdy = strftime(ds, '%u'), err)
+][
+  .(lbls),
+  on = 'day'
+][
+  ,
+  `:=`(
+    yr = factor(yr),
+    day = factor(day, levels = lbls)
+  )
+]
+ggplot(pdat) +
+  geom_bar(
+    aes(day, err, group = wkdy, fill = wkdy),
+    stat = 'identity'
+  ) +
+  facet_grid(yr ~.) +
+  scale_discrete_optum('fill') +
+  labs(
+    title = 'Christmas and New Year\'s',
+    x = element_blank(),
+    y = 'Utilization',
+    fill = 'Weekday'
+  ) +
+  mytheme +
+  theme_rotx
+```
+
+Chistmas Eve and New Year's Eve appear to be exhibiting what I call "bridge effects:" the days only seem to have slowdowns when they create a four-day weekend along with the main holiday.
+Independence Day also displayed a similar pattern.
+I will skip straight to the final holiday list, but you would keep iterating on fitting models and examining the residuals to add more holiday or other outlier terms.  
+
+```{r}
+dat[, hol := NULL]
+hols <- fread(
+  file = file.path('data', 'hols.csv'),
+  colClasses = c(ds = 'character')
+)[
+  ,
+  ds := as.Date(ds)
+]
+dat <- hols[dat, on = 'ds']
+dat[is.na(hol), hol := 'none']
+dat[, hol := relevel(factor(hol), ref = 'none')]
+```
+
+### Hurricane Effect Window
+
+The last thing we need to do with out initial model is figure out a good effect window to assume for the hurricane.
+I do this in a similar way to creating the holiday list, by examining initial model residuals around landfall.  
+
+```{r}
+ggplot(dat) +
+  geom_vline(xintercept = landfall, linetype = 'dashed') +
+  geom_bar(aes(ds, err, fill = wkdy), stat = 'identity') +
+  scale_discrete_optum('fill') +
+  coord_cartesian(xlim = landfall + c(-21, 21)) +
+  labs(
+    title = 'Initial Model Residuals Near Landfall',
+    x = element_blank(),
+    y = element_blank(),
+    fill = element_blank()
+  ) +
+  mytheme
+```
+
+Like with holidays, I'm going to skip to using the window I already derived at work.
+To do it on your own, you would iterate through fitting a model with a potential hurricane window, examining the estimated smooth to make sure it's reasonable, and examining the prediction errors around landfall for that model.
+
+### Penultimate Model
+
+After the above process is done, we have a specification for all of the outliers and interventions we need for the penultimate, or next to last, model.
+
+```{r}
+dat[, uri := 0L]
+dat[
+  .(seq(from = as.Date('2021-2-14'), length.out = 7, by = 1)),
+  uri := .I,
+  on = 'ds'
+]
+
+dat[, harvey := 0L]
+dat[
+  .(seq(from = landfall - 2, length.out = 21, by = 1)),
+  harvey := .I,
+  on = 'ds'
+]
+
+m_penult <- gam(
+  y ~ s(t) + s(yrfrac) + s(covid, k = 122 / 7) + s(uri, k = 7)
+      + s(harvey, k = 21) + wkdy + hol,
+  family = gaussian(link = 'log'),
+  data = dat,
+  knots = list(t = ts)
+)
+
+summary(m_penult)
+```
+
+```{r}
+plot(m_penult, pages = 1)
+```
+
+From a quick look at `summary()` and `plot()`, it looks like our model is on the right track.
+There are two things we need to test for and correct before we can make valid statistical deductions from the model, however.
+
+### Serial Autocorrelation of Errors
+
+Since we are working with time series data, observations are correlated through time.
+A regression model cannot have any serial autocorrelation of errors, however, because the standard errors of the estimated coefficients will be too small.
+We check for serial autocorrelation using ACF and PACF plots.
+
+```{r}
+res <- residuals(m_penult, type = 'response')
+sig_color <- colors$Visualization$Iris
+
+myacf <- acf(res, plot = F)
+ci <- qnorm(.975)/sqrt(myacf$n.used)
+pdat <- with(
+  myacf,
+  data.table(lag = as.vector(lag), acf = as.vector(acf))
+)
+pdat[lag == 0, acf := 0]
+myacf <- ggplot(pdat, aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  labs(x = 'Lag', y = 'ACF') +
+  geom_hline(
+    aes(yintercept = -ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  geom_hline(
+    aes(yintercept = ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  mytheme
+
+mypacf <- pacf(res, plot = F)
+ci <- qnorm(.975)/sqrt(mypacf$n.used)
+pdat <- with(
+  mypacf,
+  data.table(lag = as.vector(lag), acf = as.vector(acf))
+)
+pdat[lag == 0, acf := 0]
+mypacf <- ggplot(pdat, aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  labs(x = 'Lag', y = 'PACF') +
+  geom_hline(
+    aes(yintercept = -ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  geom_hline(
+    aes(yintercept = ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  mytheme
+
+grid.arrange(
+  myacf,
+  mypacf,
+  ncol = 2
+)
+```
+
+A valid model will have all of the vertical lines (very close to) within the confidence bands.
+
+### Heteroskedasticity
+
+A regression model must also exhibit _homoskedasticity_, or have constant error variance.
+Violating this assumption not only decreases the standard errors but can also bias coefficient estimates.
+The fitting algorithms used by regression models assume that every observation contributes an equal amount of information to coefficient estimation.
+Heteroskedasticity entails that the higher-variance regions in the training data contribute less information.
+
+```{r}
+wpr <- residuals(m_penult, type = 'pearson')
+pdat <- data.table(
+  # sqrt standardized Pearson residuals
+  sspr = sqrt(abs(wpr / sd(wpr))),
+  # predictions (on scale of linear predictor)
+  pred = predict(m_penult)
+)
+
+ggplot(pdat, aes(pred, sspr)) +
+  geom_point() +
+  geom_smooth(
+    formula = y ~ x,
+    method = 'lm',
+    color = colors$Visualization$Strawberry
+  ) +
+  labs(
+    title = 'Scale-Location Plot',
+    x = 'Linear Predictor',
+    y = 'Sqrt Std Pearson Residuals'
+  ) +
+  mytheme
+```
+
+Heteroskedasticity manifests in a scale-location plot as deviations from a flat, straight red line.
+A quick way to correct for it is to weight training observations with the errors from the penultimate model.
+It would be more elegant to use a priori weights, but I haven't yet come up with a good algorithm for calculating those for the general utilization dataset.
+
+### Final Model
+
+To complete model fitting, we re-fit the penultimate model with an error correlation model to correct for serial autocorrelation and weights to correct for heteroskedasticity.
+Unfortunately, the best way I have come up with to correct for serial autocorrelation is very labor-intensive: you have to build a correlation model by hand, eyeballing the coefficients using the ACF and PACF plots.
+In general, the lines on the ACF chart tell you the lag-n autocorrelation coefficient, and those on the PACF the moving average coefficient.
+They interact with each other in ways that are difficult to predict, however.
+I start with the lag 1 and multiples of 7 autoregressive coefficients and go from there.
+It is not important to get these estimates exactly right, you just need a good enough correlation model to account for correlated residuals.
+We use the `gamm()` function to pass in a correlation model for the errors and supply a `weights` argument for heteroskedasticity.
+
+```{r}
+wts <- sqrt(abs(residuals(m_penult, type = 'scaled.pearson')))
+```
+
+Fitting this model took many hours because of all of the modifications we've added, so I've just cached the fitted model in the `data` subfolder of our Github repository.
+The code to fit the model would look like this.
+
+```{r, eval=FALSE}
+p <- c(.55, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, .07,
+       0, 0, 0, 0, 0, 0, .06)
+q <- c(0, 0, 0, 0, 0, .08, 0,
+       .1, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0,
+       -.05)
+
+m_final <- gamm(
+  y ~ s(t) + s(yrfrac) + s(covid, k = 122 / 7) + s(uri, k = 7)
+      + s(harvey, k = 21) + wkdy + hol,
+  family = gaussian(link = 'log'),
+  data = dat,
+  knots = list(t = ts),
+  correlation = corARMA(
+    value = c(p, q),
+    p = length(p),
+    q = length(q),
+    fixed = T
+  ),
+  weights = wts
+)
+```
+
+```{r}
+m_final <- readRDS(file = file.path('data', 'm_final.RDS'))
+summary(m_final$gam)
+```
+
+```{r}
+plot(m_final$gam, pages = 1)
+```
+
+```{r}
+res <- residuals(m_final$lme, type = 'normalized')
+
+myacf <- acf(res, plot = F)
+ci <- qnorm(.975)/sqrt(myacf$n.used)
+pdat <- with(
+  myacf,
+  data.table(lag = as.vector(lag), acf = as.vector(acf))
+)
+pdat[lag == 0, acf := 0]
+myacf <- ggplot(pdat, aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  labs(x = 'Lag', y = 'ACF') +
+  geom_hline(
+    aes(yintercept = -ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  geom_hline(
+    aes(yintercept = ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  mytheme
+
+mypacf <- pacf(res, plot = F)
+ci <- qnorm(.975)/sqrt(mypacf$n.used)
+pdat <- with(
+  mypacf,
+  data.table(lag = as.vector(lag), acf = as.vector(acf))
+)
+pdat[lag == 0, acf := 0]
+mypacf <- ggplot(pdat, aes(x = lag, y = acf)) +
+  geom_hline(aes(yintercept = 0)) +
+  geom_segment(mapping = aes(xend = lag, yend = 0)) +
+  labs(x = 'Lag', y = 'PACF') +
+  geom_hline(
+    aes(yintercept = -ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  geom_hline(
+    aes(yintercept = ci),
+    linetype = 'dashed',
+    color = sig_color
+  ) +
+  mytheme
+
+grid.arrange(
+  myacf,
+  mypacf,
+  ncol = 2
+)
+```
+
+```{r}
+wpr <- residuals(m_final$gam, type = 'pearson') / wts
+pdat <- data.table(
+  # sqrt standardized Pearson residuals
+  sspr = sqrt(abs(wpr / sd(wpr))),
+  # predictions (on scale of linear predictor)
+  pred = predict(m_penult)
+)
+
+ggplot(pdat, aes(pred, sspr)) +
+  geom_point() +
+  geom_smooth(
+    formula = y ~ x,
+    method = 'lm',
+    color = colors$Visualization$Strawberry
+  ) +
+  labs(
+    title = 'Scale-Location Plot',
+    x = 'Linear Predictor',
+    y = 'Sqrt Std Pearson Residuals'
+  ) +
+  mytheme
+```
+
+We are using the parameters I've already come up with, but in reality, we would cycle through examining these four outputs and tweaking model parameters until everything looks good.
+This is a time-consuming and sometimes frustrating process!
+
+At the end of all this, however, we have a mathematically-robust estimate of the utilization impact due to Hurricane Harvey.
+We can visualize the estimated smooth like this.
+
+```{r}
+st <- dat[harvey == 1, ds]
+pdat <- as.data.table(
+  confint(
+    m_final,
+    parm = 's(harvey)',
+    type = 'confidence'
+  )
+)[
+  ,
+  `:=`(
+    ind = st + (dat[, max(harvey)] / .N ) * .I - 1,
+    sig = upper < 0 | lower > 0
+  )
+]
+ggplot(pdat, mapping = aes(ind)) +
+  geom_hline(yintercept = 1, linetype = 'dashed') +
+  geom_ribbon(
+    aes(ymin = exp(lower), ymax = exp(upper)),
+    alpha = .2
+  ) +
+  geom_line(
+    aes(y = exp(est), group = 1, color = sig),
+    linewidth = 2,
+    show.legend = F
+  ) +
+  scale_discrete_optum(aesthetics = 'color') +
+  labs(
+    title = 'Estimated Hurricane Harvey Impact',
+    subtitle = 'Statistically Significant Areas Colored Red',
+    x = element_blank(),
+    y = element_blank()
+  ) +
+  mytheme
+```
