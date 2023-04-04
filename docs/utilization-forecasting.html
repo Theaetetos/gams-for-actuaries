@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  
+  <meta name="github-repo" content="null" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 2 Utilization Forecasting | Generalized Additive Models for Actuaries" />
@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Bookdown Book</a></li>
+<li><a href="./">GAMs for Actuaries</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
@@ -140,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#our-workspace"><i class="fa fa-check"></i><b>0.1</b> Our Workspace</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#preliminaries"><i class="fa fa-check"></i><b>0.2</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.1</b> Branding Code</a></li>
-<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.2</b> Packages</a></li>
-<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.3</b> (Some of our) Datasets</a></li>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.1</b> Packages</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.2</b> (Some of our) Datasets</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.3</b> Branding Code</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>1</b> Motivating GAMs</a>
@@ -242,7 +242,7 @@ In this case study, I will walk through how I do so using a particular example d
 <span id="cb21-10"><a href="utilization-forecasting.html#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb21-11"><a href="utilization-forecasting.html#cb21-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb21-12"><a href="utilization-forecasting.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="predictors" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Predictors<a href="utilization-forecasting.html#predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -265,7 +265,7 @@ In this case study, I will walk through how I do so using a particular example d
 <span id="cb22-14"><a href="utilization-forecasting.html#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb22-15"><a href="utilization-forecasting.html#cb22-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb22-16"><a href="utilization-forecasting.html#cb22-16" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="in-year" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> In-year<a href="utilization-forecasting.html#in-year" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -293,7 +293,7 @@ Some drugs display other effects, as well, like flu treatments, which spike in W
 <span id="cb23-19"><a href="utilization-forecasting.html#cb23-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb23-20"><a href="utilization-forecasting.html#cb23-20" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula = &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 <div id="holidays" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Holidays<a href="utilization-forecasting.html#holidays" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -332,7 +332,7 @@ In addition, billing practices can cause spikes on days like the first of the mo
 <span id="cb25-28"><a href="utilization-forecasting.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb25-29"><a href="utilization-forecasting.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb25-30"><a href="utilization-forecasting.html#cb25-30" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="utilization-forecasting.html#cb26-1" aria-hidden="true" tabindex="-1"></a>ny <span class="ot">&lt;-</span> dat[<span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="fu">mday</span>(ds) <span class="sc">==</span> <span class="dv">1</span>, .(ds, <span class="at">hol =</span> <span class="st">&#39;New Year&#39;</span>)]</span>
 <span id="cb26-2"><a href="utilization-forecasting.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">&lt;-</span> dat[</span>
 <span id="cb26-3"><a href="utilization-forecasting.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">month</span>(ds) <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span></span>
@@ -409,7 +409,7 @@ This occurred at UHC, at least, because we removed several restrictions designed
 <span id="cb28-6"><a href="utilization-forecasting.html#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb28-7"><a href="utilization-forecasting.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb28-8"><a href="utilization-forecasting.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="utilization-forecasting.html#cb29-1" aria-hidden="true" tabindex="-1"></a>dat[, covid <span class="sc">:</span><span class="er">=</span> 0L]</span>
 <span id="cb29-2"><a href="utilization-forecasting.html#cb29-2" aria-hidden="true" tabindex="-1"></a>dat[</span>
 <span id="cb29-3"><a href="utilization-forecasting.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strftime</span>(ds, <span class="st">&#39;%Y%m&#39;</span>) <span class="sc">==</span> <span class="st">&#39;202003&#39;</span>,</span>
@@ -491,7 +491,7 @@ This occurred at UHC, at least, because we removed several restrictions designed
 ## R-sq.(adj) =  0.962   Deviance explained = 96.2%
 ## GCV = 48.978  Scale est. = 48.408    n = 2953</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="utilization-forecasting.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Although the in-year term is statistically significant, it is not a likely shape, so I am concerned that it is overfitting the training data.
 Right now, we have the luxury of trying out alternative model forms, but in production I would likely just leave it alone because it will contribute very little to forecasts.
 The help page for <code>s()</code> (<code>?s</code> in the console) directs us to a help page for <code>smooth.terms</code>, which contains a list of different options to use.
@@ -538,7 +538,7 @@ We see that by specifying <code>bs = 'ts'</code>, we can apply a stricter penalt
 ## R-sq.(adj) =  0.962   Deviance explained = 96.2%
 ## GCV = 48.978  Scale est. = 48.408    n = 2953</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="utilization-forecasting.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>It turns out that the estimate is robust to the extra penalty.
 Perhaps there is some residual month-specific variation that the weekday and holiday components aren’t capturing by themselves.
 It could also be that overall trend is masking the true in-year variation.
@@ -626,7 +626,7 @@ We’ll leave it alone but try another way to forecast this drug a little later.
 <span id="cb39-78"><a href="utilization-forecasting.html#cb39-78" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb39-79"><a href="utilization-forecasting.html#cb39-79" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
 <pre><code>## Warning: Removed 23 rows containing missing values (`geom_point()`).</code></pre>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Splines make predictions outside of the range of the training data by means of linear extrapolation using the first derivative of the estimated smooth at the endpoint.
 Since we use a log link, this means that trend is assumed to be exponential, which can cause problems if the trend slope at the end of the training data is too large.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="utilization-forecasting.html#cb41-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
@@ -656,7 +656,7 @@ Since we use a log link, this means that trend is assumed to be exponential, whi
 <span id="cb41-25"><a href="utilization-forecasting.html#cb41-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb41-26"><a href="utilization-forecasting.html#cb41-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb41-27"><a href="utilization-forecasting.html#cb41-27" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>Ours looks fine, however.</p>
 <p>In addition to this consideration, the linear extrapolation method can also be problematic if the model fits a wiggly smooth to the data.
 The estimated slope at the end of the training period could be very different from the overall trend.
@@ -676,7 +676,7 @@ You can pass a list of knot points for the model to use for a particular smooth 
 <span id="cb42-12"><a href="utilization-forecasting.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">knots =</span> <span class="fu">list</span>(<span class="at">t =</span> ts)</span>
 <span id="cb42-13"><a href="utilization-forecasting.html#cb42-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb42-14"><a href="utilization-forecasting.html#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="utilization-forecasting.html#cb43-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
 <span id="cb43-2"><a href="utilization-forecasting.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  testset[, .(ds)],</span>
 <span id="cb43-3"><a href="utilization-forecasting.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">exp</span>(</span>
@@ -704,7 +704,7 @@ You can pass a list of knot points for the model to use for a particular smooth 
 <span id="cb43-25"><a href="utilization-forecasting.html#cb43-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb43-26"><a href="utilization-forecasting.html#cb43-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb43-27"><a href="utilization-forecasting.html#cb43-27" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>It doesn’t make much of a difference, if any, with this drug because the trend component is quite regular.</p>
 </div>
 <div id="alternative-trend-forecast" class="section level2 hasAnchor" number="2.6">
@@ -767,7 +767,7 @@ To fit a model, we just need to turn the <code>yr</code> variable into a factor 
 ## R-sq.(adj) =  0.961   Deviance explained = 96.2%
 ## GCV = 49.716  Scale est. = 49.106    n = 2953</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="utilization-forecasting.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>Some of the slope in the data is now attributed to in-year variation, which we may or may not want depending on the application.</p>
 </div>
 <div id="making-predictions-1" class="section level3 hasAnchor" number="2.6.2">
@@ -850,7 +850,7 @@ I will just use a weighted average by the number of months completed in each yea
 <span id="cb52-34"><a href="utilization-forecasting.html#cb52-34" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb52-35"><a href="utilization-forecasting.html#cb52-35" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
 <pre><code>## Warning: Removed 46 rows containing missing values (`geom_line()`).</code></pre>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 
 </div>
 </div>

@@ -1,8 +1,8 @@
 our-workspace
 preliminaries
-branding-code
 packages
 some-of-our-datasets
+branding-code
 motivating-gams
 linear-regression
 data

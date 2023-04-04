@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  
+  <meta name="github-repo" content="null" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Hurricane Impact Valuation | Generalized Additive Models for Actuaries" />
@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Bookdown Book</a></li>
+<li><a href="./">GAMs for Actuaries</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
@@ -140,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#our-workspace"><i class="fa fa-check"></i><b>0.1</b> Our Workspace</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#preliminaries"><i class="fa fa-check"></i><b>0.2</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.1</b> Branding Code</a></li>
-<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.2</b> Packages</a></li>
-<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.3</b> (Some of our) Datasets</a></li>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.1</b> Packages</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.2</b> (Some of our) Datasets</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.3</b> Branding Code</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>1</b> Motivating GAMs</a>
@@ -244,7 +244,7 @@ In order to model the hurricane’s effects as rigorously as possible, we need t
 <span id="cb54-10"><a href="hurricane-impact-valuation.html#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb54-11"><a href="hurricane-impact-valuation.html#cb54-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-12"><a href="hurricane-impact-valuation.html#cb54-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>The COVID slowdown is also clearly visible. Note also that this data has runout effects at the end of the training period, i.e. the most recent time periods have had less times for claims to process.</p>
 <p>As you may remember, Texas was hit by the historic Hurricane Harvey in 2017.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="hurricane-impact-valuation.html#cb55-1" aria-hidden="true" tabindex="-1"></a>landfall <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&#39;2017-8-25&#39;</span>)</span>
@@ -262,7 +262,7 @@ In order to model the hurricane’s effects as rigorously as possible, we need t
 <span id="cb55-13"><a href="hurricane-impact-valuation.html#cb55-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb55-14"><a href="hurricane-impact-valuation.html#cb55-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-15"><a href="hurricane-impact-valuation.html#cb55-15" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Now we add the date variables we’ve been discussing.
 We will use an initial holiday list and iteratively improve it.
 For the COVID term, we will just use the parameters I’ve already determined at work to make the example shorter.
@@ -325,7 +325,7 @@ I like to account for runout by setting more knot points for the trend component
 <pre><code>## Warning in mgcv::s(covid, k = 122/7): argument k of s() should be integer
 ## and has been rounded</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="hurricane-impact-valuation.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_init, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 </div>
 <div id="deriving-the-holiday-list" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Deriving the Holiday List<a href="hurricane-impact-valuation.html#deriving-the-holiday-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -393,7 +393,7 @@ As for holidays, the main potential that jumps out at me right now is effects re
 <span id="cb62-28"><a href="hurricane-impact-valuation.html#cb62-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb62-29"><a href="hurricane-impact-valuation.html#cb62-29" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb62-30"><a href="hurricane-impact-valuation.html#cb62-30" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Chistmas Eve and New Year’s Eve appear to be exhibiting what I call “bridge effects:” the days only seem to have slowdowns when they create a four-day weekend along with the main holiday.
 Independence Day also displayed a similar pattern.
 I will skip straight to the final holiday list, but you would keep iterating on fitting models and examining the residuals to add more holiday or other outlier terms.</p>
@@ -425,7 +425,7 @@ I do this in a similar way to creating the holiday list, by examining initial mo
 <span id="cb64-10"><a href="hurricane-impact-valuation.html#cb64-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb64-11"><a href="hurricane-impact-valuation.html#cb64-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb64-12"><a href="hurricane-impact-valuation.html#cb64-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>Like with holidays, I’m going to skip to using the window I already derived at work.
 To do it on your own, you would iterate through fitting a model with a potential hurricane window, examining the estimated smooth to make sure it’s reasonable, and examining the prediction errors around landfall for that model.</p>
 </div>
@@ -525,7 +525,7 @@ To do it on your own, you would iterate through fitting a model with a potential
 ## R-sq.(adj) =  0.983   Deviance explained = 98.3%
 ## GCV = 5.2655  Scale est. = 5.132     n = 2181</code></pre>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="hurricane-impact-valuation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_penult, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>From a quick look at <code>summary()</code> and <code>plot()</code>, it looks like our model is on the right track.
 There are two things we need to test for and correct before we can make valid statistical deductions from the model, however.</p>
 </div>
@@ -588,7 +588,7 @@ We check for serial autocorrelation using ACF and PACF plots.</p>
 <span id="cb70-52"><a href="hurricane-impact-valuation.html#cb70-52" aria-hidden="true" tabindex="-1"></a>  mypacf,</span>
 <span id="cb70-53"><a href="hurricane-impact-valuation.html#cb70-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
 <span id="cb70-54"><a href="hurricane-impact-valuation.html#cb70-54" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>A valid model will have all of the vertical lines (very close to) within the confidence bands.</p>
 </div>
 <div id="heteroskedasticity" class="section level3 hasAnchor" number="3.3.6">
@@ -618,7 +618,7 @@ Heteroskedasticity entails that the higher-variance regions in the training data
 <span id="cb71-19"><a href="hurricane-impact-valuation.html#cb71-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Sqrt Std Pearson Residuals&#39;</span></span>
 <span id="cb71-20"><a href="hurricane-impact-valuation.html#cb71-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb71-21"><a href="hurricane-impact-valuation.html#cb71-21" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>Heteroskedasticity manifests in a scale-location plot as deviations from a flat, straight red line.
 A quick way to correct for it is to weight training observations with the errors from the penultimate model.
 It would be more elegant to use a priori weights, but I haven’t yet come up with a good algorithm for calculating those for the general utilization dataset.</p>
@@ -728,7 +728,7 @@ We use the <code>gamm()</code> function to pass in a correlation model for the e
 ## R-sq.(adj) =  0.923   
 ##   Scale est. = 11.506    n = 2181</code></pre>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="hurricane-impact-valuation.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_final<span class="sc">$</span>gam, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="hurricane-impact-valuation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_final<span class="sc">$</span>lme, <span class="at">type =</span> <span class="st">&#39;normalized&#39;</span>)</span>
 <span id="cb77-2"><a href="hurricane-impact-valuation.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-3"><a href="hurricane-impact-valuation.html#cb77-3" aria-hidden="true" tabindex="-1"></a>myacf <span class="ot">&lt;-</span> <span class="fu">acf</span>(res, <span class="at">plot =</span> F)</span>
@@ -782,7 +782,7 @@ We use the <code>gamm()</code> function to pass in a correlation model for the e
 <span id="cb77-51"><a href="hurricane-impact-valuation.html#cb77-51" aria-hidden="true" tabindex="-1"></a>  mypacf,</span>
 <span id="cb77-52"><a href="hurricane-impact-valuation.html#cb77-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
 <span id="cb77-53"><a href="hurricane-impact-valuation.html#cb77-53" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="hurricane-impact-valuation.html#cb78-1" aria-hidden="true" tabindex="-1"></a>wpr <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_final<span class="sc">$</span>gam, <span class="at">type =</span> <span class="st">&#39;pearson&#39;</span>) <span class="sc">/</span> wts</span>
 <span id="cb78-2"><a href="hurricane-impact-valuation.html#cb78-2" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
 <span id="cb78-3"><a href="hurricane-impact-valuation.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sqrt standardized Pearson residuals</span></span>
@@ -804,7 +804,7 @@ We use the <code>gamm()</code> function to pass in a correlation model for the e
 <span id="cb78-19"><a href="hurricane-impact-valuation.html#cb78-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Sqrt Std Pearson Residuals&#39;</span></span>
 <span id="cb78-20"><a href="hurricane-impact-valuation.html#cb78-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb78-21"><a href="hurricane-impact-valuation.html#cb78-21" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <p>We are using the parameters I’ve already come up with, but in reality, we would cycle through examining these four outputs and tweaking model parameters until everything looks good.
 This is a time-consuming and sometimes frustrating process!</p>
 <p>At the end of all this, however, we have a mathematically-robust estimate of the utilization impact due to Hurricane Harvey.
@@ -842,7 +842,7 @@ We can visualize the estimated smooth like this.</p>
 <span id="cb79-31"><a href="hurricane-impact-valuation.html#cb79-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb79-32"><a href="hurricane-impact-valuation.html#cb79-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb79-33"><a href="hurricane-impact-valuation.html#cb79-33" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 </div>
 </div>
 <div id="using-the-model" class="section level2 hasAnchor" number="3.4">

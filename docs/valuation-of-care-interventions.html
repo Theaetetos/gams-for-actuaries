@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  
+  <meta name="github-repo" content="null" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Valuation of Care Interventions | Generalized Additive Models for Actuaries" />
@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Bookdown Book</a></li>
+<li><a href="./">GAMs for Actuaries</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
@@ -140,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#our-workspace"><i class="fa fa-check"></i><b>0.1</b> Our Workspace</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#preliminaries"><i class="fa fa-check"></i><b>0.2</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.1</b> Branding Code</a></li>
-<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.2</b> Packages</a></li>
-<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.3</b> (Some of our) Datasets</a></li>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.2.1</b> Packages</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#some-of-our-datasets"><i class="fa fa-check"></i><b>0.2.2</b> (Some of our) Datasets</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#branding-code"><i class="fa fa-check"></i><b>0.2.3</b> Branding Code</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="motivating-gams.html"><a href="motivating-gams.html"><i class="fa fa-check"></i><b>1</b> Motivating GAMs</a>
@@ -303,7 +303,7 @@ These files are, of course, ignorant of the claims, membership, and risk score u
 <span id="cb82-9"><a href="valuation-of-care-interventions.html#cb82-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
 <span id="cb82-10"><a href="valuation-of-care-interventions.html#cb82-10" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb82-11"><a href="valuation-of-care-interventions.html#cb82-11" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="valuation-of-care-interventions.html#cb83-1" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> dat[</span>
 <span id="cb83-2"><a href="valuation-of-care-interventions.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
 <span id="cb83-3"><a href="valuation-of-care-interventions.html#cb83-3" aria-hidden="true" tabindex="-1"></a>  .N,</span>
@@ -315,7 +315,7 @@ These files are, of course, ignorant of the claims, membership, and risk score u
 <span id="cb83-9"><a href="valuation-of-care-interventions.html#cb83-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
 <span id="cb83-10"><a href="valuation-of-care-interventions.html#cb83-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Observations&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Months Since Intervention&#39;</span>) <span class="sc">+</span></span>
 <span id="cb83-11"><a href="valuation-of-care-interventions.html#cb83-11" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 </div>
 </div>
 <div id="model-fitting-4" class="section level2 hasAnchor" number="4.3">
@@ -386,11 +386,11 @@ Being able to use a model form that takes into account the bias in our sample wi
 <p>An <span class="math inline">\(R^2\)</span> of ~20% is actually quite good for monthly, individual-level claims data.
 Like I said earlier, healthcare claims are just one of those subject areas that exhibit very high variance.</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="valuation-of-care-interventions.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="valuation-of-care-interventions.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="valuation-of-care-interventions.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 </div>
 <div id="using-the-model-1" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Using the Model<a href="valuation-of-care-interventions.html#using-the-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
