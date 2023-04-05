@@ -1,7 +1,7 @@
 our-workspace
 preliminaries
 packages
-some-of-our-datasets
+one-of-our-datasets
 branding-code
 motivating-gams
 linear-regression
@@ -27,6 +27,7 @@ hurricane-impact-valuation
 introduction-2
 data-2
 model-fitting-3
+initial-predictors
 initial-model
 deriving-the-holiday-list
 hurricane-effect-window
@@ -35,6 +36,8 @@ serial-autocorrelation-of-errors
 heteroskedasticity
 final-model
 using-the-model
+normalizing-experience-for-forecasts
+deriving-normalizing-factors-from-gam-outputs
 valuation-of-care-interventions
 introduction-3
 data-3

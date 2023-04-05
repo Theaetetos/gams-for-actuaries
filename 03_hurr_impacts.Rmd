@@ -4,7 +4,7 @@
 
 Another very similar way I use GAMs is to value utilization impacts caused by storms.
 The main impacts a health insurer sees from something like a hurricane is a slowdown in utilization from the danger and difficulty traveling caused by the storm.
-We can adapt the tools we already have from the previous chapter and add things in order to strengthen our model to be able to use it for hyptothesis testing and quantification.
+We can adapt the tools we already have from the previous chapter and add elements in order to strengthen our model to be able to use it for hyptothesis testing and quantification.
 In order to model the hurricane's effects as rigorously as possible, we need to do some more thorough model validation so we can make sound statistical deductions from it.
 
 ## Data
@@ -26,7 +26,8 @@ ggplot(dat) +
   mytheme
 ```
 
-The COVID slowdown is also clearly visible. Note also that this data has runout effects at the end of the training period, i.e. the most recent time periods have had less times for claims to process.  
+The COVID slowdown is clearly visible.
+Note also that this data has runout effects at the end of the training period, i.e. the most recent time periods have had less times for claims to process.  
 
 As you may remember, Texas was hit by the historic Hurricane Harvey in 2017.  
 
@@ -48,7 +49,11 @@ ggplot(dat) +
   mytheme
 ```
 
-Now we add the date variables we've been discussing.
+## Model Fitting
+
+### Initial Predictors
+
+First we add the date variables we've been discussing.
 We will use an initial holiday list and iteratively improve it.
 For the COVID term, we will just use the parameters I've already determined at work to make the example shorter.
 In a real modeling context, you would determine the width of the COVID window and the optimal smooth parameters using the same methods we will employ to create the hurricane term.
@@ -92,14 +97,12 @@ dat <- hols_st[
 setkey(dat, ds)
 ```
 
-## Model Fitting
-
 ### Initial Model
 
 To start with, we can fit an initial model that's basically the same as the forecasting model we were working with in the prior chapter.
 I like to account for runout by setting more knot points for the trend component to allow it to capture the sharp drop in claims.
 
-```{r}
+```{r, warning=FALSE}
 ts <- dat[
   mday(ds) == 1 &
     (month(ds) == 1 | ds > as.Date('2021-6-30')),
@@ -214,7 +217,7 @@ To do it on your own, you would iterate through fitting a model with a potential
 
 After the above process is done, we have a specification for all of the outliers and interventions we need for the penultimate, or next to last, model.
 
-```{r}
+```{r, warning=FALSE}
 dat[, uri := 0L]
 dat[
   .(seq(from = as.Date('2021-2-14'), length.out = 7, by = 1)),
@@ -318,6 +321,7 @@ A regression model must also exhibit _homoskedasticity_, or have constant error 
 Violating this assumption not only decreases the standard errors but can also bias coefficient estimates.
 The fitting algorithms used by regression models assume that every observation contributes an equal amount of information to coefficient estimation.
 Heteroskedasticity entails that the higher-variance regions in the training data contribute less information.
+The standard way to check for it is via a _scale-location plot_.
 
 ```{r}
 wpr <- residuals(m_penult, type = 'pearson')
@@ -355,7 +359,7 @@ In general, the lines on the ACF chart tell you the lag-n autocorrelation coeffi
 They interact with each other in ways that are difficult to predict, however.
 I start with the lag 1 and multiples of 7 autoregressive coefficients and go from there.
 It is not important to get these estimates exactly right, you just need a good enough correlation model to account for correlated residuals.
-We use the `gamm()` function to pass in a correlation model for the errors and supply a `weights` argument for heteroskedasticity.
+We use the `gamm()` function (short for <u>g</u>eneralized <u>a</u>dditive <u>m</u>ixed <u>m</u>odel) to pass in a correlation model for the errors and supply a `weights` argument for heteroskedasticity.
 
 ```{r}
 wts <- sqrt(abs(residuals(m_penult, type = 'scaled.pearson')))
@@ -487,7 +491,7 @@ We can visualize the estimated smooth like this.
 
 ```{r}
 st <- dat[harvey == 1, ds]
-pdat <- as.data.table(
+hdat <- as.data.table(
   confint(
     m_final,
     parm = 's(harvey)',
@@ -500,7 +504,7 @@ pdat <- as.data.table(
     sig = upper < 0 | lower > 0
   )
 ]
-ggplot(pdat, mapping = aes(ind)) +
+ggplot(hdat, mapping = aes(ind)) +
   geom_hline(yintercept = 1, linetype = 'dashed') +
   geom_ribbon(
     aes(ymin = exp(lower), ymax = exp(upper)),
@@ -523,4 +527,107 @@ ggplot(pdat, mapping = aes(ind)) +
 
 ## Using the Model
 
+### Normalizing Experience for Forecasts
 
+Now that we have a model we're satisfied with, we can use it to normalize experience for forecasting.
+When forecasting, you have to remove any one-time impacts in history, otherwise forecasts will be biased.
+For example, imagine we have to forecast 2021 utilization in late 2020.
+This is what raw historicals looked like at the time.  
+
+```{r}
+pdat <- dat[year(ds) < 2022, .(utilk = sum(y) / 12), keyby = .(yr)]
+ggplot(pdat[yr < 2021]) +
+  geom_line(aes(yr, utilk)) +
+  labs(
+    title = 'Historical Utilization through 2020',
+    x = element_blank(),
+    y = 'Utilization/1000 Members'
+  ) +
+  mytheme
+```
+
+It's not a good idea to include 2020 experience in calculation.
+It's also not a good idea to use 2020 as the baseline year in calculating the forecast.
+Doing all this using the naive average yearly method that you find on the exams would give the following results.
+
+```{r}
+i <- pdat[, mean(utilk / shift(utilk, n = 1, type = 'lag') - 1, na.rm = T)]
+
+ggplot(pdat, aes(yr, utilk)) +
+  geom_line() +
+  geom_point(
+    data = data.table(
+      yr = 2021,
+      utilk = pdat[yr == 2020, utilk * (1 + i)]
+    ),
+    color = colors$Visualization$Violet
+  ) +
+  labs(
+    title = 'Actual vs. Expected 2021 Utilization',
+    x = element_blank(),
+    y = 'Utilization/1000 Members'
+  ) +
+  mytheme
+```
+
+Using that forecast for pricing 2021 plans would be a disaster!
+A too-low baseline year will lead to forecasts that are much too low, and including the depressed year in the trend calculation will make the forecasted trend too low, as well.
+Rather than making the forecast using the raw historicals with the one-time effects included, we can use the model to derive normalizing factors for historical periods.
+
+### Deriving Normalizing Factors from GAM Outputs
+
+```{r}
+fctrs <- as.data.table(
+  confint(
+    m_final,
+    parm = 's(harvey)',
+    n = 22
+  )
+)[
+  ,
+  .(ds = seq(from = landfall - 1, length.out = 22, by = 1), est,
+    lower, upper)
+][
+  !(ds < landfall),
+][
+  ,
+  sig := upper < 0 | lower > 0
+][
+  ,
+  fctr := exp(sig * est)
+][
+  ,
+  .(ds, fctr)
+]
+fctrs[]
+```
+
+In practice, we probably want to allow the estimated factor to grade to 1 from the first and last days that are statistically significant, but that is just an exercise in arithmetic that you can do on your own if you're curious.
+
+```{r}
+ggplot(fctrs[fctr < 1, ]) +
+  geom_hline(yintercept = 1, linetype = 'dashed') +
+  geom_bar(
+    aes(ds, fctr),
+    stat = 'identity',
+    fill = colors$Visualization$Lagoon
+  ) +
+  labs(
+    title = 'Estimated Hurricane Harvey Factors',
+    x = element_blank(),
+    y = 'Factor'
+  ) +
+  mytheme
+```
+
+Finally, we arrive at a normalizing factor for 2017Q3 historicals by taking an average of our final factors over that time period.
+
+```{r}
+fnl_fctr <- dat[year(ds) == 2017 & month(ds) %in% c(7, 8, 9), .(ds)]
+fnl_fctr <- fctrs[fnl_fctr, on = 'ds']
+fnl_fctr[is.na(fctr), fctr := 1]
+fnl_fctr[, mean(fctr)]
+```
+
+Around 112 basis points may seem unsatisfying after all that work, but professionals have to track impacts down below ten basis points, and I've been on projects that were more work, less statistically sound, and had less impact than we see here.
+That's the life of a forecasting actuary...if you like it, you love it; if not, maybe look into another field of actuarial science!

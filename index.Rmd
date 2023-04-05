@@ -12,15 +12,6 @@ description: An Introduction to Generalized Additive Models for Health Actuarial
   Problems.
 ---
 
-```{r, echo=FALSE}
-htmltools::img(
-  src = file.path('img', 'Optum_Logo.png'),
-  alt = 'logo',
-  style = 'position:absolute; top:0; right:0; padding:10px;',
-  height = '80px'
-)
-```
-
 # Introduction {.unnumbered}
 
 ## Our Workspace
@@ -36,12 +27,12 @@ htmltools::img(
 ### Packages
 
 Here are all of the packages we will need for this presentation.
-You only need to run the first code chunk once for each installation of R you have, while you need to run the second.
+You only need to run the first code chunk once for each installation of R you have, while you need to run the second every time you start a new R session.
 
 ```{r, eval=FALSE}
 install.packages(
-  c('data.table', 'ggplot2', 'gratia', 'gridExtra', 'insuranceData',
-    'mgcv', 'parallel', 'scales')
+  c('data.table', 'ggplot2', 'gratia', 'gridExtra', 'mgcv',
+    'parallel', 'scales')
 )
 ```
 
@@ -50,24 +41,23 @@ library(data.table)
 library(ggplot2)
 library(gratia)
 library(gridExtra)
-library(insuranceData)
 library(mgcv)
 library(parallel)
 library(scales)
 ```
 
-### (Some of our) Datasets
+### One of Our Datasets
 
-Finally, these are two of the datasets we will use in the examples.
+We will use the diamonds dataset in the first lesson. 
+The rest of the data is modified, masked, and randomized real data from projects I've done.
 
 ```{r}
 data('diamonds')
-data('dataCar')
 ```
 
 ### Branding Code
 
-This is just some branding stuff that I use to make my plots look nice and comply with Optum and UHC branding guidelines.
+Finally, this is some branding stuff that I use to make my plots look nice and comply with Optum and UHC branding guidelines.
 You don't need it outside of the code in the presentation, but you can use it as a template for customizing your own plots, if you wish.
 
 ```{r}
