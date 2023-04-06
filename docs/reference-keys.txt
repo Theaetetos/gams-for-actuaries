@@ -42,6 +42,9 @@ valuation-of-care-interventions
 introduction-3
 data-3
 processed-dataset
-exposure
+visualizations
 model-fitting-4
 using-the-model-1
+use-cases-for-valuation-of-care-interventions
+estimating-savings
+a-simple-example

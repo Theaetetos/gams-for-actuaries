@@ -2,7 +2,22 @@
 
 ## Introduction
 
+_Managed Care_ is an umbrella term for a wide variety of ways that health insurers participate in the planning and delivery of care.
+One part of this spectrum is the development of specialized reimbursement strategies meant to incentivize providers to deliver care more efficiently.
+This is broadly known as _Value-based Care_.
+Some examples are:  
 
+* Capitation - a payer and provider agree on a flat monthly rate for each of the payer's members that is treated by the provider.
+The payer is thereby disincentivized from overutilization, since they won't be reimbursed for services over and above the average amount assumed in the contracted rate.  
+* Bundled Payments - a payer and provider agree on a single payment for a set of services.
+This is common in maternity claims, for example.
+Similar to capitation, the payer won't be reimbursed more if a member uses more services than the average assumed in the contract, but the payer will keep the surplus if they are able to treat the member using fewer.  
+* CMS' ACO Risk Sharing Model - The overall cost per member per month of an ACO is compared against a baseline.
+Both the baseline and actual values are risk-adjusted in order to judge the ACO solely on efficiency.
+Depending on the specific model, the ACO gets to keep a proportion of any surplus and must pay CMS for any deficit.  
+
+This is an extremely important subject for a health actuary to be knowledgeable about.
+There is broad consensus that the future of health care is value-based, and it is a huge competitive advantage for an insurer to be able to "bend the trend" of the cost of care in this way.
 
 ## Data
 
@@ -39,14 +54,15 @@ To summarize, then, we have four data sources that needed to be processed.
 
 1. Claims - As a mature insurer, UHC has a strictly-structured claims database that serves as the source of truth for all clinical and financial operations around the company. Individuals are assigned a unique ID to facilitate joins.  
 2. Membership - The same goes for membership and eligibility data at UHC.  
-3. Risk Scores - These are maintained separately from claims and membership under the Symmetry product organization.
+3. Risk Scores - These are maintained separately from claims and membership under a different product organization.
 Unfortunately, this data source uses a different unique ID than the claims and membership data source.  
 4. Operations tracking files - a series of Excel workbooks maintained by the team actually administering the care intervention.
-These files are, of course, ignorant of the claims, membership, and risk score unique IDs, and are instead organized by member name.  
+These files are, of course, ignorant of the claims, membership, and risk score unique IDs, and are instead organized by member name.
+As a further complication, all of these names are input manually, so there is a risk of a member's name being misspelled.
 
 The bulk of the initial work, therefore, was mapping member names to data source unique IDs.
 
-### Exposure
+### Visualizations
 
 Let's take a look at what the time series of scripts looks like.  
 
@@ -59,7 +75,7 @@ pdat <- dat[
 ggplot(pdat) +
   geom_line(aes(factor(yrmo), scrpts, group = 1)) +
   scale_y_continuous(labels = comma) +
-  labs(x = element_blank(), y = element_blank()) +
+  labs(x = element_blank(), y = 'Utilization') +
   mytheme +
   theme_rotx
 ```
@@ -74,7 +90,7 @@ exposure <- dat[
 ggplot(exposure) +
   geom_line(aes(dur, N)) +
   scale_y_continuous(labels = comma) +
-  labs(x = 'Observations', y = 'Months Since Intervention') +
+  labs(y = 'Observations', x = 'Months Since Intervention') +
   mytheme
 ```
 
@@ -137,4 +153,47 @@ plot(m, select = 3)
 
 ## Using the Model
 
+### Use Cases for Valuation of Care Interventions
 
+By convention, VBC interventions are valued using a metric called ROI.
+It has a slightly different definition than in corporate finance.
+Here, it is simply the present value of expected savings divided by the present value of expected costs.
+An intervention needs an ROI greater than 100% to generate net savings.
+Once calculated, this metric can be used to price plans that include the intervention, negotiate with providers to share the expected savings, request funding to build up the organizational capabilities in order to administer it, etc.
+
+### Estimating Savings
+
+There are a few different ways to estimate the future savings that an intervention will generate.
+Since we have a model describing the effect of the intervention on a utilization metric, we would have to use _monetization of utilization impact_.
+To get to a per member per month savings for participants in the program, an assumption around cost per unit of utilization is applied to the estimated utilization impact.
+Deciding on this assumption is tricky for a number of reasons.
+First and foremost, the savings estimate is very sensitive to it, so a very precise estimate is needed.
+Second, unit cost is likely to be correlated with utilization.
+On the one hand, this means that a global average of all members will understate savings.
+On the other hand, the experienced unit cost for participants in the program may include some subtle upward biases that shouldn't be carried forward.
+Third, you need to extend the scope of your analysis to future plan design and benefit changes in addition to all the data you've had to wrangle so far.
+You can't take credit for savings for a block of business that will move to a capitated arrangement, for example, because utilization will no longer affect the insurer's costs after that change.
+
+### A Simple Example
+
+As a simple example, I will demonstrate how to forecast the impact of this intervention on utilization trend for the next policy year.
+Let's assume we currently cover 10,000 members, all of whom will have coverage the entire next year.
+The next assumption we will need is called _penetration_, or the percentage of members that will receive the intervention.
+Depending on the intervention, this can be linked to the assumed morbidity of the insured pool, the distribution of member's ages, etc.
+Finally, we need prior year utilization and baseline utilization trend assumptions.
+The calculations are demonstrated below.
+
+```{r}
+mbrs <- 10000
+pen <- .03
+ann_util_py <- 25
+trnd <- .05
+impct <- 1 - unname(exp(coef(m)['intvTRUE']))
+
+actual_scrpts <- mbrs * ann_util_py
+exp_scrpts <- actual_scrpts * (1 + trnd)
+avoided_scrpts <- mbrs * pen * ann_util_py * (1 + trnd) * impct
+fnl_trnd <- (exp_scrpts - avoided_scrpts) / actual_scrpts - 1
+trnd_impct <- trnd - fnl_trnd
+trnd_impct
+```

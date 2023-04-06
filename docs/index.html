@@ -200,10 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>4.2</b> Data</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Processed Dataset</a></li>
-<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>4.2.2</b> Exposure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#visualizations"><i class="fa fa-check"></i><b>4.2.2</b> Visualizations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a></li>
+<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#use-cases-for-valuation-of-care-interventions"><i class="fa fa-check"></i><b>4.4.1</b> Use Cases for Valuation of Care Interventions</a></li>
+<li class="chapter" data-level="4.4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#estimating-savings"><i class="fa fa-check"></i><b>4.4.2</b> Estimating Savings</a></li>
+<li class="chapter" data-level="4.4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#a-simple-example"><i class="fa fa-check"></i><b>4.4.3</b> A Simple Example</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -225,13 +230,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="img/Optum-logo-ora-RGB.png">
+</div>
 <div id="header">
 <h1 class="title">Generalized Additive Models for Actuaries</h1>
 <p class="author"><em>Nathan Cornwell</em></p>
-<p class="date"><em>April 04 2023</em></p>
+<p class="date"><em>April 06 2023</em></p>
 </div>
 <div id="introduction" class="section level1 unnumbered hasAnchor">
 <h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><a href="https://www.linkedin.com/in/nathan-cornwell-asa-maaa-01170011b/">LinkedIn</a></p>
+<p><a href="nathan.cornwell@optum.com">Email</a></p>
 <div id="our-workspace" class="section level2 hasAnchor" number="0.1">
 <h2><span class="header-section-number">0.1</span> Our Workspace<a href="index.html#our-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><a href="https://posit.co/download/rstudio-desktop/">R/RStudio</a></p>
@@ -273,34 +284,44 @@ You don’t need it outside of the code in the presentation, but you can use it 
 <span id="cb4-5"><a href="index.html#cb4-5" aria-hidden="true" tabindex="-1"></a>viz_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Violet =</span> <span class="st">&#39;#422C88&#39;</span>, <span class="at">Iris =</span> <span class="st">&#39;#8061BC&#39;</span>,</span>
 <span id="cb4-6"><a href="index.html#cb4-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Lagoon =</span> <span class="st">&#39;#007C89&#39;</span>, <span class="at">Rainwater =</span> <span class="st">&#39;#6FC1B1&#39;</span>,</span>
 <span id="cb4-7"><a href="index.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Strawberry =</span> <span class="st">&#39;#A32A2E&#39;</span>, <span class="at">Apple =</span> <span class="st">&#39;#D13F44&#39;</span>)</span>
-<span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Primary =</span> primary_colors, <span class="at">Secondary =</span> sec_colors,</span>
-<span id="cb4-9"><a href="index.html#cb4-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">Typography =</span> type_colors, <span class="at">Visualization =</span> viz_colors)</span>
-<span id="cb4-10"><a href="index.html#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="index.html#cb4-11" aria-hidden="true" tabindex="-1"></a>scale_discrete_optum <span class="ot">&lt;-</span> <span class="cf">function</span>(aesthetics, ...){</span>
-<span id="cb4-12"><a href="index.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(</span>
-<span id="cb4-13"><a href="index.html#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">aesthetics =</span> aesthetics,</span>
-<span id="cb4-14"><a href="index.html#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale_name =</span> <span class="st">&#39;optum&#39;</span>,</span>
-<span id="cb4-15"><a href="index.html#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(</span>
-<span id="cb4-16"><a href="index.html#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(colors<span class="sc">$</span>Visualization[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>)])</span>
-<span id="cb4-17"><a href="index.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb4-18"><a href="index.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb4-19"><a href="index.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-20"><a href="index.html#cb4-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-21"><a href="index.html#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="index.html#cb4-22" aria-hidden="true" tabindex="-1"></a>theme_titles <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
-<span id="cb4-23"><a href="index.html#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>),</span>
-<span id="cb4-24"><a href="index.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>)</span>
-<span id="cb4-25"><a href="index.html#cb4-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-26"><a href="index.html#cb4-26" aria-hidden="true" tabindex="-1"></a>theme_rotx <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
-<span id="cb4-27"><a href="index.html#cb4-27" aria-hidden="true" tabindex="-1"></a>theme_optum_plot <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
-<span id="cb4-28"><a href="index.html#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span>),</span>
-<span id="cb4-29"><a href="index.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
-<span id="cb4-30"><a href="index.html#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> colors<span class="sc">$</span>Secondary<span class="sc">$</span>White,</span>
-<span id="cb4-31"><a href="index.html#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span></span>
-<span id="cb4-32"><a href="index.html#cb4-32" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-33"><a href="index.html#cb4-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-34"><a href="index.html#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="index.html#cb4-35" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span> theme_optum_plot <span class="sc">+</span> theme_titles</span></code></pre></div>
+<span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true" tabindex="-1"></a>state_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Green Success</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#007000&#39;</span>,</span>
+<span id="cb4-9"><a href="index.html#cb4-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Gold Callout</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#F5B700&#39;</span>,</span>
+<span id="cb4-10"><a href="index.html#cb4-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Red Alert</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#C40000&#39;</span>)</span>
+<span id="cb4-11"><a href="index.html#cb4-11" aria-hidden="true" tabindex="-1"></a>uhc_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Blue =</span> <span class="st">&#39;#002677&#39;</span>, <span class="at">White =</span> <span class="st">&#39;#FFFFFF&#39;</span>,</span>
+<span id="cb4-12"><a href="index.html#cb4-12" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Bright Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#00BED5&#39;</span>, <span class="at">Gold =</span> <span class="st">&#39;#F5B700&#39;</span>,</span>
+<span id="cb4-13"><a href="index.html#cb4-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Orange =</span> <span class="st">&#39;#FF681F&#39;</span>, <span class="st">`</span><span class="at">Bright Blue 20%</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;CCF2F7&#39;</span>,</span>
+<span id="cb4-14"><a href="index.html#cb4-14" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Bright Blue 40%</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#99E5EE&#39;</span>,</span>
+<span id="cb4-15"><a href="index.html#cb4-15" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#5A5A5A&#39;</span>, <span class="st">`</span><span class="at">Light Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#F4F4F4&#39;</span>,</span>
+<span id="cb4-16"><a href="index.html#cb4-16" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Medium Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#DADBDC&#39;</span>, <span class="at">Hyperlink =</span> <span class="st">&#39;#196ECF&#39;</span>)</span>
+<span id="cb4-17"><a href="index.html#cb4-17" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Primary =</span> primary_colors, <span class="at">Secondary =</span> sec_colors,</span>
+<span id="cb4-18"><a href="index.html#cb4-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">Typography =</span> type_colors, <span class="at">Visualization =</span> viz_colors,</span>
+<span id="cb4-19"><a href="index.html#cb4-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">State =</span> state_colors, <span class="at">UHC =</span> uhc_colors)</span>
+<span id="cb4-20"><a href="index.html#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="index.html#cb4-21" aria-hidden="true" tabindex="-1"></a>scale_discrete_optum <span class="ot">&lt;-</span> <span class="cf">function</span>(aesthetics, ...){</span>
+<span id="cb4-22"><a href="index.html#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(</span>
+<span id="cb4-23"><a href="index.html#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">aesthetics =</span> aesthetics,</span>
+<span id="cb4-24"><a href="index.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale_name =</span> <span class="st">&#39;optum&#39;</span>,</span>
+<span id="cb4-25"><a href="index.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(</span>
+<span id="cb4-26"><a href="index.html#cb4-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(colors<span class="sc">$</span>Visualization[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>)])</span>
+<span id="cb4-27"><a href="index.html#cb4-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-28"><a href="index.html#cb4-28" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-29"><a href="index.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-30"><a href="index.html#cb4-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-31"><a href="index.html#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="index.html#cb4-32" aria-hidden="true" tabindex="-1"></a>theme_titles <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<span id="cb4-33"><a href="index.html#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>),</span>
+<span id="cb4-34"><a href="index.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>)</span>
+<span id="cb4-35"><a href="index.html#cb4-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-36"><a href="index.html#cb4-36" aria-hidden="true" tabindex="-1"></a>theme_rotx <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
+<span id="cb4-37"><a href="index.html#cb4-37" aria-hidden="true" tabindex="-1"></a>theme_optum_plot <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<span id="cb4-38"><a href="index.html#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span>),</span>
+<span id="cb4-39"><a href="index.html#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
+<span id="cb4-40"><a href="index.html#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> colors<span class="sc">$</span>Secondary<span class="sc">$</span>White,</span>
+<span id="cb4-41"><a href="index.html#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span></span>
+<span id="cb4-42"><a href="index.html#cb4-42" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-43"><a href="index.html#cb4-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-44"><a href="index.html#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="index.html#cb4-45" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span> theme_optum_plot <span class="sc">+</span> theme_titles</span></code></pre></div>
 
 </div>
 </div>

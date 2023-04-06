@@ -1,4 +1,6 @@
 bookdown::gitbook:
+  includes:
+    before_body: img/hero-image.html
   css: style.css
   split_by: chapter
   config:

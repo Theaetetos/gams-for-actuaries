@@ -200,10 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>4.2</b> Data</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Processed Dataset</a></li>
-<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>4.2.2</b> Exposure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#visualizations"><i class="fa fa-check"></i><b>4.2.2</b> Visualizations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a></li>
+<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#use-cases-for-valuation-of-care-interventions"><i class="fa fa-check"></i><b>4.4.1</b> Use Cases for Valuation of Care Interventions</a></li>
+<li class="chapter" data-level="4.4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#estimating-savings"><i class="fa fa-check"></i><b>4.4.2</b> Estimating Savings</a></li>
+<li class="chapter" data-level="4.4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#a-simple-example"><i class="fa fa-check"></i><b>4.4.3</b> A Simple Example</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -225,6 +230,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="img/Optum-logo-ora-RGB.png">
+</div>
 <div id="hurricane-impact-valuation" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Hurricane Impact Valuation<a href="hurricane-impact-valuation.html#hurricane-impact-valuation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="introduction-2" class="section level2 hasAnchor" number="3.1">
@@ -249,7 +258,7 @@ In order to model the hurricane’s effects as rigorously as possible, we need t
 <span id="cb54-10"><a href="hurricane-impact-valuation.html#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb54-11"><a href="hurricane-impact-valuation.html#cb54-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-12"><a href="hurricane-impact-valuation.html#cb54-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>The COVID slowdown is clearly visible.
 Note also that this data has runout effects at the end of the training period, i.e. the most recent time periods have had less times for claims to process.</p>
 <p>As you may remember, Texas was hit by the historic Hurricane Harvey in 2017.</p>
@@ -268,7 +277,7 @@ Note also that this data has runout effects at the end of the training period, i
 <span id="cb55-13"><a href="hurricane-impact-valuation.html#cb55-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span></span>
 <span id="cb55-14"><a href="hurricane-impact-valuation.html#cb55-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-15"><a href="hurricane-impact-valuation.html#cb55-15" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 </div>
 <div id="model-fitting-3" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Model Fitting<a href="hurricane-impact-valuation.html#model-fitting-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -333,7 +342,7 @@ I like to account for runout by setting more knot points for the trend component
 <span id="cb57-12"><a href="hurricane-impact-valuation.html#cb57-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb57-13"><a href="hurricane-impact-valuation.html#cb57-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-14"><a href="hurricane-impact-valuation.html#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_init, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 </div>
 <div id="deriving-the-holiday-list" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Deriving the Holiday List<a href="hurricane-impact-valuation.html#deriving-the-holiday-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -401,7 +410,7 @@ As for holidays, the main potential that jumps out at me right now is effects re
 <span id="cb60-28"><a href="hurricane-impact-valuation.html#cb60-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb60-29"><a href="hurricane-impact-valuation.html#cb60-29" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb60-30"><a href="hurricane-impact-valuation.html#cb60-30" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>Chistmas Eve and New Year’s Eve appear to be exhibiting what I call “bridge effects:” the days only seem to have slowdowns when they create a four-day weekend along with the main holiday.
 Independence Day also displayed a similar pattern.
 I will skip straight to the final holiday list, but you would keep iterating on fitting models and examining the residuals to add more holiday or other outlier terms.</p>
@@ -433,7 +442,7 @@ I do this in a similar way to creating the holiday list, by examining initial mo
 <span id="cb62-10"><a href="hurricane-impact-valuation.html#cb62-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb62-11"><a href="hurricane-impact-valuation.html#cb62-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb62-12"><a href="hurricane-impact-valuation.html#cb62-12" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Like with holidays, I’m going to skip to using the window I already derived at work.
 To do it on your own, you would iterate through fitting a model with a potential hurricane window, examining the estimated smooth to make sure it’s reasonable, and examining the prediction errors around landfall for that model.</p>
 </div>
@@ -472,50 +481,28 @@ To do it on your own, you would iterate through fitting a model with a potential
 ##     s(harvey, k = 21) + wkdy + hol
 ## 
 ## Parametric coefficients:
-##                                   Estimate Std. Error  t value Pr(&gt;|t|)
-## (Intercept)                       3.785078   0.003034 1247.446  &lt; 2e-16
-## wkdyT                            -0.033896   0.004243   -7.988 2.23e-15
-## wkdyW                            -0.065864   0.004336  -15.189  &lt; 2e-16
-## wkdyTr                           -0.070122   0.004346  -16.137  &lt; 2e-16
-## wkdyF                            -0.185418   0.004637  -39.984  &lt; 2e-16
-## wkdySat                          -1.835358   0.018280 -100.403  &lt; 2e-16
-## wkdySun                          -2.395776   0.031691  -75.599  &lt; 2e-16
-## holChristmas                     -2.390926   0.269866   -8.860  &lt; 2e-16
-## holChristmas - Day After         -0.289921   0.042223   -6.866 8.61e-12
-## holChristmas Eve                 -1.191191   0.099507  -11.971  &lt; 2e-16
-## holIndependence Day              -1.933519   0.159968  -12.087  &lt; 2e-16
-## holIndependence Day - Bridge Day -0.298177   0.056288   -5.297 1.30e-07
-## holLabor Day                     -2.264282   0.192997  -11.732  &lt; 2e-16
-## holMemorial Day                  -2.265312   0.209980  -10.788  &lt; 2e-16
-## holNew Year&#39;s                    -1.848559   0.138372  -13.359  &lt; 2e-16
-## holNew Year&#39;s - Day After        -0.142470   0.036071   -3.950 8.08e-05
-## holNew Year&#39;s Eve                -0.434925   0.048754   -8.921  &lt; 2e-16
-## holPresidents Day                 0.012921   0.022767    0.568     0.57
-## holThanksgiving                  -2.770453   0.335150   -8.266 2.40e-16
-## holThanksgiving - Day After      -0.958753   0.061687  -15.542  &lt; 2e-16
-## holThanksgiving - Day Before     -0.177955   0.025493   -6.981 3.91e-12
-##                                     
-## (Intercept)                      ***
-## wkdyT                            ***
-## wkdyW                            ***
-## wkdyTr                           ***
-## wkdyF                            ***
-## wkdySat                          ***
-## wkdySun                          ***
-## holChristmas                     ***
-## holChristmas - Day After         ***
-## holChristmas Eve                 ***
-## holIndependence Day              ***
-## holIndependence Day - Bridge Day ***
-## holLabor Day                     ***
-## holMemorial Day                  ***
-## holNew Year&#39;s                    ***
-## holNew Year&#39;s - Day After        ***
-## holNew Year&#39;s Eve                ***
-## holPresidents Day                   
-## holThanksgiving                  ***
-## holThanksgiving - Day After      ***
-## holThanksgiving - Day Before     ***
+##                                   Estimate Std. Error  t value Pr(&gt;|t|)    
+## (Intercept)                       3.785078   0.003034 1247.446  &lt; 2e-16 ***
+## wkdyT                            -0.033896   0.004243   -7.988 2.23e-15 ***
+## wkdyW                            -0.065864   0.004336  -15.189  &lt; 2e-16 ***
+## wkdyTr                           -0.070122   0.004346  -16.137  &lt; 2e-16 ***
+## wkdyF                            -0.185418   0.004637  -39.984  &lt; 2e-16 ***
+## wkdySat                          -1.835358   0.018280 -100.403  &lt; 2e-16 ***
+## wkdySun                          -2.395776   0.031691  -75.599  &lt; 2e-16 ***
+## holChristmas                     -2.390926   0.269866   -8.860  &lt; 2e-16 ***
+## holChristmas - Day After         -0.289921   0.042223   -6.866 8.61e-12 ***
+## holChristmas Eve                 -1.191191   0.099507  -11.971  &lt; 2e-16 ***
+## holIndependence Day              -1.933519   0.159968  -12.087  &lt; 2e-16 ***
+## holIndependence Day - Bridge Day -0.298177   0.056288   -5.297 1.30e-07 ***
+## holLabor Day                     -2.264282   0.192997  -11.732  &lt; 2e-16 ***
+## holMemorial Day                  -2.265312   0.209980  -10.788  &lt; 2e-16 ***
+## holNew Year&#39;s                    -1.848559   0.138372  -13.359  &lt; 2e-16 ***
+## holNew Year&#39;s - Day After        -0.142470   0.036071   -3.950 8.08e-05 ***
+## holNew Year&#39;s Eve                -0.434925   0.048754   -8.921  &lt; 2e-16 ***
+## holPresidents Day                 0.012921   0.022767    0.568     0.57    
+## holThanksgiving                  -2.770453   0.335150   -8.266 2.40e-16 ***
+## holThanksgiving - Day After      -0.958753   0.061687  -15.542  &lt; 2e-16 ***
+## holThanksgiving - Day Before     -0.177955   0.025493   -6.981 3.91e-12 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -532,14 +519,14 @@ To do it on your own, you would iterate through fitting a model with a potential
 ## R-sq.(adj) =  0.983   Deviance explained = 98.3%
 ## GCV = 5.2655  Scale est. = 5.132     n = 2181</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="hurricane-impact-valuation.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_penult, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>From a quick look at <code>summary()</code> and <code>plot()</code>, it looks like our model is on the right track.
 There are two things we need to test for and correct before we can make valid statistical deductions from the model, however.</p>
 </div>
 <div id="serial-autocorrelation-of-errors" class="section level3 hasAnchor" number="3.3.6">
 <h3><span class="header-section-number">3.3.6</span> Serial Autocorrelation of Errors<a href="hurricane-impact-valuation.html#serial-autocorrelation-of-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since we are working with time series data, observations are correlated through time.
-A regression model cannot have any serial autocorrelation of errors, however, because the standard errors of the estimated coefficients will be too small.
+A regression model cannot have any <em>serial autocorrelation of errors</em>, however, because the standard errors of the estimated coefficients will be too small.
 We check for serial autocorrelation using ACF and PACF plots.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="hurricane-impact-valuation.html#cb66-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_penult, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>)</span>
 <span id="cb66-2"><a href="hurricane-impact-valuation.html#cb66-2" aria-hidden="true" tabindex="-1"></a>sig_color <span class="ot">&lt;-</span> colors<span class="sc">$</span>Visualization<span class="sc">$</span>Iris</span>
@@ -595,7 +582,7 @@ We check for serial autocorrelation using ACF and PACF plots.</p>
 <span id="cb66-52"><a href="hurricane-impact-valuation.html#cb66-52" aria-hidden="true" tabindex="-1"></a>  mypacf,</span>
 <span id="cb66-53"><a href="hurricane-impact-valuation.html#cb66-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
 <span id="cb66-54"><a href="hurricane-impact-valuation.html#cb66-54" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>A valid model will have all of the vertical lines (very close to) within the confidence bands.</p>
 </div>
 <div id="heteroskedasticity" class="section level3 hasAnchor" number="3.3.7">
@@ -626,7 +613,7 @@ The standard way to check for it is via a <em>scale-location plot</em>.</p>
 <span id="cb67-19"><a href="hurricane-impact-valuation.html#cb67-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Sqrt Std Pearson Residuals&#39;</span></span>
 <span id="cb67-20"><a href="hurricane-impact-valuation.html#cb67-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb67-21"><a href="hurricane-impact-valuation.html#cb67-21" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>Heteroskedasticity manifests in a scale-location plot as deviations from a flat, straight red line.
 A quick way to correct for it is to weight training observations with the errors from the penultimate model.
 It would be more elegant to use a priori weights, but I haven’t yet come up with a good algorithm for calculating those for the general utilization dataset.</p>
@@ -634,14 +621,14 @@ It would be more elegant to use a priori weights, but I haven’t yet come up wi
 <div id="final-model" class="section level3 hasAnchor" number="3.3.8">
 <h3><span class="header-section-number">3.3.8</span> Final Model<a href="hurricane-impact-valuation.html#final-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To complete model fitting, we re-fit the penultimate model with an error correlation model to correct for serial autocorrelation and weights to correct for heteroskedasticity.
-Unfortunately, the best way I have come up with to correct for serial autocorrelation is very labor-intensive: you have to build a correlation model by hand, eyeballing the coefficients using the ACF and PACF plots.
+Unfortunately, the best way to correct for serial autocorrelation that I believe is currently possible is very labor-intensive: you have to build a correlation model by hand, eyeballing the coefficients using the ACF and PACF plots.
 In general, the lines on the ACF chart tell you the lag-n autocorrelation coefficient, and those on the PACF the moving average coefficient.
 They interact with each other in ways that are difficult to predict, however.
 I start with the lag 1 and multiples of 7 autoregressive coefficients and go from there.
 It is not important to get these estimates exactly right, you just need a good enough correlation model to account for correlated residuals.
 We use the <code>gamm()</code> function (short for <u>g</u>eneralized <u>a</u>dditive <u>m</u>ixed <u>m</u>odel) to pass in a correlation model for the errors and supply a <code>weights</code> argument for heteroskedasticity.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="hurricane-impact-valuation.html#cb68-1" aria-hidden="true" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">abs</span>(<span class="fu">residuals</span>(m_penult, <span class="at">type =</span> <span class="st">&#39;scaled.pearson&#39;</span>)))</span></code></pre></div>
-<p>The code to fit the model would look like this.</p>
+<p>The code to fit the model looks like this.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="hurricane-impact-valuation.html#cb69-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">55</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
 <span id="cb69-2"><a href="hurricane-impact-valuation.html#cb69-2" aria-hidden="true" tabindex="-1"></a>       <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">07</span>,</span>
 <span id="cb69-3"><a href="hurricane-impact-valuation.html#cb69-3" aria-hidden="true" tabindex="-1"></a>       <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">06</span>)</span>
@@ -676,50 +663,28 @@ We use the <code>gamm()</code> function (short for <u>g</u>eneralized <u>a</u>dd
 ##     s(harvey, k = 21) + wkdy + hol
 ## 
 ## Parametric coefficients:
-##                                    Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)                       3.7684028  0.0065583 574.601  &lt; 2e-16
-## wkdyT                            -0.0427913  0.0053828  -7.950 3.00e-15
-## wkdyW                            -0.0814813  0.0072804 -11.192  &lt; 2e-16
-## wkdyTr                           -0.1010531  0.0079996 -12.632  &lt; 2e-16
-## wkdyF                            -0.2180938  0.0083694 -26.058  &lt; 2e-16
-## wkdySat                          -1.9861325  0.0530410 -37.445  &lt; 2e-16
-## wkdySun                          -2.5842627  0.1048317 -24.652  &lt; 2e-16
-## holChristmas                     -2.2011358  0.3429394  -6.418 1.69e-10
-## holChristmas - Day After         -0.2236717  0.0487236  -4.591 4.68e-06
-## holChristmas Eve                 -1.1433660  0.1284091  -8.904  &lt; 2e-16
-## holIndependence Day              -1.6876224  0.1300657 -12.975  &lt; 2e-16
-## holIndependence Day - Bridge Day -0.2197339  0.0810224  -2.712  0.00674
-## holLabor Day                     -2.3877992  0.3534898  -6.755 1.84e-11
-## holMemorial Day                  -2.4493897  0.5459640  -4.486 7.63e-06
-## holNew Year&#39;s                    -1.6572612  0.1295243 -12.795  &lt; 2e-16
-## holNew Year&#39;s - Day After         0.0193896  0.0741909   0.261  0.79385
-## holNew Year&#39;s Eve                -0.3398861  0.0580711  -5.853 5.58e-09
-## holPresidents Day                 0.0008035  0.0403463   0.020  0.98411
-## holThanksgiving                  -0.6035092  0.0947922  -6.367 2.36e-10
-## holThanksgiving - Day After      -0.5728268  0.0373162 -15.351  &lt; 2e-16
-## holThanksgiving - Day Before     -0.0548677  0.0249713  -2.197  0.02811
-##                                     
-## (Intercept)                      ***
-## wkdyT                            ***
-## wkdyW                            ***
-## wkdyTr                           ***
-## wkdyF                            ***
-## wkdySat                          ***
-## wkdySun                          ***
-## holChristmas                     ***
-## holChristmas - Day After         ***
-## holChristmas Eve                 ***
-## holIndependence Day              ***
-## holIndependence Day - Bridge Day ** 
-## holLabor Day                     ***
-## holMemorial Day                  ***
-## holNew Year&#39;s                    ***
-## holNew Year&#39;s - Day After           
-## holNew Year&#39;s Eve                ***
-## holPresidents Day                   
-## holThanksgiving                  ***
-## holThanksgiving - Day After      ***
-## holThanksgiving - Day Before     *  
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                       3.7684028  0.0065583 574.601  &lt; 2e-16 ***
+## wkdyT                            -0.0427913  0.0053828  -7.950 3.00e-15 ***
+## wkdyW                            -0.0814813  0.0072804 -11.192  &lt; 2e-16 ***
+## wkdyTr                           -0.1010531  0.0079996 -12.632  &lt; 2e-16 ***
+## wkdyF                            -0.2180938  0.0083694 -26.058  &lt; 2e-16 ***
+## wkdySat                          -1.9861325  0.0530410 -37.445  &lt; 2e-16 ***
+## wkdySun                          -2.5842627  0.1048317 -24.652  &lt; 2e-16 ***
+## holChristmas                     -2.2011358  0.3429394  -6.418 1.69e-10 ***
+## holChristmas - Day After         -0.2236717  0.0487236  -4.591 4.68e-06 ***
+## holChristmas Eve                 -1.1433660  0.1284091  -8.904  &lt; 2e-16 ***
+## holIndependence Day              -1.6876224  0.1300657 -12.975  &lt; 2e-16 ***
+## holIndependence Day - Bridge Day -0.2197339  0.0810224  -2.712  0.00674 ** 
+## holLabor Day                     -2.3877992  0.3534898  -6.755 1.84e-11 ***
+## holMemorial Day                  -2.4493897  0.5459640  -4.486 7.63e-06 ***
+## holNew Year&#39;s                    -1.6572612  0.1295243 -12.795  &lt; 2e-16 ***
+## holNew Year&#39;s - Day After         0.0193896  0.0741909   0.261  0.79385    
+## holNew Year&#39;s Eve                -0.3398861  0.0580711  -5.853 5.58e-09 ***
+## holPresidents Day                 0.0008035  0.0403463   0.020  0.98411    
+## holThanksgiving                  -0.6035092  0.0947922  -6.367 2.36e-10 ***
+## holThanksgiving - Day After      -0.5728268  0.0373162 -15.351  &lt; 2e-16 ***
+## holThanksgiving - Day Before     -0.0548677  0.0249713  -2.197  0.02811 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -736,7 +701,7 @@ We use the <code>gamm()</code> function (short for <u>g</u>eneralized <u>a</u>dd
 ## R-sq.(adj) =  0.923   
 ##   Scale est. = 11.506    n = 2181</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="hurricane-impact-valuation.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_final<span class="sc">$</span>gam, <span class="at">pages =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="hurricane-impact-valuation.html#cb73-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_final<span class="sc">$</span>lme, <span class="at">type =</span> <span class="st">&#39;normalized&#39;</span>)</span>
 <span id="cb73-2"><a href="hurricane-impact-valuation.html#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-3"><a href="hurricane-impact-valuation.html#cb73-3" aria-hidden="true" tabindex="-1"></a>myacf <span class="ot">&lt;-</span> <span class="fu">acf</span>(res, <span class="at">plot =</span> F)</span>
@@ -790,7 +755,7 @@ We use the <code>gamm()</code> function (short for <u>g</u>eneralized <u>a</u>dd
 <span id="cb73-51"><a href="hurricane-impact-valuation.html#cb73-51" aria-hidden="true" tabindex="-1"></a>  mypacf,</span>
 <span id="cb73-52"><a href="hurricane-impact-valuation.html#cb73-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
 <span id="cb73-53"><a href="hurricane-impact-valuation.html#cb73-53" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="hurricane-impact-valuation.html#cb74-1" aria-hidden="true" tabindex="-1"></a>wpr <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_final<span class="sc">$</span>gam, <span class="at">type =</span> <span class="st">&#39;pearson&#39;</span>) <span class="sc">/</span> wts</span>
 <span id="cb74-2"><a href="hurricane-impact-valuation.html#cb74-2" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
 <span id="cb74-3"><a href="hurricane-impact-valuation.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sqrt standardized Pearson residuals</span></span>
@@ -812,7 +777,7 @@ We use the <code>gamm()</code> function (short for <u>g</u>eneralized <u>a</u>dd
 <span id="cb74-19"><a href="hurricane-impact-valuation.html#cb74-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Sqrt Std Pearson Residuals&#39;</span></span>
 <span id="cb74-20"><a href="hurricane-impact-valuation.html#cb74-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb74-21"><a href="hurricane-impact-valuation.html#cb74-21" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <p>We are using the parameters I’ve already come up with, but in reality, we would cycle through examining these four outputs and tweaking model parameters until everything looks good.
 This is a time-consuming and sometimes frustrating process!</p>
 <p>At the end of all this, however, we have a mathematically-robust estimate of the utilization impact due to Hurricane Harvey.
@@ -850,7 +815,7 @@ We can visualize the estimated smooth like this.</p>
 <span id="cb75-31"><a href="hurricane-impact-valuation.html#cb75-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb75-32"><a href="hurricane-impact-valuation.html#cb75-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb75-33"><a href="hurricane-impact-valuation.html#cb75-33" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 </div>
 </div>
 <div id="using-the-model" class="section level2 hasAnchor" number="3.4">
@@ -870,9 +835,9 @@ This is what raw historicals looked like at the time.</p>
 <span id="cb76-7"><a href="hurricane-impact-valuation.html#cb76-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization/1000 Members&#39;</span></span>
 <span id="cb76-8"><a href="hurricane-impact-valuation.html#cb76-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb76-9"><a href="hurricane-impact-valuation.html#cb76-9" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>It’s not a good idea to include 2020 experience in calculation.
-It’s also not a good idea to use 2020 as the baseline year in calculating the forecast.
+It’s also not a good idea to use raw 2020 actuals as the baseline for calculating the forecast.
 Doing all this using the naive average yearly method that you find on the exams would give the following results.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="hurricane-impact-valuation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> pdat[, <span class="fu">mean</span>(utilk <span class="sc">/</span> <span class="fu">shift</span>(utilk, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">type =</span> <span class="st">&#39;lag&#39;</span>) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">na.rm =</span> T)]</span>
 <span id="cb77-2"><a href="hurricane-impact-valuation.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -891,7 +856,7 @@ Doing all this using the naive average yearly method that you find on the exams 
 <span id="cb77-15"><a href="hurricane-impact-valuation.html#cb77-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Utilization/1000 Members&#39;</span></span>
 <span id="cb77-16"><a href="hurricane-impact-valuation.html#cb77-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb77-17"><a href="hurricane-impact-valuation.html#cb77-17" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Using that forecast for pricing 2021 plans would be a disaster!
 A too-low baseline year will lead to forecasts that are much too low, and including the depressed year in the trend calculation will make the forecasted trend too low, as well.
 Rather than making the forecast using the raw historicals with the one-time effects included, we can use the model to derive normalizing factors for historical periods.</p>
@@ -958,7 +923,7 @@ Rather than making the forecast using the raw historicals with the one-time effe
 <span id="cb80-11"><a href="hurricane-impact-valuation.html#cb80-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&#39;Factor&#39;</span></span>
 <span id="cb80-12"><a href="hurricane-impact-valuation.html#cb80-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb80-13"><a href="hurricane-impact-valuation.html#cb80-13" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>Finally, we arrive at a normalizing factor for 2017Q3 historicals by taking an average of our final factors over that time period.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="hurricane-impact-valuation.html#cb81-1" aria-hidden="true" tabindex="-1"></a>fnl_fctr <span class="ot">&lt;-</span> dat[<span class="fu">year</span>(ds) <span class="sc">==</span> <span class="dv">2017</span> <span class="sc">&amp;</span> <span class="fu">month</span>(ds) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), .(ds)]</span>
 <span id="cb81-2"><a href="hurricane-impact-valuation.html#cb81-2" aria-hidden="true" tabindex="-1"></a>fnl_fctr <span class="ot">&lt;-</span> fctrs[fnl_fctr, on <span class="ot">=</span> <span class="st">&#39;ds&#39;</span>]</span>

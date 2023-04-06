@@ -14,6 +14,10 @@ description: An Introduction to Generalized Additive Models for Health Actuarial
 
 # Introduction {.unnumbered}
 
+[LinkedIn](https://www.linkedin.com/in/nathan-cornwell-asa-maaa-01170011b/)
+
+[Email](nathan.cornwell@optum.com)
+
 ## Our Workspace
 
 [R/RStudio](https://posit.co/download/rstudio-desktop/)
@@ -36,7 +40,7 @@ install.packages(
 )
 ```
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(data.table)
 library(ggplot2)
 library(gratia)
@@ -68,8 +72,18 @@ type_colors <- list(`Dark Blue` = '#002677', `Dark Gray` = '#5A5A5A')
 viz_colors <- list(Violet = '#422C88', Iris = '#8061BC',
                    Lagoon = '#007C89', Rainwater = '#6FC1B1',
                    Strawberry = '#A32A2E', Apple = '#D13F44')
+state_colors <- list(`Green Success` = '#007000',
+                     `Gold Callout` = '#F5B700',
+                     `Red Alert` = '#C40000')
+uhc_colors <- list(Blue = '#002677', White = '#FFFFFF',
+                   `Bright Blue` = '#00BED5', Gold = '#F5B700',
+                   Orange = '#FF681F', `Bright Blue 20%` = 'CCF2F7',
+                   `Bright Blue 40%` = '#99E5EE',
+                   `Dark Gray` = '#5A5A5A', `Light Gray` = '#F4F4F4',
+                   `Medium Gray` = '#DADBDC', Hyperlink = '#196ECF')
 colors <- list(Primary = primary_colors, Secondary = sec_colors,
-               Typography = type_colors, Visualization = viz_colors)
+               Typography = type_colors, Visualization = viz_colors,
+               State = state_colors, UHC = uhc_colors)
 
 scale_discrete_optum <- function(aesthetics, ...){
   discrete_scale(

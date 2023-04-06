@@ -200,10 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#data-3"><i class="fa fa-check"></i><b>4.2</b> Data</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#processed-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Processed Dataset</a></li>
-<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#exposure"><i class="fa fa-check"></i><b>4.2.2</b> Exposure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#visualizations"><i class="fa fa-check"></i><b>4.2.2</b> Visualizations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#model-fitting-4"><i class="fa fa-check"></i><b>4.3</b> Model Fitting</a></li>
-<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a></li>
+<li class="chapter" data-level="4.4" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#using-the-model-1"><i class="fa fa-check"></i><b>4.4</b> Using the Model</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#use-cases-for-valuation-of-care-interventions"><i class="fa fa-check"></i><b>4.4.1</b> Use Cases for Valuation of Care Interventions</a></li>
+<li class="chapter" data-level="4.4.2" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#estimating-savings"><i class="fa fa-check"></i><b>4.4.2</b> Estimating Savings</a></li>
+<li class="chapter" data-level="4.4.3" data-path="valuation-of-care-interventions.html"><a href="valuation-of-care-interventions.html#a-simple-example"><i class="fa fa-check"></i><b>4.4.3</b> A Simple Example</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -225,10 +230,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
+<link href="style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="img/Optum-logo-ora-RGB.png">
+</div>
 <div id="valuation-of-care-interventions" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Valuation of Care Interventions<a href="valuation-of-care-interventions.html#valuation-of-care-interventions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="introduction-3" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Introduction<a href="valuation-of-care-interventions.html#introduction-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Managed Care</em> is an umbrella term for a wide variety of ways that health insurers participate in the planning and delivery of care.
+One part of this spectrum is the development of specialized reimbursement strategies meant to incentivize providers to deliver care more efficiently.
+This is broadly known as <em>Value-based Care</em>.
+Some examples are:</p>
+<ul>
+<li>Capitation - a payer and provider agree on a flat monthly rate for each of the payer’s members that is treated by the provider.
+The payer is thereby disincentivized from overutilization, since they won’t be reimbursed for services over and above the average amount assumed in the contracted rate.<br />
+</li>
+<li>Bundled Payments - a payer and provider agree on a single payment for a set of services.
+This is common in maternity claims, for example.
+Similar to capitation, the payer won’t be reimbursed more if a member uses more services than the average assumed in the contract, but the payer will keep the surplus if they are able to treat the member using fewer.<br />
+</li>
+<li>CMS’ ACO Risk Sharing Model - The overall cost per member per month of an ACO is compared against a baseline.
+Both the baseline and actual values are risk-adjusted in order to judge the ACO solely on efficiency.
+Depending on the specific model, the ACO gets to keep a proportion of any surplus and must pay CMS for any deficit.</li>
+</ul>
+<p>This is an extremely important subject for a health actuary to be knowledgeable about.
+There is broad consensus that the future of health care is value-based, and it is a huge competitive advantage for an insurer to be able to “bend the trend” of the cost of care in this way.</p>
 </div>
 <div id="data-3" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Data<a href="valuation-of-care-interventions.html#data-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -286,16 +313,17 @@ Here is a data dictionary summarizing the elements of this final table, along wi
 </li>
 <li>Membership - The same goes for membership and eligibility data at UHC.<br />
 </li>
-<li>Risk Scores - These are maintained separately from claims and membership under the Symmetry product organization.
+<li>Risk Scores - These are maintained separately from claims and membership under a different product organization.
 Unfortunately, this data source uses a different unique ID than the claims and membership data source.<br />
 </li>
 <li>Operations tracking files - a series of Excel workbooks maintained by the team actually administering the care intervention.
-These files are, of course, ignorant of the claims, membership, and risk score unique IDs, and are instead organized by member name.</li>
+These files are, of course, ignorant of the claims, membership, and risk score unique IDs, and are instead organized by member name.
+As a further complication, all of these names are input manually, so there is a risk of a member’s name being misspelled.</li>
 </ol>
 <p>The bulk of the initial work, therefore, was mapping member names to data source unique IDs.</p>
 </div>
-<div id="exposure" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Exposure<a href="valuation-of-care-interventions.html#exposure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="visualizations" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Visualizations<a href="valuation-of-care-interventions.html#visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s take a look at what the time series of scripts looks like.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="valuation-of-care-interventions.html#cb85-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> dat[</span>
 <span id="cb85-2"><a href="valuation-of-care-interventions.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
@@ -305,10 +333,10 @@ These files are, of course, ignorant of the claims, membership, and risk score u
 <span id="cb85-6"><a href="valuation-of-care-interventions.html#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat) <span class="sc">+</span></span>
 <span id="cb85-7"><a href="valuation-of-care-interventions.html#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(yrmo), scrpts, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb85-8"><a href="valuation-of-care-interventions.html#cb85-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb85-9"><a href="valuation-of-care-interventions.html#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb85-9"><a href="valuation-of-care-interventions.html#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span>) <span class="sc">+</span></span>
 <span id="cb85-10"><a href="valuation-of-care-interventions.html#cb85-10" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
 <span id="cb85-11"><a href="valuation-of-care-interventions.html#cb85-11" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="valuation-of-care-interventions.html#cb86-1" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> dat[</span>
 <span id="cb86-2"><a href="valuation-of-care-interventions.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
 <span id="cb86-3"><a href="valuation-of-care-interventions.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  .N,</span>
@@ -318,9 +346,9 @@ These files are, of course, ignorant of the claims, membership, and risk score u
 <span id="cb86-7"><a href="valuation-of-care-interventions.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(exposure) <span class="sc">+</span></span>
 <span id="cb86-8"><a href="valuation-of-care-interventions.html#cb86-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(dur, N)) <span class="sc">+</span></span>
 <span id="cb86-9"><a href="valuation-of-care-interventions.html#cb86-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb86-10"><a href="valuation-of-care-interventions.html#cb86-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Observations&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Months Since Intervention&#39;</span>) <span class="sc">+</span></span>
+<span id="cb86-10"><a href="valuation-of-care-interventions.html#cb86-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Observations&#39;</span>, <span class="at">x =</span> <span class="st">&#39;Months Since Intervention&#39;</span>) <span class="sc">+</span></span>
 <span id="cb86-11"><a href="valuation-of-care-interventions.html#cb86-11" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
 </div>
 <div id="model-fitting-4" class="section level2 hasAnchor" number="4.3">
@@ -391,15 +419,58 @@ Being able to use a model form that takes into account the bias in our sample wi
 <p>An <span class="math inline">\(R^2\)</span> of ~20% is actually quite good for monthly, individual-level claims data.
 Like I said earlier, healthcare claims are just one of those subject areas that exhibit very high variance.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="valuation-of-care-interventions.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="valuation-of-care-interventions.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="valuation-of-care-interventions.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 <div id="using-the-model-1" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Using the Model<a href="valuation-of-care-interventions.html#using-the-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="use-cases-for-valuation-of-care-interventions" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Use Cases for Valuation of Care Interventions<a href="valuation-of-care-interventions.html#use-cases-for-valuation-of-care-interventions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>By convention, VBC interventions are valued using a metric called ROI.
+It has a slightly different definition than in corporate finance.
+Here, it is simply the present value of expected savings divided by the present value of expected costs.
+An intervention needs an ROI greater than 100% to generate net savings.
+Once calculated, this metric can be used to price plans that include the intervention, negotiate with providers to share the expected savings, request funding to build up the organizational capabilities in order to administer it, etc.</p>
+</div>
+<div id="estimating-savings" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Estimating Savings<a href="valuation-of-care-interventions.html#estimating-savings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are a few different ways to estimate the future savings that an intervention will generate.
+Since we have a model describing the effect of the intervention on a utilization metric, we would have to use <em>monetization of utilization impact</em>.
+To get to a per member per month savings for participants in the program, an assumption around cost per unit of utilization is applied to the estimated utilization impact.
+Deciding on this assumption is tricky for a number of reasons.
+First and foremost, the savings estimate is very sensitive to it, so a very precise estimate is needed.
+Second, unit cost is likely to be correlated with utilization.
+On the one hand, this means that a global average of all members will understate savings.
+On the other hand, the experienced unit cost for participants in the program may include some subtle upward biases that shouldn’t be carried forward.
+Third, you need to extend the scope of your analysis to future plan design and benefit changes in addition to all the data you’ve had to wrangle so far.
+You can’t take credit for savings for a block of business that will move to a capitated arrangement, for example, because utilization will no longer affect the insurer’s costs after that change.</p>
+</div>
+<div id="a-simple-example" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> A Simple Example<a href="valuation-of-care-interventions.html#a-simple-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As a simple example, I will demonstrate how to forecast the impact of this intervention on utilization trend for the next policy year.
+Let’s assume we currently cover 10,000 members, all of whom will have coverage the entire next year.
+The next assumption we will need is called <em>penetration</em>, or the percentage of members that will receive the intervention.
+Depending on the intervention, this can be linked to the assumed morbidity of the insured pool, the distribution of member’s ages, etc.
+Finally, we need prior year utilization and baseline utilization trend assumptions.
+The calculations are demonstrated below.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="valuation-of-care-interventions.html#cb93-1" aria-hidden="true" tabindex="-1"></a>mbrs <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb93-2"><a href="valuation-of-care-interventions.html#cb93-2" aria-hidden="true" tabindex="-1"></a>pen <span class="ot">&lt;-</span> .<span class="dv">03</span></span>
+<span id="cb93-3"><a href="valuation-of-care-interventions.html#cb93-3" aria-hidden="true" tabindex="-1"></a>ann_util_py <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb93-4"><a href="valuation-of-care-interventions.html#cb93-4" aria-hidden="true" tabindex="-1"></a>trnd <span class="ot">&lt;-</span> .<span class="dv">05</span></span>
+<span id="cb93-5"><a href="valuation-of-care-interventions.html#cb93-5" aria-hidden="true" tabindex="-1"></a>impct <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">unname</span>(<span class="fu">exp</span>(<span class="fu">coef</span>(m)[<span class="st">&#39;intvTRUE&#39;</span>]))</span>
+<span id="cb93-6"><a href="valuation-of-care-interventions.html#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="valuation-of-care-interventions.html#cb93-7" aria-hidden="true" tabindex="-1"></a>actual_scrpts <span class="ot">&lt;-</span> mbrs <span class="sc">*</span> ann_util_py</span>
+<span id="cb93-8"><a href="valuation-of-care-interventions.html#cb93-8" aria-hidden="true" tabindex="-1"></a>exp_scrpts <span class="ot">&lt;-</span> actual_scrpts <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> trnd)</span>
+<span id="cb93-9"><a href="valuation-of-care-interventions.html#cb93-9" aria-hidden="true" tabindex="-1"></a>avoided_scrpts <span class="ot">&lt;-</span> mbrs <span class="sc">*</span> pen <span class="sc">*</span> ann_util_py <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> trnd) <span class="sc">*</span> impct</span>
+<span id="cb93-10"><a href="valuation-of-care-interventions.html#cb93-10" aria-hidden="true" tabindex="-1"></a>fnl_trnd <span class="ot">&lt;-</span> (exp_scrpts <span class="sc">-</span> avoided_scrpts) <span class="sc">/</span> actual_scrpts <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb93-11"><a href="valuation-of-care-interventions.html#cb93-11" aria-hidden="true" tabindex="-1"></a>trnd_impct <span class="ot">&lt;-</span> trnd <span class="sc">-</span> fnl_trnd</span>
+<span id="cb93-12"><a href="valuation-of-care-interventions.html#cb93-12" aria-hidden="true" tabindex="-1"></a>trnd_impct</span></code></pre></div>
+<pre><code>## [1] 0.001669789</code></pre>
 
+</div>
 </div>
 </div>
             </section>

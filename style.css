@@ -1,23 +1,4 @@
-.book .book-body .page-wrapper .page-inner section.normal h1.title {
-  color: #FF612B;
-  font-size: 3em;
-}
-h1 {
-  color: #002677;
-  font-weight: bold;
-}
-h2 {
-  color: #5A5A5A;
-  font-weight: bold;
-  text-decoration:underline;
-}
-h3 {
-  color: #5A5A5A;
-  font-weight: bold;
-}
-h4 {
-  color: #5A5A5A;
-}
+/* Baseline bookdown */
 p.author {
   font-size: 1.75em;
 }
@@ -37,4 +18,101 @@ pre {
 }
 pre code {
   white-space: inherit;
+}
+
+/* Header formats */
+
+.book .book-body .page-wrapper .page-inner section.normal h1.title {
+  font-size: 3em;
+}
+h1 {
+  color: #002677;
+  font-size: 2em;
+  font-weight: bold;
+}
+h2 {
+  color: #5A5A5A;
+  font-size: 1.75em;
+  font-weight: bold;
+  text-decoration:underline;
+}
+h3 {
+  color: #5A5A5A;
+  font-weight: bold;
+}
+h4 {
+  color: #5A5A5A;
+}
+
+/* Code for banner */
+
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 240px;
+  background-color: #FBF9F4;
+}
+.hero-image {
+  float: left;
+  width: auto;
+  height: 240px;
+  object-fit: contain;
+}
+.page-inner {
+  padding-top: 250px !important;
+}
+
+/* Make the horizontal line go straight across in top navbar */
+
+.summary > li:first-child {
+    height: 50px;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.07);
+}
+.book .book-summary ul.summary li.divider {
+    height: 0px;
+}
+
+/* Equal spacing before and after code chunks */
+
+.sourceCode pre {
+  margin: 0 !important;
+}
+.sourceCode {
+  margin-bottom: 0.85em;
+}
+
+/* Branded color for links */
+
+.book .book-body .page-wrapper .page-inner section.normal a {
+  color: #196ECF;
+}
+.summary a:hover {
+  color: #196ECF !important;
+} 
+.book .book-summary ul.summary li.active>a { /*active TOC links*/
+  color: #196ECF !important;
+  border-left: solid 4px;
+  border-color: #196ECF;
+  padding-left: 11px !important;
+}  
+
+/* Get rid of header hover hashes */
+a.anchor-section::before {
+  content: '';
+}
+
+/* TOC */
+
+/* Branded background color */
+.book .book-summary {
+  background: #FBF9F4;
+}
+
+/* Branded text color */
+.book .book-summary ul.summary li a, 
+.book .book-summary ul.summary li span {
+  color: #5A5A5A;
 }
