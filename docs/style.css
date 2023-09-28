@@ -1,10 +1,5 @@
-/* Baseline bookdown */
-p.author {
-  font-size: 1.75em;
-}
-p.date {
-  font-size: 1.75em;
-}
+/* baseline bookdown */
+
 p.caption {
   color: #777;
   margin-top: 10px;
@@ -20,31 +15,59 @@ pre code {
   white-space: inherit;
 }
 
-/* Header formats */
+/* header formats */
 
 .book .book-body .page-wrapper .page-inner section.normal h1.title {
-  font-size: 3em;
+  font-size: 46px;
+}
+  /* TODO - how to disable <em> tag in this <p>? */
+.book .book-body .page-wrapper .page-inner section.normal p.author,
+.book .book-body .page-wrapper .page-inner section.normal p.date{
+  color: #5A5A5A;
+  font-size: 26px;
+  font-weight: normal;
+  font-style: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#header .date{
+  margin-top: 0;
 }
 h1 {
   color: #002677;
-  font-size: 2em;
+  font-size: 38px;
   font-weight: bold;
+}
+h1.title {
+  font-size: 46px;
 }
 h2 {
-  color: #5A5A5A;
-  font-size: 1.75em;
+  color: #002677;
+  font-size: 34px;
   font-weight: bold;
-  text-decoration:underline;
 }
 h3 {
-  color: #5A5A5A;
+  color: #002677;
+  font-size: 30px;
   font-weight: bold;
 }
 h4 {
-  color: #5A5A5A;
+  color: #002677;
+  font-size: 26px;
+  font-weight: bold;
+}
+h5 {
+  color: #002677;
+  font-size: 22px;
+  font-weight: bold;
+}
+h6 {
+  color: #002677;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-/* Code for banner */
+/* banner */
 
 .hero-image-container {
   position: absolute;
@@ -52,11 +75,12 @@ h4 {
   left: 0;
   width: 100%;
   height: 240px;
-  background-color: #FBF9F4;
+  background-color: #D9F6FA;
 }
 .hero-image {
-  float: left;
-  width: auto;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
   height: 240px;
   object-fit: contain;
 }
@@ -64,7 +88,7 @@ h4 {
   padding-top: 250px !important;
 }
 
-/* Make the horizontal line go straight across in top navbar */
+/* make the horizontal line go straight across in top navbar */
 
 .summary > li:first-child {
     height: 50px;
@@ -91,15 +115,19 @@ h4 {
 }
 .summary a:hover {
   color: #196ECF !important;
-} 
-.book .book-summary ul.summary li.active>a { /*active TOC links*/
+}
+
+/*active TOC links*/
+
+.book .book-summary ul.summary li.active>a {
   color: #196ECF !important;
   border-left: solid 4px;
   border-color: #196ECF;
   padding-left: 11px !important;
-}  
+}
 
 /* Get rid of header hover hashes */
+
 a.anchor-section::before {
   content: '';
 }
@@ -112,7 +140,35 @@ a.anchor-section::before {
 }
 
 /* Branded text color */
-.book .book-summary ul.summary li a, 
+.book .book-summary ul.summary li a,
 .book .book-summary ul.summary li span {
   color: #5A5A5A;
+}
+
+/* footer */
+
+.footer hr {
+  width: 100%;
+}
+
+.footer {
+  font-size: .8em;
+  text-align: center;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 24.8px;
+}
+
+.footer p {
+  margin-bottom: 0;
+}
+
+.footer-image {
+  float: left;
+  width: auto;
+  height: 16px;
+}
+
+.tocify-extend-page {
+  height: 0px !important; /* Gets rid of extra space after footer*/
 }

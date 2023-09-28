@@ -1,6 +1,7 @@
 bookdown::gitbook:
   includes:
     before_body: img/hero-image.html
+    after_body: img/footer.html
   css: style.css
   split_by: chapter
   config:
