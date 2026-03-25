@@ -19,11 +19,9 @@ dat <- fread(
 
 ggplot(dat) +
   geom_line(aes(ds, y)) +
-  labs(
-    x = element_blank(),
-    y = 'Utilization'
-  ) +
-  mytheme
+  labs(y = 'Utilization') +
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 The COVID slowdown is clearly visible.
@@ -42,11 +40,9 @@ ggplot(dat) +
   ) +
   geom_line(aes(ds, y)) +
   coord_cartesian(xlim = as.Date(c('2017-8-1', '2017-9-30'))) +
-  labs(
-    x = element_blank(),
-    y = 'Utilization'
-  ) +
-  mytheme
+  labs(y = 'Utilization') +
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 ## Model Fitting
@@ -73,7 +69,19 @@ dat[
   )
 ][
   ,
-  yrfrac := yrfrac / max(yrfrac),
+  yrfrac := yrfrac / as.numeric(
+    strftime(
+      as.Date(
+        paste(
+          year(ds),
+          12,
+          31,
+          sep = '-'
+        )
+      ),
+      '%j'
+    )
+  ),
   by = .(yr)
 ][
   .(seq(from = as.Date('2020-3-1'), length.out = 122, by = 1)),
@@ -135,7 +143,7 @@ dat[
 dat[order(-abs(err)), .(ds, hol, err)][1:20, ]
 ```
 
-There's actually a pattern in the residuals that I forgot about: Winter Storm Uri, the unofficial name for the ice storms that hit Texas in 2021.
+There's a sneaky pattern in the residuals: Winter Storm Uri, the unofficial name for the ice storms that hit Texas in 2021.
 We'll add a term for that below.
 As for holidays, the main potential that jumps out at me right now is effects related to Christmas Eve, so let's examine that more closely.  
 
@@ -164,12 +172,12 @@ ggplot(pdat) +
   scale_discrete_optum('fill') +
   labs(
     title = 'Christmas and New Year\'s',
-    x = element_blank(),
     y = 'Utilization',
     fill = 'Weekday'
   ) +
   mytheme +
-  theme_rotx
+  theme_rotx +
+  theme(axis.title.x = element_blank())
 ```
 
 Chistmas Eve and New Year's Eve appear to be exhibiting what I call "bridge effects:" the days only seem to have slowdowns when they create a four-day weekend along with the main holiday.
@@ -201,13 +209,9 @@ ggplot(dat) +
   geom_bar(aes(ds, err, fill = wkdy), stat = 'identity') +
   scale_discrete_optum('fill') +
   coord_cartesian(xlim = landfall + c(-21, 21)) +
-  labs(
-    title = 'Initial Model Residuals Near Landfall',
-    x = element_blank(),
-    y = element_blank(),
-    fill = element_blank()
-  ) +
-  mytheme
+  labs(title = 'Initial Model Residuals Near Landfall') +
+  mytheme +
+  theme(axis.title = element_blank(), legend.title = element_blank())
 ```
 
 Like with holidays, I'm going to skip to using the window I already derived at work.
@@ -248,7 +252,7 @@ plot(m_penult, pages = 1)
 ```
 
 From a quick look at `summary()` and `plot()`, it looks like our model is on the right track.
-There are two things we need to test for and correct before we can make valid statistical deductions from the model, however.
+There are two things we need to test for and correct before we can make valid statistical inferences from the model, however.
 
 ### Serial Autocorrelation of Errors
 
@@ -313,7 +317,7 @@ grid.arrange(
 )
 ```
 
-A valid model will have all of the vertical lines (very close to) within the confidence bands.
+A valid model will have (almost) all of the vertical lines (very close to) within the confidence bands.
 
 ### Heteroskedasticity
 
@@ -518,11 +522,10 @@ ggplot(hdat, mapping = aes(ind)) +
   scale_discrete_optum(aesthetics = 'color') +
   labs(
     title = 'Estimated Hurricane Harvey Impact',
-    subtitle = 'Statistically Significant Areas Colored Red',
-    x = element_blank(),
-    y = element_blank()
+    subtitle = 'Statistically Significant Areas Colored Red'
   ) +
-  mytheme
+  mytheme +
+  theme(axis.title = element_blank())
 ```
 
 ## Using the Model
@@ -540,10 +543,10 @@ ggplot(pdat[yr < 2021]) +
   geom_line(aes(yr, utilk)) +
   labs(
     title = 'Historical Utilization through 2020',
-    x = element_blank(),
     y = 'Utilization/1000 Members'
   ) +
-  mytheme
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 It's not a good idea to include 2020 experience in calculation.
@@ -564,10 +567,10 @@ ggplot(pdat, aes(yr, utilk)) +
   ) +
   labs(
     title = 'Actual vs. Expected 2021 Utilization',
-    x = element_blank(),
     y = 'Utilization/1000 Members'
   ) +
-  mytheme
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 Using that forecast for pricing 2021 plans would be a disaster!
@@ -585,16 +588,16 @@ fctrs <- as.data.table(
   )
 )[
   ,
-  .(ds = seq(from = landfall - 1, length.out = 22, by = 1), est,
-    lower, upper)
+  .(ds = seq(from = landfall - 1, length.out = 22, by = 1), .estimate,
+    .lower_ci, .upper_ci)
 ][
   !(ds < landfall),
 ][
   ,
-  sig := upper < 0 | lower > 0
+  sig := .upper_ci < 0 | .lower_ci > 0
 ][
   ,
-  fctr := exp(sig * est)
+  fctr := exp(sig * .estimate)
 ][
   ,
   .(ds, fctr)
@@ -630,4 +633,4 @@ fnl_fctr[, mean(fctr)]
 ```
 
 Around 112 basis points may seem unsatisfying after all that work, but professionals have to track impacts down below ten basis points, and I've been on projects that were more work, less statistically sound, and had less impact than we see here.
-That's the life of a forecasting actuary...if you like it, you love it; if not, maybe look into another field of actuarial science!
+That's the life of a forecasting actuary...if you like it, you love it; if not, maybe look into another field!
