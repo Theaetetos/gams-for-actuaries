@@ -75,9 +75,10 @@ pdat <- dat[
 ggplot(pdat) +
   geom_line(aes(factor(yrmo), scrpts, group = 1)) +
   scale_y_continuous(labels = comma) +
-  labs(x = element_blank(), y = 'Utilization') +
+  labs(y = 'Utilization') +
   mytheme +
-  theme_rotx
+  theme_rotx +
+  theme(axis.title.x = element_blank())
 ```
 
 ```{r}
