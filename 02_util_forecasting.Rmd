@@ -1,4 +1,64 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Utilization Forecasting
+
+```{r, message=FALSE, warning=FALSE}
+library(data.table)
+library(ggplot2)
+library(gratia)
+library(gridExtra)
+library(mgcv)
+library(parallel)
+library(scales)
+
+primary_colors <- list(`Optum Orange` = '#FF612B')
+sec_colors <- list(White = '#FFFFFF', `Sky Blue` = '#D9F6FA',
+                   `Warm White` = '#FBF9F4')
+type_colors <- list(`Dark Blue` = '#002677', `Dark Gray` = '#5A5A5A')
+viz_colors <- list(Violet = '#422C88', Iris = '#8061BC',
+                   Lagoon = '#007C89', Rainwater = '#6FC1B1',
+                   Strawberry = '#A32A2E', Apple = '#D13F44')
+state_colors <- list(`Green Success` = '#007000',
+                     `Gold Callout` = '#F5B700',
+                     `Red Alert` = '#C40000')
+uhc_colors <- list(Blue = '#002677', White = '#FFFFFF',
+                   `Bright Blue` = '#00BED5', Gold = '#F5B700',
+                   Orange = '#FF681F', `Bright Blue 20%` = 'CCF2F7',
+                   `Bright Blue 40%` = '#99E5EE',
+                   `Dark Gray` = '#5A5A5A', `Light Gray` = '#F4F4F4',
+                   `Medium Gray` = '#DADBDC', Hyperlink = '#196ECF')
+colors <- list(Primary = primary_colors, Secondary = sec_colors,
+               Typography = type_colors, Visualization = viz_colors,
+               State = state_colors, UHC = uhc_colors)
+
+scale_discrete_optum <- function(aesthetics, ...){
+  discrete_scale(
+    aesthetics = aesthetics,
+    palette = grDevices::colorRampPalette(
+      as.character(colors$Visualization[c(4, 3, 1, 2, 6, 5)])
+    ),
+    ...
+  )
+}
+
+theme_titles <- theme(
+  plot.title = element_text(hjust = .5),
+  plot.subtitle = element_text(hjust = .5)
+)
+theme_rotx <- theme(axis.text.x = element_text(angle = 90))
+theme_optum_plot <- theme(
+  text = element_text(color = colors$Typography$`Dark Gray`),
+  panel.background = element_rect(
+    fill = colors$Secondary$White,
+    color = colors$Typography$`Dark Gray`
+  )
+)
+
+mytheme <- theme_optum_plot + theme_titles
+```
 
 ## Introduction
 
@@ -17,11 +77,9 @@ dat <- fread(
 
 ggplot(dat) +
   geom_line(aes(ds, y)) +
-  labs(
-    x = element_blank(),
-    y = 'Utilization'
-  ) +
-  mytheme
+  labs(y = 'Utilization') +
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 ## Predictors
@@ -42,11 +100,9 @@ dat[
 
 ggplot(dat) +
   geom_boxplot(aes(wkdy, y)) +
-  labs(
-    x = element_blank(),
-    y = 'Utilization'
-  ) +
-  mytheme
+  labs(y = 'Utilization') +
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 ### In-year
@@ -64,13 +120,25 @@ dat[
   yrfrac := as.numeric(strftime(ds, '%j'))
 ][
   ,
-  yrfrac := yrfrac / max(yrfrac)
+  yrfrac := yrfrac / as.numeric(
+    strftime(
+      as.Date(
+        paste(
+          year(ds),
+          12,
+          31,
+          sep = '-'
+        )
+      ),
+      '%j'
+    )
+  )
 ]
 
 ggplot(dat, aes(yrfrac, y)) +
   geom_hline(yintercept = 90, linetype = 'dashed') +
   geom_point() +
-  geom_smooth() +
+  geom_smooth(method = 'gam', formula = y ~ s(x, bs = 'cs')) +
   labs(
     x = 'Proportion of Year Completed',
     y = 'Utilization'
@@ -111,12 +179,12 @@ ggplot(pdat) +
   scale_discrete_optum('fill') +
   labs(
     title = 'Christmas and New Year\'s',
-    x = element_blank(),
     y = 'Utilization',
     fill = 'Weekday'
   ) +
   mytheme +
-  theme_rotx
+  theme_rotx +
+  theme(axis.title.x = element_blank())
 ```
 
 ```{r}
@@ -182,11 +250,9 @@ This occurred at UHC, at least, because we removed several restrictions designed
 ggplot(dat) +
   geom_line(aes(ds, y)) +
   coord_cartesian(xlim = as.Date(c('2020-3-1', '2020-3-31'))) +
-  labs(
-    x = element_blank(),
-    y = 'Utilization'
-  ) +
-  mytheme
+  labs(y = 'Utilization') +
+  mytheme +
+  theme(axis.title.x = element_blank())
 ```
 
 ```{r}
@@ -267,7 +333,20 @@ testset[
   )
 ][
   ,
-  yrfrac := yrfrac / max(yrfrac),
+  # note that you have to do some finessing if your data ends before the end of a year
+  yrfrac := yrfrac / as.numeric(
+    strftime(
+      as.Date(
+        paste(
+          year(ds),
+          12,
+          31,
+          sep = '-'
+        )
+      ),
+      '%j'
+    )
+  ),
   by = .(yr)
 ][
   strftime(ds, '%Y%m') == '202003',
@@ -319,7 +398,7 @@ ggplot(pdat, aes(x = factor(yrmo))) +
   geom_point(aes(y = y)) +
   geom_point(aes(y = yhat), color = colors$Visualization$Strawberry) +
   labs(
-    'Actual vs. Predicted',
+    title = 'Actual vs. Predicted',
     x = 'Month',
     y = 'Annualized Utilization PMPM'
   ) +
@@ -351,13 +430,12 @@ pdat <- cbind(
 ggplot(pdat) +
   geom_line(aes(ds, t, group = 1, color = grp)) +
   scale_discrete_optum('color') +
-  labs(
-    title = 'Modeled Trend Component',
-    x = element_blank(),
-    y = element_blank(),
-    color = element_blank()
-  ) +
-  mytheme
+  labs(title = 'Modeled Trend Component') +
+  mytheme +
+  theme(
+    axis.title = element_blank(),
+    legend.title = element_blank()
+  )
 ```
 
 Ours looks fine, however.  
@@ -405,13 +483,12 @@ pdat <- cbind(
 ggplot(pdat) +
   geom_line(aes(ds, t, group = 1, color = grp)) +
   scale_discrete_optum('color') +
-  labs(
-    title = 'Modeled Trend Component',
-    x = element_blank(),
-    y = element_blank(),
-    color = element_blank()
-  ) +
-  mytheme
+  labs(title = 'Modeled Trend Component') +
+  mytheme +
+  theme(
+    axis.title = element_blank(),
+    legend.title = element_blank()
+  )
 ```
 
 It doesn't make much of a difference, if any, with this drug because the trend component is quite regular.
@@ -519,7 +596,7 @@ ggplot(pdat, aes(x = factor(yrmo))) +
   geom_point(aes(y = value, color = variable)) +
   scale_discrete_optum('color') +
   labs(
-    'Actual vs. Predicted',
+    title = 'Actual vs. Predicted',
     x = 'Month',
     y = 'Annualized Utilization PMPM',
     color = 'Model'
