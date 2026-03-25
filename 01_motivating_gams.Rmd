@@ -1,3 +1,19 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(data.table)
+library(ggplot2)
+library(gratia)
+library(gridExtra)
+library(mgcv)
+library(parallel)
+library(scales)
+```
+
 # Motivating GAMs
 
 ## Linear Regression
@@ -9,7 +25,7 @@ $$
 y \sim \beta_0+\sum_{i=1}^n \beta_i x_i+ \epsilon \\
 \epsilon \sim N(0,\sigma^2)
 $$
-In English, some _response variable_ $y$ is modeled as the sum of an _intercept_ term $\beta_0$ and $n$ _predictor variables_ $x_1,...,x_n$ with random _error_ $\epsilon \sim N(0,\sigma^2)$.
+In English, some _response variable_ $y$ is modeled as the sum of an _intercept_ term $\beta_0$ and $n$ _predictor variables_ $x_1,...,x_n$ with random _error_ $\epsilon$ distributed normally with mean 0 and variance $\sigma^2$.
 
 ## Data
 
@@ -95,8 +111,8 @@ ggplot(preds) +
     intercept = 0,
     color = colors$Visualization$Strawberry
   ) +
-  scale_x_continuous(labels = dollar) +
-  scale_y_continuous(labels = dollar) +
+  scale_x_continuous(labels = label_currency()) +
+  scale_y_continuous(labels = label_currency()) +
   labs(x = 'Actual', y = 'Predicted') +
   mytheme
 ```
@@ -150,8 +166,8 @@ ggplot(preds) +
     intercept = 0,
     color = colors$Visualization$Strawberry
   ) +
-  scale_x_continuous(labels = dollar) +
-  scale_y_continuous(labels = dollar) +
+  scale_x_continuous(labels = label_currency()) +
+  scale_y_continuous(labels = label_currency()) +
   labs(x = 'Actual', y = 'Predicted') +
   mytheme
 ```
@@ -176,10 +192,11 @@ ggplot(preds) +
     )
   ) +
   scale_discrete_optum('color') +
-  scale_x_continuous(labels = dollar) +
-  scale_y_continuous(labels = dollar) +
-  labs(x = 'Actual', y = 'Predicted', color = element_blank()) +
-  mytheme
+  scale_x_continuous(labels = label_currency()) +
+  scale_y_continuous(labels = label_currency()) +
+  labs(x = 'Actual', y = 'Predicted') +
+  mytheme +
+  theme(legend.title = element_blank())
 ```
 
 This residual plot makes the cause of the grouping issue very clear: the price slope for diamonds of clarity IF looks to be quite different from the slopes of the rest of the clarity ratings.
@@ -206,8 +223,8 @@ ggplot(preds) +
     intercept = 0,
     color = colors$Visualization$Strawberry
   ) +
-  scale_x_continuous(labels = dollar) +
-  scale_y_continuous(labels = dollar) +
+  scale_x_continuous(labels = label_currency()) +
+  scale_y_continuous(labels = label_currency()) +
   labs(x = 'Actual', y = 'Predicted') +
   mytheme
 ```
@@ -235,8 +252,8 @@ pdat[
 
 ggplot(pdat, aes(x = exp(carat), group = clarity, color = clarity)) +
   geom_line(aes(y = pred)) +
-  scale_discrete_optum(aesthetics = 'color') +
-  scale_y_continuous(labels = dollar) +
+  scale_discrete_optum('color') +
+  scale_y_continuous(labels = label_currency()) +
   labs(
     title = 'Visualization of Price Slopes',
     x = 'Carat',
@@ -267,6 +284,7 @@ The `bam()` function is just short for <u>b</u>ig <u>g</u>am and includes a new 
 It is recommended to fit GAMs in parallel if the number of rows in your training dataset is five figures or more.  
 
 ```{r}
+# if you want to be able to use your computer during model fitting, take away a core or two
 cluster <- makePSOCKcluster(detectCores())
 m_gam <- bam(
   price ~ ti(carat) + clarity + ti(carat, by = clarity) + cut + color,
@@ -294,7 +312,7 @@ ggplot(pdat, aes(x = exp(carat), group = clarity, color = clarity)) +
   geom_line(aes(y = glm), linetype = 'dashed') +
   geom_line(aes(y = gam)) +
   scale_discrete_optum(aesthetics = 'color') +
-  scale_y_continuous(labels = dollar) +
+  scale_y_continuous(labels = label_currency()) +
   labs(
     title = 'Visualization of Price Slopes',
     x = 'Carat',
