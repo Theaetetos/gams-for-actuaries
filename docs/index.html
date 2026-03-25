@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Generalized Additive Models for Actuaries</title>
   <meta name="description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Generalized Additive Models for Actuaries" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  <meta name="github-repo" content="null" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Generalized Additive Models for Actuaries" />
@@ -55,7 +55,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -65,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -237,11 +241,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Generalized Additive Models for Actuaries</h1>
 <p class="author"><em>Nathan Cornwell</em></p>
-<p class="date"><em>September 28 2023</em></p>
+<p class="date"><em>March 25 2026</em></p>
 </div>
 <div id="introduction" class="section level1 unnumbered hasAnchor">
 <h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><a href="https://www.linkedin.com/in/nathan-cornwell-asa-maaa-01170011b/">LinkedIn</a></p>
+<p><a href="https://www.linkedin.com/in/nathan-cornwell-fsa-maaa-01170011b/">LinkedIn</a></p>
 <p><a href="nathan.cornwell@optum.com">Email</a></p>
 <div id="our-workspace" class="section level2 hasAnchor" number="0.1">
 <h2><span class="header-section-number">0.1</span> Our Workspace<a href="index.html#our-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -255,73 +259,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">0.2.1</span> Packages<a href="index.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here are all of the packages we will need for this presentation.
 You only need to run the first code chunk once for each installation of R you have, while you need to run the second every time you start a new R session.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&#39;data.table&#39;</span>, <span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;gratia&#39;</span>, <span class="st">&#39;gridExtra&#39;</span>, <span class="st">&#39;mgcv&#39;</span>,</span>
-<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;parallel&#39;</span>, <span class="st">&#39;scales&#39;</span>)</span>
-<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb2-2"><a href="index.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-3"><a href="index.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gratia)</span>
-<span id="cb2-4"><a href="index.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb2-5"><a href="index.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
-<span id="cb2-6"><a href="index.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
-<span id="cb2-7"><a href="index.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
+<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&#39;data.table&#39;</span>, <span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;gratia&#39;</span>, <span class="st">&#39;gridExtra&#39;</span>, <span class="st">&#39;mgcv&#39;</span>,</span>
+<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a>    <span class="st">&#39;parallel&#39;</span>, <span class="st">&#39;scales&#39;</span>)</span>
+<span id="cb1-4"><a href="index.html#cb1-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb2-2"><a href="index.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="index.html#cb2-3" tabindex="-1"></a><span class="fu">library</span>(gratia)</span>
+<span id="cb2-4"><a href="index.html#cb2-4" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb2-5"><a href="index.html#cb2-5" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb2-6"><a href="index.html#cb2-6" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb2-7"><a href="index.html#cb2-7" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
 </div>
 <div id="one-of-our-datasets" class="section level3 hasAnchor" number="0.2.2">
 <h3><span class="header-section-number">0.2.2</span> One of Our Datasets<a href="index.html#one-of-our-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will use the diamonds dataset in the first lesson.
 The rest of the data is modified, masked, and randomized real data from projects I’ve done.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;diamonds&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;diamonds&#39;</span>)</span></code></pre></div>
 </div>
 <div id="branding-code" class="section level3 hasAnchor" number="0.2.3">
 <h3><span class="header-section-number">0.2.3</span> Branding Code<a href="index.html#branding-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Finally, this is some branding stuff that I use to make my plots look nice and comply with Optum and UHC branding guidelines.
 You don’t need it outside of the code in the presentation, but you can use it as a template for customizing your own plots, if you wish.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a>primary_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Optum Orange</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#FF612B&#39;</span>)</span>
-<span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a>sec_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">White =</span> <span class="st">&#39;#FFFFFF&#39;</span>, <span class="st">`</span><span class="at">Sky Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#D9F6FA&#39;</span>,</span>
-<span id="cb4-3"><a href="index.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Warm White</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#FBF9F4&#39;</span>)</span>
-<span id="cb4-4"><a href="index.html#cb4-4" aria-hidden="true" tabindex="-1"></a>type_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Dark Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#002677&#39;</span>, <span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#5A5A5A&#39;</span>)</span>
-<span id="cb4-5"><a href="index.html#cb4-5" aria-hidden="true" tabindex="-1"></a>viz_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Violet =</span> <span class="st">&#39;#422C88&#39;</span>, <span class="at">Iris =</span> <span class="st">&#39;#8061BC&#39;</span>,</span>
-<span id="cb4-6"><a href="index.html#cb4-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Lagoon =</span> <span class="st">&#39;#007C89&#39;</span>, <span class="at">Rainwater =</span> <span class="st">&#39;#6FC1B1&#39;</span>,</span>
-<span id="cb4-7"><a href="index.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Strawberry =</span> <span class="st">&#39;#A32A2E&#39;</span>, <span class="at">Apple =</span> <span class="st">&#39;#D13F44&#39;</span>)</span>
-<span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true" tabindex="-1"></a>state_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Green Success</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#007000&#39;</span>,</span>
-<span id="cb4-9"><a href="index.html#cb4-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Gold Callout</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#F5B700&#39;</span>,</span>
-<span id="cb4-10"><a href="index.html#cb4-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Red Alert</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#C40000&#39;</span>)</span>
-<span id="cb4-11"><a href="index.html#cb4-11" aria-hidden="true" tabindex="-1"></a>uhc_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Blue =</span> <span class="st">&#39;#002677&#39;</span>, <span class="at">White =</span> <span class="st">&#39;#FFFFFF&#39;</span>,</span>
-<span id="cb4-12"><a href="index.html#cb4-12" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Bright Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#00BED5&#39;</span>, <span class="at">Gold =</span> <span class="st">&#39;#F5B700&#39;</span>,</span>
-<span id="cb4-13"><a href="index.html#cb4-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Orange =</span> <span class="st">&#39;#FF681F&#39;</span>, <span class="st">`</span><span class="at">Bright Blue 20%</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;CCF2F7&#39;</span>,</span>
-<span id="cb4-14"><a href="index.html#cb4-14" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Bright Blue 40%</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#99E5EE&#39;</span>,</span>
-<span id="cb4-15"><a href="index.html#cb4-15" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#5A5A5A&#39;</span>, <span class="st">`</span><span class="at">Light Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#F4F4F4&#39;</span>,</span>
-<span id="cb4-16"><a href="index.html#cb4-16" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Medium Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#DADBDC&#39;</span>, <span class="at">Hyperlink =</span> <span class="st">&#39;#196ECF&#39;</span>)</span>
-<span id="cb4-17"><a href="index.html#cb4-17" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Primary =</span> primary_colors, <span class="at">Secondary =</span> sec_colors,</span>
-<span id="cb4-18"><a href="index.html#cb4-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">Typography =</span> type_colors, <span class="at">Visualization =</span> viz_colors,</span>
-<span id="cb4-19"><a href="index.html#cb4-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">State =</span> state_colors, <span class="at">UHC =</span> uhc_colors)</span>
-<span id="cb4-20"><a href="index.html#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="index.html#cb4-21" aria-hidden="true" tabindex="-1"></a>scale_discrete_optum <span class="ot">&lt;-</span> <span class="cf">function</span>(aesthetics, ...){</span>
-<span id="cb4-22"><a href="index.html#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(</span>
-<span id="cb4-23"><a href="index.html#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">aesthetics =</span> aesthetics,</span>
-<span id="cb4-24"><a href="index.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale_name =</span> <span class="st">&#39;optum&#39;</span>,</span>
-<span id="cb4-25"><a href="index.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(</span>
-<span id="cb4-26"><a href="index.html#cb4-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(colors<span class="sc">$</span>Visualization[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>)])</span>
-<span id="cb4-27"><a href="index.html#cb4-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb4-28"><a href="index.html#cb4-28" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb4-29"><a href="index.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-30"><a href="index.html#cb4-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-31"><a href="index.html#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="index.html#cb4-32" aria-hidden="true" tabindex="-1"></a>theme_titles <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
-<span id="cb4-33"><a href="index.html#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>),</span>
-<span id="cb4-34"><a href="index.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>)</span>
-<span id="cb4-35"><a href="index.html#cb4-35" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-36"><a href="index.html#cb4-36" aria-hidden="true" tabindex="-1"></a>theme_rotx <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
-<span id="cb4-37"><a href="index.html#cb4-37" aria-hidden="true" tabindex="-1"></a>theme_optum_plot <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
-<span id="cb4-38"><a href="index.html#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span>),</span>
-<span id="cb4-39"><a href="index.html#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
-<span id="cb4-40"><a href="index.html#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> colors<span class="sc">$</span>Secondary<span class="sc">$</span>White,</span>
-<span id="cb4-41"><a href="index.html#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span></span>
-<span id="cb4-42"><a href="index.html#cb4-42" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-43"><a href="index.html#cb4-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-44"><a href="index.html#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="index.html#cb4-45" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span> theme_optum_plot <span class="sc">+</span> theme_titles</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" tabindex="-1"></a>primary_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Optum Orange</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#FF612B&#39;</span>)</span>
+<span id="cb4-2"><a href="index.html#cb4-2" tabindex="-1"></a>sec_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">White =</span> <span class="st">&#39;#FFFFFF&#39;</span>, <span class="st">`</span><span class="at">Sky Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#D9F6FA&#39;</span>,</span>
+<span id="cb4-3"><a href="index.html#cb4-3" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Warm White</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#FBF9F4&#39;</span>)</span>
+<span id="cb4-4"><a href="index.html#cb4-4" tabindex="-1"></a>type_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Dark Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#002677&#39;</span>, <span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#5A5A5A&#39;</span>)</span>
+<span id="cb4-5"><a href="index.html#cb4-5" tabindex="-1"></a>viz_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Violet =</span> <span class="st">&#39;#422C88&#39;</span>, <span class="at">Iris =</span> <span class="st">&#39;#8061BC&#39;</span>,</span>
+<span id="cb4-6"><a href="index.html#cb4-6" tabindex="-1"></a>                   <span class="at">Lagoon =</span> <span class="st">&#39;#007C89&#39;</span>, <span class="at">Rainwater =</span> <span class="st">&#39;#6FC1B1&#39;</span>,</span>
+<span id="cb4-7"><a href="index.html#cb4-7" tabindex="-1"></a>                   <span class="at">Strawberry =</span> <span class="st">&#39;#A32A2E&#39;</span>, <span class="at">Apple =</span> <span class="st">&#39;#D13F44&#39;</span>)</span>
+<span id="cb4-8"><a href="index.html#cb4-8" tabindex="-1"></a>state_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Green Success</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#007000&#39;</span>,</span>
+<span id="cb4-9"><a href="index.html#cb4-9" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Gold Callout</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#F5B700&#39;</span>,</span>
+<span id="cb4-10"><a href="index.html#cb4-10" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Red Alert</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#C40000&#39;</span>)</span>
+<span id="cb4-11"><a href="index.html#cb4-11" tabindex="-1"></a>uhc_colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Blue =</span> <span class="st">&#39;#002677&#39;</span>, <span class="at">White =</span> <span class="st">&#39;#FFFFFF&#39;</span>,</span>
+<span id="cb4-12"><a href="index.html#cb4-12" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Bright Blue</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#00BED5&#39;</span>, <span class="at">Gold =</span> <span class="st">&#39;#F5B700&#39;</span>,</span>
+<span id="cb4-13"><a href="index.html#cb4-13" tabindex="-1"></a>                   <span class="at">Orange =</span> <span class="st">&#39;#FF681F&#39;</span>, <span class="st">`</span><span class="at">Bright Blue 20%</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#CCF2F7&#39;</span>,</span>
+<span id="cb4-14"><a href="index.html#cb4-14" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Bright Blue 40%</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#99E5EE&#39;</span>,</span>
+<span id="cb4-15"><a href="index.html#cb4-15" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#5A5A5A&#39;</span>, <span class="st">`</span><span class="at">Light Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#F4F4F4&#39;</span>,</span>
+<span id="cb4-16"><a href="index.html#cb4-16" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Medium Gray</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;#DADBDC&#39;</span>, <span class="at">Hyperlink =</span> <span class="st">&#39;#196ECF&#39;</span>)</span>
+<span id="cb4-17"><a href="index.html#cb4-17" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Primary =</span> primary_colors, <span class="at">Secondary =</span> sec_colors,</span>
+<span id="cb4-18"><a href="index.html#cb4-18" tabindex="-1"></a>               <span class="at">Typography =</span> type_colors, <span class="at">Visualization =</span> viz_colors,</span>
+<span id="cb4-19"><a href="index.html#cb4-19" tabindex="-1"></a>               <span class="at">State =</span> state_colors, <span class="at">UHC =</span> uhc_colors)</span>
+<span id="cb4-20"><a href="index.html#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="index.html#cb4-21" tabindex="-1"></a>scale_discrete_optum <span class="ot">&lt;-</span> <span class="cf">function</span>(aesthetics, ...){</span>
+<span id="cb4-22"><a href="index.html#cb4-22" tabindex="-1"></a>  <span class="fu">discrete_scale</span>(</span>
+<span id="cb4-23"><a href="index.html#cb4-23" tabindex="-1"></a>    <span class="at">aesthetics =</span> aesthetics,</span>
+<span id="cb4-24"><a href="index.html#cb4-24" tabindex="-1"></a>    <span class="at">palette =</span> grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(</span>
+<span id="cb4-25"><a href="index.html#cb4-25" tabindex="-1"></a>      <span class="fu">as.character</span>(colors<span class="sc">$</span>Visualization[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>)])</span>
+<span id="cb4-26"><a href="index.html#cb4-26" tabindex="-1"></a>    ),</span>
+<span id="cb4-27"><a href="index.html#cb4-27" tabindex="-1"></a>    ...</span>
+<span id="cb4-28"><a href="index.html#cb4-28" tabindex="-1"></a>  )</span>
+<span id="cb4-29"><a href="index.html#cb4-29" tabindex="-1"></a>}</span>
+<span id="cb4-30"><a href="index.html#cb4-30" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="index.html#cb4-31" tabindex="-1"></a>theme_titles <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<span id="cb4-32"><a href="index.html#cb4-32" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>),</span>
+<span id="cb4-33"><a href="index.html#cb4-33" tabindex="-1"></a>  <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> .<span class="dv">5</span>)</span>
+<span id="cb4-34"><a href="index.html#cb4-34" tabindex="-1"></a>)</span>
+<span id="cb4-35"><a href="index.html#cb4-35" tabindex="-1"></a>theme_rotx <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
+<span id="cb4-36"><a href="index.html#cb4-36" tabindex="-1"></a>theme_optum_plot <span class="ot">&lt;-</span> <span class="fu">theme</span>(</span>
+<span id="cb4-37"><a href="index.html#cb4-37" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span>),</span>
+<span id="cb4-38"><a href="index.html#cb4-38" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
+<span id="cb4-39"><a href="index.html#cb4-39" tabindex="-1"></a>    <span class="at">fill =</span> colors<span class="sc">$</span>Secondary<span class="sc">$</span>White,</span>
+<span id="cb4-40"><a href="index.html#cb4-40" tabindex="-1"></a>    <span class="at">color =</span> colors<span class="sc">$</span>Typography<span class="sc">$</span><span class="st">`</span><span class="at">Dark Gray</span><span class="st">`</span></span>
+<span id="cb4-41"><a href="index.html#cb4-41" tabindex="-1"></a>  )</span>
+<span id="cb4-42"><a href="index.html#cb4-42" tabindex="-1"></a>)</span>
+<span id="cb4-43"><a href="index.html#cb4-43" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="index.html#cb4-44" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span> theme_optum_plot <span class="sc">+</span> theme_titles</span></code></pre></div>
 
 </div>
 </div>
@@ -331,7 +334,7 @@ You don’t need it outside of the code in the presentation, but you can use it 
   <p>
     <img class="footer-image" src="img/Optum-logo-ora-RGB.png">
     <span>&copy</span>
-    2023 Optum, Inc. All rights reserved.
+    2026 Optum, Inc. All rights reserved.
   </p>
 </div>
             </section>
@@ -354,42 +357,42 @@ You don’t need it outside of the code in the presentation, but you can use it 
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

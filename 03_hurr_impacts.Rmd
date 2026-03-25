@@ -505,17 +505,17 @@ hdat <- as.data.table(
   ,
   `:=`(
     ind = st + (dat[, max(harvey)] / .N ) * .I - 1,
-    sig = upper < 0 | lower > 0
+    sig = .upper_ci < 0 | .lower_ci > 0
   )
 ]
 ggplot(hdat, mapping = aes(ind)) +
   geom_hline(yintercept = 1, linetype = 'dashed') +
   geom_ribbon(
-    aes(ymin = exp(lower), ymax = exp(upper)),
+    aes(ymin = exp(.lower_ci), ymax = exp(.upper_ci)),
     alpha = .2
   ) +
   geom_line(
-    aes(y = exp(est), group = 1, color = sig),
+    aes(y = exp(.estimate), group = 1, color = sig),
     linewidth = 2,
     show.legend = F
   ) +
@@ -632,5 +632,5 @@ fnl_fctr[is.na(fctr), fctr := 1]
 fnl_fctr[, mean(fctr)]
 ```
 
-Around 112 basis points may seem unsatisfying after all that work, but professionals have to track impacts down below ten basis points, and I've been on projects that were more work, less statistically sound, and had less impact than we see here.
+Not quite twelve basis points may seem unsatisfying after all that work, but professionals have to track impacts down below ten basis points, and I've been on projects that were more work, less statistically sound, and had less impact than we see here.
 That's the life of a forecasting actuary...if you like it, you love it; if not, maybe look into another field!

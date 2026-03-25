@@ -1,64 +1,4 @@
----
-output:
-  word_document: default
-  html_document: default
----
 # Utilization Forecasting
-
-```{r, message=FALSE, warning=FALSE}
-library(data.table)
-library(ggplot2)
-library(gratia)
-library(gridExtra)
-library(mgcv)
-library(parallel)
-library(scales)
-
-primary_colors <- list(`Optum Orange` = '#FF612B')
-sec_colors <- list(White = '#FFFFFF', `Sky Blue` = '#D9F6FA',
-                   `Warm White` = '#FBF9F4')
-type_colors <- list(`Dark Blue` = '#002677', `Dark Gray` = '#5A5A5A')
-viz_colors <- list(Violet = '#422C88', Iris = '#8061BC',
-                   Lagoon = '#007C89', Rainwater = '#6FC1B1',
-                   Strawberry = '#A32A2E', Apple = '#D13F44')
-state_colors <- list(`Green Success` = '#007000',
-                     `Gold Callout` = '#F5B700',
-                     `Red Alert` = '#C40000')
-uhc_colors <- list(Blue = '#002677', White = '#FFFFFF',
-                   `Bright Blue` = '#00BED5', Gold = '#F5B700',
-                   Orange = '#FF681F', `Bright Blue 20%` = 'CCF2F7',
-                   `Bright Blue 40%` = '#99E5EE',
-                   `Dark Gray` = '#5A5A5A', `Light Gray` = '#F4F4F4',
-                   `Medium Gray` = '#DADBDC', Hyperlink = '#196ECF')
-colors <- list(Primary = primary_colors, Secondary = sec_colors,
-               Typography = type_colors, Visualization = viz_colors,
-               State = state_colors, UHC = uhc_colors)
-
-scale_discrete_optum <- function(aesthetics, ...){
-  discrete_scale(
-    aesthetics = aesthetics,
-    palette = grDevices::colorRampPalette(
-      as.character(colors$Visualization[c(4, 3, 1, 2, 6, 5)])
-    ),
-    ...
-  )
-}
-
-theme_titles <- theme(
-  plot.title = element_text(hjust = .5),
-  plot.subtitle = element_text(hjust = .5)
-)
-theme_rotx <- theme(axis.text.x = element_text(angle = 90))
-theme_optum_plot <- theme(
-  text = element_text(color = colors$Typography$`Dark Gray`),
-  panel.background = element_rect(
-    fill = colors$Secondary$White,
-    color = colors$Typography$`Dark Gray`
-  )
-)
-
-mytheme <- theme_optum_plot + theme_titles
-```
 
 ## Introduction
 
@@ -138,13 +78,19 @@ dat[
 ggplot(dat, aes(yrfrac, y)) +
   geom_hline(yintercept = 90, linetype = 'dashed') +
   geom_point() +
-  geom_smooth(method = 'gam', formula = y ~ s(x, bs = 'cs')) +
+  geom_smooth(
+    method = 'gam',
+    formula = y ~ s(x, bs = 'cs'),
+    color = colors$Visualization$Rainwater
+  ) +
   labs(
     x = 'Proportion of Year Completed',
     y = 'Utilization'
   ) +
   mytheme
 ```
+
+This drug, however, may be an exception based on this plot.
 
 ### Holidays
 
@@ -333,7 +279,6 @@ testset[
   )
 ][
   ,
-  # note that you have to do some finessing if your data ends before the end of a year
   yrfrac := yrfrac / as.numeric(
     strftime(
       as.Date(
@@ -352,9 +297,8 @@ testset[
   strftime(ds, '%Y%m') == '202003',
   covid := .I
 ]
-# holidays
-## there are more efficient ways to do this, but they required more advanced coding outside the
-## scope of this module
+# holidays - there are more efficient ways to do this, but they required more advanced coding
+# outside the scope of this module
 hols <- rbind(
   hols,
   data.table(ds = as.Date('2024-1-1'), hol = 'New Year'),
@@ -448,10 +392,11 @@ You can pass a list of knot points for the model to use for a particular smooth 
 ```{r}
 # I like to allow trend to change every half year
 ts <- dat[month(ds) %in% c(1, 7) & mday(ds) == 1, t]
+maxt <- dat[, max(t)]
 # remove knot points outside of the allowed range
-ts <- ts[ts < .8 * dat[, max(t)]]
+ts <- ts[ts < .8 * maxt]
 # add back the last day counter
-ts <- c(ts, dat[, max(t)])
+ts <- c(ts, maxt)
 
 m <- gam(
   y ~ s(t) + s(yrfrac, bs = 'ts') + s(covid) + wkdy + hol,
@@ -541,7 +486,7 @@ trnds <- cbind(
   by = .(yr = year(ds))
 ][
   ,
-  trnd := fctr^(1 / (.I - 1)) - 1
+  trnd := fctr / shift(fctr) - 1
 ][
   yr > min(yr),
 ]

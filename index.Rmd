@@ -77,7 +77,7 @@ state_colors <- list(`Green Success` = '#007000',
                      `Red Alert` = '#C40000')
 uhc_colors <- list(Blue = '#002677', White = '#FFFFFF',
                    `Bright Blue` = '#00BED5', Gold = '#F5B700',
-                   Orange = '#FF681F', `Bright Blue 20%` = 'CCF2F7',
+                   Orange = '#FF681F', `Bright Blue 20%` = '#CCF2F7',
                    `Bright Blue 40%` = '#99E5EE',
                    `Dark Gray` = '#5A5A5A', `Light Gray` = '#F4F4F4',
                    `Medium Gray` = '#DADBDC', Hyperlink = '#196ECF')

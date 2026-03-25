@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Valuation of Care Interventions | Generalized Additive Models for Actuaries</title>
   <meta name="description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Valuation of Care Interventions | Generalized Additive Models for Actuaries" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An Introduction to Generalized Additive Models for Health Actuarial Business Problems." />
-  <meta name="github-repo" content="null" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Valuation of Care Interventions | Generalized Additive Models for Actuaries" />
@@ -55,7 +55,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -65,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -263,23 +267,24 @@ There is broad consensus that the future of health care is value-based, and it i
 <h3><span class="header-section-number">4.2.1</span> Processed Dataset<a href="valuation-of-care-interventions.html#processed-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Data preparation is an even more important step than usual in workflows like this.
 Unfortunately, it involves a lot of protected health information, so we have to start with the processed, anonymized dataset.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="valuation-of-care-interventions.html#cb83-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;intv_data.csv&#39;</span>))</span>
-<span id="cb83-2"><a href="valuation-of-care-interventions.html#cb83-2" aria-hidden="true" tabindex="-1"></a>fctrs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;gdr&#39;</span>, <span class="st">&#39;prdct&#39;</span>, <span class="st">&#39;cdhp&#39;</span>, <span class="st">&#39;funding&#39;</span>, <span class="st">&#39;state&#39;</span>, <span class="st">&#39;covid&#39;</span>,</span>
-<span id="cb83-3"><a href="valuation-of-care-interventions.html#cb83-3" aria-hidden="true" tabindex="-1"></a>           <span class="st">&#39;intv&#39;</span>)</span>
-<span id="cb83-4"><a href="valuation-of-care-interventions.html#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(fctr <span class="cf">in</span> fctrs) dat[, (fctr) <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">get</span>(fctr))]</span>
-<span id="cb83-5"><a href="valuation-of-care-interventions.html#cb83-5" aria-hidden="true" tabindex="-1"></a>dat[]</span></code></pre></div>
-<pre><code>##          yr mth scrpts gdr prdct cdhp funding state covid     rs  intv dur
-##     1: 2020   9      1   1     1    1       1     2 FALSE 6.9058 FALSE -17
-##     2: 2020  10      1   1     1    1       1     2 FALSE 6.9058 FALSE -16
-##     3: 2020  11      0   1     1    1       1     2 FALSE 6.9058 FALSE -15
-##     4: 2020  12      0   1     1    1       1     2 FALSE 6.9058 FALSE -14
-##     5: 2021   1      0   1     1    1       1     2 FALSE 6.9058 FALSE -13
-##    ---                                                                    
-## 45488: 2022   3     12   2     1    1       1     2 FALSE 2.6091 FALSE   0
-## 45489: 2021  12      3   1     1    2       1     2 FALSE 5.0894 FALSE  -2
-## 45490: 2022   1      3   1     1    2       1     2 FALSE 5.0894 FALSE  -1
-## 45491: 2022   2      5   1     1    2       1     2 FALSE 5.0894 FALSE   0
-## 45492: 2022   3      2   1     1    2       1     2 FALSE 5.0894  TRUE   1</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="valuation-of-care-interventions.html#cb80-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;intv_data.csv&#39;</span>))</span>
+<span id="cb80-2"><a href="valuation-of-care-interventions.html#cb80-2" tabindex="-1"></a>fctrs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;gdr&#39;</span>, <span class="st">&#39;prdct&#39;</span>, <span class="st">&#39;cdhp&#39;</span>, <span class="st">&#39;funding&#39;</span>, <span class="st">&#39;state&#39;</span>, <span class="st">&#39;covid&#39;</span>,</span>
+<span id="cb80-3"><a href="valuation-of-care-interventions.html#cb80-3" tabindex="-1"></a>           <span class="st">&#39;intv&#39;</span>)</span>
+<span id="cb80-4"><a href="valuation-of-care-interventions.html#cb80-4" tabindex="-1"></a><span class="cf">for</span>(fctr <span class="cf">in</span> fctrs) dat[, (fctr) <span class="sc">:=</span> <span class="fu">factor</span>(<span class="fu">get</span>(fctr))]</span>
+<span id="cb80-5"><a href="valuation-of-care-interventions.html#cb80-5" tabindex="-1"></a>dat[]</span></code></pre></div>
+<pre><code>##           yr   mth scrpts    gdr  prdct   cdhp funding  state  covid     rs   intv   dur
+##        &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;fctr&gt; &lt;fctr&gt; &lt;fctr&gt;  &lt;fctr&gt; &lt;fctr&gt; &lt;fctr&gt;  &lt;num&gt; &lt;fctr&gt; &lt;int&gt;
+##     1:  2020     9      1      1      1      1       1      2  FALSE 6.9058  FALSE   -17
+##     2:  2020    10      1      1      1      1       1      2  FALSE 6.9058  FALSE   -16
+##     3:  2020    11      0      1      1      1       1      2  FALSE 6.9058  FALSE   -15
+##     4:  2020    12      0      1      1      1       1      2  FALSE 6.9058  FALSE   -14
+##     5:  2021     1      0      1      1      1       1      2  FALSE 6.9058  FALSE   -13
+##    ---                                                                                  
+## 45488:  2022     3     12      2      1      1       1      2  FALSE 2.6091  FALSE     0
+## 45489:  2021    12      3      1      1      2       1      2  FALSE 5.0894  FALSE    -2
+## 45490:  2022     1      3      1      1      2       1      2  FALSE 5.0894  FALSE    -1
+## 45491:  2022     2      5      1      1      2       1      2  FALSE 5.0894  FALSE     0
+## 45492:  2022     3      2      1      1      2       1      2  FALSE 5.0894   TRUE     1</code></pre>
 <p>This dataset is a combination of items from many sources, representing a significant analytic challenge.
 Here is a data dictionary summarizing the elements of this final table, along with some info about how it was processed into this final state.</p>
 <ul>
@@ -325,30 +330,31 @@ As a further complication, all of these names are input manually, so there is a 
 <div id="visualizations" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Visualizations<a href="valuation-of-care-interventions.html#visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s take a look at what the time series of scripts looks like.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="valuation-of-care-interventions.html#cb85-1" aria-hidden="true" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> dat[</span>
-<span id="cb85-2"><a href="valuation-of-care-interventions.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
-<span id="cb85-3"><a href="valuation-of-care-interventions.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">scrpts =</span> <span class="fu">sum</span>(scrpts)),</span>
-<span id="cb85-4"><a href="valuation-of-care-interventions.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  keyby <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">paste0</span>(yr, <span class="fu">ifelse</span>(mth <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="dv">0</span>, <span class="st">&#39;&#39;</span>), mth))</span>
-<span id="cb85-5"><a href="valuation-of-care-interventions.html#cb85-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb85-6"><a href="valuation-of-care-interventions.html#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdat) <span class="sc">+</span></span>
-<span id="cb85-7"><a href="valuation-of-care-interventions.html#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(yrmo), scrpts, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb85-8"><a href="valuation-of-care-interventions.html#cb85-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb85-9"><a href="valuation-of-care-interventions.html#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span>) <span class="sc">+</span></span>
-<span id="cb85-10"><a href="valuation-of-care-interventions.html#cb85-10" aria-hidden="true" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
-<span id="cb85-11"><a href="valuation-of-care-interventions.html#cb85-11" aria-hidden="true" tabindex="-1"></a>  theme_rotx</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="valuation-of-care-interventions.html#cb86-1" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> dat[</span>
-<span id="cb86-2"><a href="valuation-of-care-interventions.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
-<span id="cb86-3"><a href="valuation-of-care-interventions.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  .N,</span>
-<span id="cb86-4"><a href="valuation-of-care-interventions.html#cb86-4" aria-hidden="true" tabindex="-1"></a>  keyby <span class="ot">=</span> .(dur)</span>
-<span id="cb86-5"><a href="valuation-of-care-interventions.html#cb86-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb86-6"><a href="valuation-of-care-interventions.html#cb86-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-7"><a href="valuation-of-care-interventions.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(exposure) <span class="sc">+</span></span>
-<span id="cb86-8"><a href="valuation-of-care-interventions.html#cb86-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(dur, N)) <span class="sc">+</span></span>
-<span id="cb86-9"><a href="valuation-of-care-interventions.html#cb86-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb86-10"><a href="valuation-of-care-interventions.html#cb86-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Observations&#39;</span>, <span class="at">x =</span> <span class="st">&#39;Months Since Intervention&#39;</span>) <span class="sc">+</span></span>
-<span id="cb86-11"><a href="valuation-of-care-interventions.html#cb86-11" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="valuation-of-care-interventions.html#cb82-1" tabindex="-1"></a>pdat <span class="ot">&lt;-</span> dat[</span>
+<span id="cb82-2"><a href="valuation-of-care-interventions.html#cb82-2" tabindex="-1"></a>  ,</span>
+<span id="cb82-3"><a href="valuation-of-care-interventions.html#cb82-3" tabindex="-1"></a>  .(<span class="at">scrpts =</span> <span class="fu">sum</span>(scrpts)),</span>
+<span id="cb82-4"><a href="valuation-of-care-interventions.html#cb82-4" tabindex="-1"></a>  keyby <span class="ot">=</span> .(<span class="at">yrmo =</span> <span class="fu">paste0</span>(yr, <span class="fu">ifelse</span>(mth <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="dv">0</span>, <span class="st">&#39;&#39;</span>), mth))</span>
+<span id="cb82-5"><a href="valuation-of-care-interventions.html#cb82-5" tabindex="-1"></a>]</span>
+<span id="cb82-6"><a href="valuation-of-care-interventions.html#cb82-6" tabindex="-1"></a><span class="fu">ggplot</span>(pdat) <span class="sc">+</span></span>
+<span id="cb82-7"><a href="valuation-of-care-interventions.html#cb82-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(yrmo), scrpts, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb82-8"><a href="valuation-of-care-interventions.html#cb82-8" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb82-9"><a href="valuation-of-care-interventions.html#cb82-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Utilization&#39;</span>) <span class="sc">+</span></span>
+<span id="cb82-10"><a href="valuation-of-care-interventions.html#cb82-10" tabindex="-1"></a>  mytheme <span class="sc">+</span></span>
+<span id="cb82-11"><a href="valuation-of-care-interventions.html#cb82-11" tabindex="-1"></a>  theme_rotx <span class="sc">+</span></span>
+<span id="cb82-12"><a href="valuation-of-care-interventions.html#cb82-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-68-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="valuation-of-care-interventions.html#cb83-1" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> dat[</span>
+<span id="cb83-2"><a href="valuation-of-care-interventions.html#cb83-2" tabindex="-1"></a>  ,</span>
+<span id="cb83-3"><a href="valuation-of-care-interventions.html#cb83-3" tabindex="-1"></a>  .N,</span>
+<span id="cb83-4"><a href="valuation-of-care-interventions.html#cb83-4" tabindex="-1"></a>  keyby <span class="ot">=</span> .(dur)</span>
+<span id="cb83-5"><a href="valuation-of-care-interventions.html#cb83-5" tabindex="-1"></a>]</span>
+<span id="cb83-6"><a href="valuation-of-care-interventions.html#cb83-6" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="valuation-of-care-interventions.html#cb83-7" tabindex="-1"></a><span class="fu">ggplot</span>(exposure) <span class="sc">+</span></span>
+<span id="cb83-8"><a href="valuation-of-care-interventions.html#cb83-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(dur, N)) <span class="sc">+</span></span>
+<span id="cb83-9"><a href="valuation-of-care-interventions.html#cb83-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb83-10"><a href="valuation-of-care-interventions.html#cb83-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Observations&#39;</span>, <span class="at">x =</span> <span class="st">&#39;Months Since Intervention&#39;</span>) <span class="sc">+</span></span>
+<span id="cb83-11"><a href="valuation-of-care-interventions.html#cb83-11" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-69-1.png" alt="" width="672" /></p>
 </div>
 </div>
 <div id="model-fitting-4" class="section level2 hasAnchor" number="4.3">
@@ -360,30 +366,30 @@ This is preferable in many circumstances, one of which being those we have here,
 It’s not just unlikely that the mean pharmacy quantity consumed by this population is anything like the true mean of the entire UHC book of business, much less the US as a whole: we know this beforehand because we are taking a sample of some of the most expensive members that UHC covers.
 Being able to use a model form that takes into account the bias in our sample will improve the ability of the model to generate useful, generalizable insights.</p>
 <p>The code to fit it is found in the following chunk.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="valuation-of-care-interventions.html#cb87-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makePSOCKcluster</span>(<span class="fu">detectCores</span>())</span>
-<span id="cb87-2"><a href="valuation-of-care-interventions.html#cb87-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">bam</span>(</span>
-<span id="cb87-3"><a href="valuation-of-care-interventions.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  scrpts <span class="sc">~</span> <span class="fu">s</span>(yr, <span class="at">k =</span> <span class="dv">3</span>)</span>
-<span id="cb87-4"><a href="valuation-of-care-interventions.html#cb87-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(mth, <span class="at">k =</span> <span class="dv">4</span>)</span>
-<span id="cb87-5"><a href="valuation-of-care-interventions.html#cb87-5" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> covid</span>
-<span id="cb87-6"><a href="valuation-of-care-interventions.html#cb87-6" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(rs, <span class="at">bs =</span> <span class="st">&#39;cs&#39;</span>)</span>
-<span id="cb87-7"><a href="valuation-of-care-interventions.html#cb87-7" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(gdr, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
-<span id="cb87-8"><a href="valuation-of-care-interventions.html#cb87-8" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(prdct, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
-<span id="cb87-9"><a href="valuation-of-care-interventions.html#cb87-9" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(state, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
-<span id="cb87-10"><a href="valuation-of-care-interventions.html#cb87-10" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(cdhp, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
-<span id="cb87-11"><a href="valuation-of-care-interventions.html#cb87-11" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(funding, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
-<span id="cb87-12"><a href="valuation-of-care-interventions.html#cb87-12" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> intv,</span>
-<span id="cb87-13"><a href="valuation-of-care-interventions.html#cb87-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">nb</span>(),</span>
-<span id="cb87-14"><a href="valuation-of-care-interventions.html#cb87-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat[</span>
-<span id="cb87-15"><a href="valuation-of-care-interventions.html#cb87-15" aria-hidden="true" tabindex="-1"></a>    exposure[N <span class="sc">&gt;</span> <span class="dv">99</span>, ],</span>
-<span id="cb87-16"><a href="valuation-of-care-interventions.html#cb87-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">on =</span> <span class="st">&#39;dur&#39;</span></span>
-<span id="cb87-17"><a href="valuation-of-care-interventions.html#cb87-17" aria-hidden="true" tabindex="-1"></a>  ],</span>
-<span id="cb87-18"><a href="valuation-of-care-interventions.html#cb87-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster =</span> cl</span>
-<span id="cb87-19"><a href="valuation-of-care-interventions.html#cb87-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb87-20"><a href="valuation-of-care-interventions.html#cb87-20" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
-<span id="cb87-21"><a href="valuation-of-care-interventions.html#cb87-21" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(m, <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;m_intv.RDS&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="valuation-of-care-interventions.html#cb84-1" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makePSOCKcluster</span>(<span class="fu">detectCores</span>())</span>
+<span id="cb84-2"><a href="valuation-of-care-interventions.html#cb84-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">bam</span>(</span>
+<span id="cb84-3"><a href="valuation-of-care-interventions.html#cb84-3" tabindex="-1"></a>  scrpts <span class="sc">~</span> <span class="fu">s</span>(yr, <span class="at">k =</span> <span class="dv">3</span>)</span>
+<span id="cb84-4"><a href="valuation-of-care-interventions.html#cb84-4" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(mth, <span class="at">k =</span> <span class="dv">4</span>)</span>
+<span id="cb84-5"><a href="valuation-of-care-interventions.html#cb84-5" tabindex="-1"></a>         <span class="sc">+</span> covid</span>
+<span id="cb84-6"><a href="valuation-of-care-interventions.html#cb84-6" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(rs, <span class="at">bs =</span> <span class="st">&#39;cs&#39;</span>)</span>
+<span id="cb84-7"><a href="valuation-of-care-interventions.html#cb84-7" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(gdr, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
+<span id="cb84-8"><a href="valuation-of-care-interventions.html#cb84-8" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(prdct, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
+<span id="cb84-9"><a href="valuation-of-care-interventions.html#cb84-9" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(state, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
+<span id="cb84-10"><a href="valuation-of-care-interventions.html#cb84-10" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(cdhp, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
+<span id="cb84-11"><a href="valuation-of-care-interventions.html#cb84-11" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">s</span>(funding, <span class="at">bs =</span> <span class="st">&#39;re&#39;</span>)</span>
+<span id="cb84-12"><a href="valuation-of-care-interventions.html#cb84-12" tabindex="-1"></a>         <span class="sc">+</span> intv,</span>
+<span id="cb84-13"><a href="valuation-of-care-interventions.html#cb84-13" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">nb</span>(),</span>
+<span id="cb84-14"><a href="valuation-of-care-interventions.html#cb84-14" tabindex="-1"></a>  <span class="at">data =</span> dat[</span>
+<span id="cb84-15"><a href="valuation-of-care-interventions.html#cb84-15" tabindex="-1"></a>    exposure[N <span class="sc">&gt;</span> <span class="dv">99</span>, ],</span>
+<span id="cb84-16"><a href="valuation-of-care-interventions.html#cb84-16" tabindex="-1"></a>    <span class="at">on =</span> <span class="st">&#39;dur&#39;</span></span>
+<span id="cb84-17"><a href="valuation-of-care-interventions.html#cb84-17" tabindex="-1"></a>  ],</span>
+<span id="cb84-18"><a href="valuation-of-care-interventions.html#cb84-18" tabindex="-1"></a>  <span class="at">cluster =</span> cl</span>
+<span id="cb84-19"><a href="valuation-of-care-interventions.html#cb84-19" tabindex="-1"></a>)</span>
+<span id="cb84-20"><a href="valuation-of-care-interventions.html#cb84-20" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb84-21"><a href="valuation-of-care-interventions.html#cb84-21" tabindex="-1"></a><span class="fu">saveRDS</span>(m, <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;m_intv.RDS&#39;</span>))</span></code></pre></div>
 <p>Again, I have cached the fitted model in our Github repo for ease of use.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="valuation-of-care-interventions.html#cb88-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;m_intv.RDS&#39;</span>))</span>
-<span id="cb88-2"><a href="valuation-of-care-interventions.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="valuation-of-care-interventions.html#cb85-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&#39;m_intv.RDS&#39;</span>))</span>
+<span id="cb85-2"><a href="valuation-of-care-interventions.html#cb85-2" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
 <pre><code>## 
 ## Family: Negative Binomial(1.928) 
 ## Link function: log 
@@ -418,12 +424,12 @@ Being able to use a model form that takes into account the bias in our sample wi
 ## fREML =  64839  Scale est. = 1         n = 45236</code></pre>
 <p>An <span class="math inline">\(R^2\)</span> of ~20% is actually quite good for monthly, individual-level claims data.
 Like I said earlier, healthcare claims are just one of those subject areas that exhibit very high variance.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="valuation-of-care-interventions.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="valuation-of-care-interventions.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="valuation-of-care-interventions.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="valuation-of-care-interventions.html#cb87-1" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-72-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="valuation-of-care-interventions.html#cb88-1" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-73-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="valuation-of-care-interventions.html#cb89-1" tabindex="-1"></a><span class="fu">plot</span>(m, <span class="at">select =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="gams-for-actuaries_files/figure-html/unnamed-chunk-74-1.png" alt="" width="672" /></p>
 </div>
 <div id="using-the-model-1" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Using the Model<a href="valuation-of-care-interventions.html#using-the-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -456,18 +462,18 @@ The next assumption we will need is called <em>penetration</em>, or the percenta
 Depending on the intervention, this can be linked to the assumed morbidity of the insured pool, the distribution of member’s ages, etc.
 Finally, we need prior year utilization and baseline utilization trend assumptions.
 The calculations are demonstrated below.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="valuation-of-care-interventions.html#cb93-1" aria-hidden="true" tabindex="-1"></a>mbrs <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb93-2"><a href="valuation-of-care-interventions.html#cb93-2" aria-hidden="true" tabindex="-1"></a>pen <span class="ot">&lt;-</span> .<span class="dv">03</span></span>
-<span id="cb93-3"><a href="valuation-of-care-interventions.html#cb93-3" aria-hidden="true" tabindex="-1"></a>ann_util_py <span class="ot">&lt;-</span> <span class="dv">25</span></span>
-<span id="cb93-4"><a href="valuation-of-care-interventions.html#cb93-4" aria-hidden="true" tabindex="-1"></a>trnd <span class="ot">&lt;-</span> .<span class="dv">05</span></span>
-<span id="cb93-5"><a href="valuation-of-care-interventions.html#cb93-5" aria-hidden="true" tabindex="-1"></a>impct <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">unname</span>(<span class="fu">exp</span>(<span class="fu">coef</span>(m)[<span class="st">&#39;intvTRUE&#39;</span>]))</span>
-<span id="cb93-6"><a href="valuation-of-care-interventions.html#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-7"><a href="valuation-of-care-interventions.html#cb93-7" aria-hidden="true" tabindex="-1"></a>actual_scrpts <span class="ot">&lt;-</span> mbrs <span class="sc">*</span> ann_util_py</span>
-<span id="cb93-8"><a href="valuation-of-care-interventions.html#cb93-8" aria-hidden="true" tabindex="-1"></a>exp_scrpts <span class="ot">&lt;-</span> actual_scrpts <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> trnd)</span>
-<span id="cb93-9"><a href="valuation-of-care-interventions.html#cb93-9" aria-hidden="true" tabindex="-1"></a>avoided_scrpts <span class="ot">&lt;-</span> mbrs <span class="sc">*</span> pen <span class="sc">*</span> ann_util_py <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> trnd) <span class="sc">*</span> impct</span>
-<span id="cb93-10"><a href="valuation-of-care-interventions.html#cb93-10" aria-hidden="true" tabindex="-1"></a>fnl_trnd <span class="ot">&lt;-</span> (exp_scrpts <span class="sc">-</span> avoided_scrpts) <span class="sc">/</span> actual_scrpts <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb93-11"><a href="valuation-of-care-interventions.html#cb93-11" aria-hidden="true" tabindex="-1"></a>trnd_impct <span class="ot">&lt;-</span> trnd <span class="sc">-</span> fnl_trnd</span>
-<span id="cb93-12"><a href="valuation-of-care-interventions.html#cb93-12" aria-hidden="true" tabindex="-1"></a>trnd_impct</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="valuation-of-care-interventions.html#cb90-1" tabindex="-1"></a>mbrs <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb90-2"><a href="valuation-of-care-interventions.html#cb90-2" tabindex="-1"></a>pen <span class="ot">&lt;-</span> .<span class="dv">03</span></span>
+<span id="cb90-3"><a href="valuation-of-care-interventions.html#cb90-3" tabindex="-1"></a>ann_util_py <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb90-4"><a href="valuation-of-care-interventions.html#cb90-4" tabindex="-1"></a>trnd <span class="ot">&lt;-</span> .<span class="dv">05</span></span>
+<span id="cb90-5"><a href="valuation-of-care-interventions.html#cb90-5" tabindex="-1"></a>impct <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">unname</span>(<span class="fu">exp</span>(<span class="fu">coef</span>(m)[<span class="st">&#39;intvTRUE&#39;</span>]))</span>
+<span id="cb90-6"><a href="valuation-of-care-interventions.html#cb90-6" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="valuation-of-care-interventions.html#cb90-7" tabindex="-1"></a>actual_scrpts <span class="ot">&lt;-</span> mbrs <span class="sc">*</span> ann_util_py</span>
+<span id="cb90-8"><a href="valuation-of-care-interventions.html#cb90-8" tabindex="-1"></a>exp_scrpts <span class="ot">&lt;-</span> actual_scrpts <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> trnd)</span>
+<span id="cb90-9"><a href="valuation-of-care-interventions.html#cb90-9" tabindex="-1"></a>avoided_scrpts <span class="ot">&lt;-</span> mbrs <span class="sc">*</span> pen <span class="sc">*</span> ann_util_py <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> trnd) <span class="sc">*</span> impct</span>
+<span id="cb90-10"><a href="valuation-of-care-interventions.html#cb90-10" tabindex="-1"></a>fnl_trnd <span class="ot">&lt;-</span> (exp_scrpts <span class="sc">-</span> avoided_scrpts) <span class="sc">/</span> actual_scrpts <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb90-11"><a href="valuation-of-care-interventions.html#cb90-11" tabindex="-1"></a>trnd_impct <span class="ot">&lt;-</span> trnd <span class="sc">-</span> fnl_trnd</span>
+<span id="cb90-12"><a href="valuation-of-care-interventions.html#cb90-12" tabindex="-1"></a>trnd_impct</span></code></pre></div>
 <pre><code>## [1] 0.001669789</code></pre>
 
 </div>
@@ -478,7 +484,7 @@ The calculations are demonstrated below.</p>
   <p>
     <img class="footer-image" src="img/Optum-logo-ora-RGB.png">
     <span>&copy</span>
-    2023 Optum, Inc. All rights reserved.
+    2026 Optum, Inc. All rights reserved.
   </p>
 </div>
             </section>
@@ -501,42 +507,42 @@ The calculations are demonstrated below.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

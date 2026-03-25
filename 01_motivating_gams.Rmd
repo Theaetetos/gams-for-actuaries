@@ -1,19 +1,3 @@
----
-output:
-  word_document: default
-  html_document: default
----
-
-```{r, message=FALSE, warning=FALSE}
-library(data.table)
-library(ggplot2)
-library(gratia)
-library(gridExtra)
-library(mgcv)
-library(parallel)
-library(scales)
-```
-
 # Motivating GAMs
 
 ## Linear Regression
@@ -199,7 +183,7 @@ ggplot(preds) +
   theme(legend.title = element_blank())
 ```
 
-This residual plot makes the cause of the grouping issue very clear: the price slope for diamonds of clarity IF looks to be quite different from the slopes of the rest of the clarity ratings.
+This residual plot makes the cause of the grouping issue very clear: the price slope for diamonds of clarity I1 looks to be quite different from the slopes of the rest of the clarity ratings.
 Based on the groupings visible in the above plot, we need to allow the price slope to vary by clarity.
 The other main issue is not as clear, but I will skip straight to it to save us time: the price-carat relationship also needs to be able to change slope.
 We can implement these changes with the below code.
@@ -233,7 +217,8 @@ This now looks good enough to get on with.
 We can visualize our fancy new price slopes in the following chart.
 
 ```{r}
-# CJ stands for 'Cross Join', and creates a data.table that is the cartesian product of all of the input vectors
+# CJ stands for 'Cross Join', and creates a data.table that is the cartesian product of all of
+# the input vectors
 pdat <- CJ(
   # we need to apply the link function to any numeric variables
   carat = log(seq(from = .01, to = 5.01, by = .01)),
@@ -278,7 +263,7 @@ This sounds a lot scarier than it is; it should become clear how splines work in
 GAMs are fit a lot like GLMs.
 The function to use is called `gam()`, and it takes the same arguments `formula`, `data`, and `family` as `glm()`.
 You specify a functional term by wrapping it in `s()` or one of the other [smooth constructors](https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html) offered in the `mgcv` package.
-Here, I am using the `ti()` (short for <u>t</u>ensor <u>i</u>nteraction) constructor because this is the recommended way to create interaction terms in the context of GAMs.
+Here, I am using the `ti()` (short for <u>t</u>ensor <u>i</u>nteraction) constructor because this is the recommended way to create smooth interaction terms in the context of GAMs.
 I also parallelize model fitting, because otherwise fitting takes hours on my 32G work laptop (!).
 The `bam()` function is just short for <u>b</u>ig <u>g</u>am and includes a new argument, `cluster`, which is a parallel computing cluster created using the `parallel` package.
 It is recommended to fit GAMs in parallel if the number of rows in your training dataset is five figures or more.  
